@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>จัดการบทความ | HappiWell Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@2.29.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/header@2.8.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/list@1.9.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/quote@2.6.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/image@2.9.0"></script>
+<style>
+  :root{
+    --bg:#F7F9FD; --surface:#FFFFFF;
+    --mint-900:#1B3A8C; --mint-700:#2E4FC7; --mint-600:#4361EE;
+    --mint-200:#C7D4FA; --mint-100:#E1E8FC; --mint-50:#F1F4FE;
+    --apricot-600:#E63946; --apricot-100:#FBDADC;
+    --teal-600:#2CB8A8; --teal-700:#1F8F82; --teal-100:#DBF4F0;
+    --ink:#1B2230; --ink-soft:#525A6B; --line:#E6EAF6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans Thai',sans-serif;line-height:1.6;}
+  h1,h2,h3{font-family:'Anuphan',sans-serif;color:var(--mint-900);}
+  a{color:inherit;}
+
+  header{
+    background:var(--surface);border-bottom:1px solid var(--line);
+    padding:14px 24px;display:flex;align-items:center;justify-content:space-between;
+    position:sticky;top:0;z-index:10;
+  }
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand .mark{width:32px;height:32px;border-radius:9px;background:var(--mint-600);display:flex;align-items:center;justify-content:center;}
+  .brand .mark svg{width:17px;height:17px;stroke:#fff;fill:none;}
+  .brand span{font-family:'Anuphan',sans-serif;font-weight:700;color:var(--mint-900);}
+  #logout-btn{
+    background:none;border:1px solid var(--line);border-radius:999px;padding:8px 16px;
+    font-family:inherit;font-size:13.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;
+  }
+
+  .wrap{max-width:900px;margin:0 auto;padding:32px 24px 80px;}
+
+  /* LIST VIEW */
+  .list-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px;}
+  .list-head h1{font-size:22px;}
+  .btn-primary{
+    background:var(--mint-600);color:#fff;border:none;border-radius:999px;
+    padding:11px 20px;font-family:inherit;font-weight:700;font-size:14px;cursor:pointer;
+  }
+  .article-row{
+    background:var(--surface);border:1px solid var(--line);border-radius:14px;
+    padding:16px 18px;display:flex;align-items:center;gap:14px;margin-bottom:10px;
+  }
+  .article-row .thumb{
+    width:56px;height:56px;border-radius:10px;background:var(--mint-50);flex-shrink:0;
+    background-size:cover;background-position:center;
+  }
+  .article-row .info{flex:1;min-width:0;}
+  .article-row h3{font-size:15.5px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .article-row .meta{font-size:12.5px;color:var(--ink-soft);margin-top:2px;}
+  .badge{
+    display:inline-block;font-size:11.5px;font-weight:700;padding:3px 10px;border-radius:999px;
+  }
+  .badge.published{background:var(--teal-100);color:var(--teal-700);}
+  .badge.draft{background:var(--apricot-100);color:#8C1D26;}
+  .row-actions{display:flex;gap:6px;flex-shrink:0;}
+  .icon-btn{
+    width:34px;height:34px;border-radius:9px;border:1px solid var(--line);background:var(--surface);
+    display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--ink-soft);
+  }
+  .icon-btn:hover{background:var(--mint-50);color:var(--mint-700);}
+  .icon-btn.danger:hover{background:var(--apricot-100);color:#8C1D26;}
+  .empty-state{text-align:center;padding:60px 20px;color:var(--ink-soft);}
+
+  /* EDITOR VIEW */
+  #editor-view{display:none;}
+  .back-link{
+    display:inline-flex;align-items:center;gap:6px;color:var(--mint-700);font-weight:600;
+    font-size:14px;margin-bottom:18px;background:none;border:none;cursor:pointer;font-family:inherit;
+  }
+  .field{margin-bottom:18px;}
+  .field label{display:block;font-size:13px;font-weight:600;color:var(--ink-soft);margin-bottom:6px;}
+  .field input[type=text], .field textarea, .field select, .field input[type=date]{
+    width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;
+    font-family:inherit;font-size:15px;color:var(--ink);
+  }
+  .field textarea{resize:vertical;min-height:70px;}
+  .field input:focus, .field textarea:focus, .field select:focus{outline:none;border-color:var(--mint-600);}
+  .field .hint{font-size:12px;color:var(--ink-soft);margin-top:5px;}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+
+  .cover-upload{
+    border:2px dashed var(--mint-200);border-radius:12px;background:var(--mint-50);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+    padding:24px;cursor:pointer;color:var(--mint-700);font-size:13.5px;font-weight:600;
+    text-align:center;
+  }
+  .cover-upload img{max-width:100%;max-height:160px;border-radius:8px;}
+
+  #editorjs-container{
+    border:1.5px solid var(--line);border-radius:12px;padding:16px;min-height:280px;background:var(--surface);
+  }
+  .editor-actions{display:flex;gap:10px;margin-top:24px;}
+  .btn-ghost{
+    background:var(--surface);border:1.5px solid var(--line);color:var(--ink);
+    border-radius:999px;padding:11px 20px;font-family:inherit;font-weight:600;font-size:14px;cursor:pointer;
+  }
+  .toast{
+    position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+    background:var(--mint-900);color:#fff;padding:12px 22px;border-radius:999px;
+    font-size:14px;font-weight:600;display:none;z-index:50;
+  }
+  .toast.show{display:block;}
+  .toast.error{background:var(--apricot-600);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <div class="mark"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-9.5-8.5C.5 8.5 3 5 6.5 5c2 0 3.5 1.2 5.5 3 2-1.8 3.5-3 5.5-3 3.5 0 6 3.5 4 7.5C19 16.65 12 21 12 21z"/></svg></div>
+    <span>HappiWell Admin</span>
+  </div>
+  <button id="logout-btn">ออกจากระบบ</button>
+</header>
+
+<div class="wrap">
+
+  <!-- LIST VIEW -->
+  <div id="list-view">
+    <div class="list-head">
+      <h1>บทความทั้งหมด</h1>
+      <button class="btn-primary" onclick="openEditor()">+ เพิ่มบทความใหม่</button>
+    </div>
+    <div id="article-list"></div>
+  </div>
+
+  <!-- EDITOR VIEW -->
+  <div id="editor-view">
+    <button class="back-link" onclick="closeEditor()">← กลับไปหน้ารายการ</button>
+    <h1 id="editor-title" style="font-size:20px;margin-bottom:22px;">เพิ่มบทความใหม่</h1>
+
+    <div class="field">
+      <label>ชื่อบทความ</label>
+      <input type="text" id="f-title" oninput="autoSlug()" placeholder="เช่น วัคซีนไข้หวัดใหญ่ ราคาพิเศษเดือนนี้">
+    </div>
+
+    <div class="field">
+      <label>Slug (สำหรับ URL)</label>
+      <input type="text" id="f-slug" placeholder="flu-vaccine-2569">
+      <div class="hint">ภาษาอังกฤษ ไม่มีเว้นวรรค แก้เองได้</div>
+    </div>
+
+    <div class="field">
+      <label>สรุปย่อ (excerpt)</label>
+      <textarea id="f-excerpt" placeholder="สรุปสั้นๆ แสดงในการ์ดหน้าแรก"></textarea>
+    </div>
+
+    <div class="two-col">
+      <div class="field">
+        <label>หมวดหมู่</label>
+        <select id="f-category">
+          <option value="news">ข่าวประชาสัมพันธ์</option>
+          <option value="promotion">โปรโมชั่น</option>
+          <option value="article">บทความสุขภาพ</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>วันที่เผยแพร่</label>
+        <input type="date" id="f-published-at">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>รูปหน้าปก</label>
+      <div class="cover-upload" id="cover-upload" onclick="document.getElementById('cover-file').click()">
+        <span id="cover-upload-text">คลิกเพื่ออัปโหลดรูปหน้าปก</span>
+      </div>
+      <input type="file" id="cover-file" accept="image/*" style="display:none" onchange="uploadCover(event)">
+    </div>
+
+    <div class="field">
+      <label>เนื้อหาบทความ</label>
+      <div id="editorjs-container"></div>
+    </div>
+
+    <div class="field">
+      <label style="display:flex;align-items:center;gap:8px;">
+        <input type="checkbox" id="f-published" style="width:auto;">
+        เผยแพร่บทความนี้ทันที
+      </label>
+    </div>
+
+    <div class="editor-actions">
+      <button class="btn-primary" onclick="saveArticle()">บันทึก</button>
+      <button class="btn-ghost" onclick="closeEditor()">ยกเลิก</button>
+    </div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const SUPABASE_URL = 'https://brfddpdynusxiiqopark.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJyZmRkcGR5bnVzeGlpcW9wYXJrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAxNDA5MDgsImV4cCI6MjA5NTcxNjkwOH0.nP6zm_9DLc0ieocf6ad53mIjn4GoaGnXzozZtTsg2BM';
+  const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  let editorjs = null;
+  let editingId = null;
+  let coverImageUrl = null;
+
+  // ---- Auth guard ----
+  (async () => {
+    const { data: { session } } = await sb.auth.getSession();
+    if (!session) { window.location.href = 'admin-login.html'; return; }
+    loadArticles();
+  })();
+
+  document.getElementById('logout-btn').addEventListener('click', async () => {
+    await sb.auth.signOut();
+    window.location.href = 'admin-login.html';
+  });
+
+  function showToast(msg, isError) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'toast show' + (isError ? ' error' : '');
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+
+  // ---- List view ----
+  async function loadArticles() {
+    const { data, error } = await sb
+      .from('hw_articles')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    const container = document.getElementById('article-list');
+    if (error) {
+      container.innerHTML = `<div class="empty-state">โหลดบทความไม่สำเร็จ: ${error.message}</div>`;
+      return;
+    }
+    if (!data || data.length === 0) {
+      container.innerHTML = `<div class="empty-state">ยังไม่มีบทความ กด "เพิ่มบทความใหม่" เพื่อเริ่มเขียนบทความแรก</div>`;
+      return;
+    }
+
+    container.innerHTML = data.map(a => `
+      <div class="article-row">
+        <div class="thumb" style="${a.cover_image ? `background-image:url('${a.cover_image}')` : ''}"></div>
+        <div class="info">
+          <h3>${escapeHtml(a.title || '(ไม่มีชื่อ)')}</h3>
+          <div class="meta">
+            <span class="badge ${a.is_published ? 'published' : 'draft'}">${a.is_published ? 'เผยแพร่แล้ว' : 'ฉบับร่าง'}</span>
+            &nbsp;${categoryLabel(a.category)} · ${a.published_at ? new Date(a.published_at).toLocaleDateString('th-TH') : 'ยังไม่กำหนดวันที่'}
+          </div>
+        </div>
+        <div class="row-actions">
+          <button class="icon-btn" title="แก้ไข" onclick="openEditor('${a.id}')">✎</button>
+          <button class="icon-btn danger" title="ลบ" onclick="deleteArticle('${a.id}', '${escapeHtml(a.title || '')}')">✕</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function categoryLabel(c) {
+    return { news: 'ข่าวประชาสัมพันธ์', promotion: 'โปรโมชั่น', article: 'บทความสุขภาพ' }[c] || c;
+  }
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  }
+
+  async function deleteArticle(id, title) {
+    if (!confirm(`ลบบทความ "${title}" ใช่ไหม? ไม่สามารถกู้คืนได้`)) return;
+    const { error } = await sb.from('hw_articles').delete().eq('id', id);
+    if (error) { showToast('ลบไม่สำเร็จ: ' + error.message, true); return; }
+    showToast('ลบบทความแล้ว');
+    loadArticles();
+  }
+
+  // ---- Editor view ----
+  function autoSlug() {
+    if (editingId) return; // don't auto-overwrite slug when editing existing article
+    const title = document.getElementById('f-title').value;
+    const slug = title
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9ก-๙\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-');
+    document.getElementById('f-slug').value = slug;
+  }
+
+  async function openEditor(id) {
+    editingId = id || null;
+    coverImageUrl = null;
+    document.getElementById('list-view').style.display = 'none';
+    document.getElementById('editor-view').style.display = 'block';
+    document.getElementById('editor-title').textContent = id ? 'แก้ไขบทความ' : 'เพิ่มบทความใหม่';
+
+    // reset fields
+    document.getElementById('f-title').value = '';
+    document.getElementById('f-slug').value = '';
+    document.getElementById('f-excerpt').value = '';
+    document.getElementById('f-category').value = 'news';
+    document.getElementById('f-published-at').value = new Date().toISOString().slice(0, 10);
+    document.getElementById('f-published').checked = false;
+    document.getElementById('cover-upload').innerHTML = '<span id="cover-upload-text">คลิกเพื่ออัปโหลดรูปหน้าปก</span>';
+
+    let initialBlocks = { blocks: [] };
+
+    if (id) {
+      const { data, error } = await sb.from('hw_articles').select('*').eq('id', id).single();
+      if (error) { showToast('โหลดบทความไม่สำเร็จ: ' + error.message, true); return; }
+      document.getElementById('f-title').value = data.title || '';
+      document.getElementById('f-slug').value = data.slug || '';
+      document.getElementById('f-excerpt').value = data.excerpt || '';
+      document.getElementById('f-category').value = data.category || 'news';
+      document.getElementById('f-published-at').value = data.published_at ? data.published_at.slice(0, 10) : '';
+      document.getElementById('f-published').checked = !!data.is_published;
+      coverImageUrl = data.cover_image || null;
+      if (coverImageUrl) {
+        document.getElementById('cover-upload').innerHTML = `<img src="${coverImageUrl}">`;
+      }
+      if (data.content) {
+        try { initialBlocks = JSON.parse(data.content); } catch (e) { initialBlocks = { blocks: [] }; }
+      }
+    }
+
+    if (editorjs) { await editorjs.isReady; editorjs.destroy(); editorjs = null; }
+    editorjs = new EditorJS({
+      holder: 'editorjs-container',
+      placeholder: 'เริ่มพิมพ์เนื้อหาบทความที่นี่...',
+      data: initialBlocks,
+      tools: {
+        header: { class: Header, inlineToolbar: true, config: { levels: [2, 3], defaultLevel: 2 } },
+        list: { class: List, inlineToolbar: true },
+        quote: { class: Quote, inlineToolbar: true },
+        image: {
+          class: ImageTool,
+          config: {
+            uploader: {
+              uploadByFile: async (file) => {
+                const path = `content/${Date.now()}-${file.name}`;
+                const { error } = await sb.storage.from('article-images').upload(path, file);
+                if (error) { showToast('อัปโหลดรูปไม่สำเร็จ: ' + error.message, true); return { success: 0 }; }
+                const { data: pub } = sb.storage.from('article-images').getPublicUrl(path);
+                return { success: 1, file: { url: pub.publicUrl } };
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+
+  function closeEditor() {
+    document.getElementById('editor-view').style.display = 'none';
+    document.getElementById('list-view').style.display = 'block';
+    loadArticles();
+  }
+
+  async function uploadCover(evt) {
+    const file = evt.target.files[0];
+    if (!file) return;
+    document.getElementById('cover-upload').innerHTML = '<span>กำลังอัปโหลด...</span>';
+    const path = `cover/${Date.now()}-${file.name}`;
+    const { error } = await sb.storage.from('article-images').upload(path, file);
+    if (error) {
+      showToast('อัปโหลดรูปหน้าปกไม่สำเร็จ: ' + error.message, true);
+      document.getElementById('cover-upload').innerHTML = '<span id="cover-upload-text">คลิกเพื่ออัปโหลดรูปหน้าปก</span>';
+      return;
+    }
+    const { data: pub } = sb.storage.from('article-images').getPublicUrl(path);
+    coverImageUrl = pub.publicUrl;
+    document.getElementById('cover-upload').innerHTML = `<img src="${coverImageUrl}">`;
+  }
+
+  async function saveArticle() {
+    const title = document.getElementById('f-title').value.trim();
+    const slug = document.getElementById('f-slug').value.trim();
+    if (!title || !slug) { showToast('กรุณากรอกชื่อบทความและ slug', true); return; }
+
+    const content = await editorjs.save();
+    if (!content.blocks || content.blocks.length === 0) {
+      showToast('กรุณาเพิ่มเนื้อหาบทความอย่างน้อย 1 ย่อหน้า', true);
+      return;
+    }
+
+    const payload = {
+      title,
+      slug,
+      excerpt: document.getElementById('f-excerpt').value.trim(),
+      category: document.getElementById('f-category').value,
+      published_at: document.getElementById('f-published-at').value || null,
+      is_published: document.getElementById('f-published').checked,
+      cover_image: coverImageUrl,
+      content: JSON.stringify(content),
+    };
+
+    let result;
+    if (editingId) {
+      result = await sb.from('hw_articles').update(payload).eq('id', editingId);
+    } else {
+      result = await sb.from('hw_articles').insert(payload);
+    }
+
+    if (result.error) {
+      showToast('บันทึกไม่สำเร็จ: ' + result.error.message, true);
+      return;
+    }
+
+    showToast('บันทึกบทความแล้ว');
+    closeEditor();
+  }
+</script>
+
+</body>
+</html>

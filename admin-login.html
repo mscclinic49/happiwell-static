@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>เข้าสู่ระบบแอดมิน | HappiWell คลินิกเวชกรรม</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+  :root{
+    --bg:#F7F9FD; --surface:#FFFFFF;
+    --mint-900:#1B3A8C; --mint-700:#2E4FC7; --mint-600:#4361EE;
+    --mint-100:#E1E8FC; --mint-50:#F1F4FE;
+    --apricot-600:#E63946; --apricot-100:#FBDADC;
+    --ink:#1B2230; --ink-soft:#525A6B; --line:#E6EAF6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans Thai',sans-serif;
+    min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;
+  }
+  .card{
+    width:100%;max-width:380px;background:var(--surface);border:1px solid var(--line);
+    border-radius:18px;padding:36px 32px;
+  }
+  .brand{display:flex;align-items:center;gap:10px;margin-bottom:26px;}
+  .brand .mark{width:34px;height:34px;border-radius:9px;background:var(--mint-600);display:flex;align-items:center;justify-content:center;}
+  .brand .mark svg{width:18px;height:18px;stroke:#fff;fill:none;}
+  .brand span{font-family:'Anuphan',sans-serif;font-weight:700;color:var(--mint-900);font-size:16px;}
+  h1{font-family:'Anuphan',sans-serif;font-size:21px;color:var(--mint-900);margin-bottom:6px;}
+  .sub{color:var(--ink-soft);font-size:13.5px;margin-bottom:26px;}
+  label{display:block;font-size:13px;font-weight:600;color:var(--ink-soft);margin-bottom:6px;}
+  input{
+    width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;
+    font-family:inherit;font-size:15px;color:var(--ink);margin-bottom:16px;
+  }
+  input:focus{outline:none;border-color:var(--mint-600);}
+  button{
+    width:100%;padding:13px;border:none;border-radius:999px;background:var(--mint-600);
+    color:#fff;font-family:inherit;font-weight:700;font-size:15px;cursor:pointer;
+  }
+  button:disabled{opacity:.6;cursor:default;}
+  .error{
+    display:none;background:var(--apricot-100);color:#8C1D26;font-size:13.5px;
+    padding:10px 14px;border-radius:10px;margin-bottom:16px;
+  }
+  .error.show{display:block;}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="brand">
+    <div class="mark"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-9.5-8.5C.5 8.5 3 5 6.5 5c2 0 3.5 1.2 5.5 3 2-1.8 3.5-3 5.5-3 3.5 0 6 3.5 4 7.5C19 16.65 12 21 12 21z"/></svg></div>
+    <span>HappiWell Admin</span>
+  </div>
+  <h1>เข้าสู่ระบบ</h1>
+  <div class="sub">ใช้บัญชีเดียวกับระบบเทเลเมด</div>
+
+  <div class="error" id="err"></div>
+
+  <form id="login-form">
+    <label>อีเมล</label>
+    <input type="email" id="email" required autocomplete="username">
+    <label>รหัสผ่าน</label>
+    <input type="password" id="password" required autocomplete="current-password">
+    <button type="submit" id="submit-btn">เข้าสู่ระบบ</button>
+  </form>
+</div>
+
+<script>
+  const SUPABASE_URL = 'https://brfddpdynusxiiqopark.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJyZmRkcGR5bnVzeGlpcW9wYXJrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAxNDA5MDgsImV4cCI6MjA5NTcxNjkwOH0.nP6zm_9DLc0ieocf6ad53mIjn4GoaGnXzozZtTsg2BM';
+  const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  // If already logged in, skip straight to the admin panel
+  (async () => {
+    const { data: { session } } = await sb.auth.getSession();
+    if (session) window.location.href = 'admin-articles.html';
+  })();
+
+  const form = document.getElementById('login-form');
+  const errBox = document.getElementById('err');
+  const submitBtn = document.getElementById('submit-btn');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errBox.classList.remove('show');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'กำลังเข้าสู่ระบบ...';
+
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+
+    const { data, error } = await sb.auth.signInWithPassword({ email, password });
+
+    if (error) {
+      errBox.textContent = 'เข้าสู่ระบบไม่สำเร็จ: อีเมลหรือรหัสผ่านไม่ถูกต้อง';
+      errBox.classList.add('show');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'เข้าสู่ระบบ';
+      return;
+    }
+
+    // Confirm this user has admin/superadmin role before letting them into the panel
+    const { data: userRow, error: roleErr } = await sb
+      .from('hw_users')
+      .select('role')
+      .eq('id', data.user.id)
+      .single();
+
+    if (roleErr || !userRow || !['admin', 'superadmin'].includes(userRow.role)) {
+      errBox.textContent = 'บัญชีนี้ไม่มีสิทธิ์เข้าถึงระบบแอดมิน';
+      errBox.classList.add('show');
+      await sb.auth.signOut();
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'เข้าสู่ระบบ';
+      return;
+    }
+
+    window.location.href = 'admin-articles.html';
+  });
+</script>
+
+</body>
+</html>
