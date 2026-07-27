@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
   :root{
     --bg:#F7F9FD;
@@ -597,40 +598,8 @@
       <div class="eyebrow">ข่าวสารจากคลินิก</div>
       <h2>ข่าวประชาสัมพันธ์ โปรโมชั่น และบทความสุขภาพ</h2>
     </div>
-    <div class="news-grid">
-      <div class="news-card">
-        <div class="thumb" style="background:var(--mint-100);">
-          <svg viewBox="0 0 24 24" fill="none" stroke="var(--mint-700)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v16l4-3h12V4H4z"/><path d="M8 9h8M8 13h5"/></svg>
-        </div>
-        <div class="body">
-          <span class="kicker" style="background:var(--mint-100);color:var(--mint-700);">ข่าวประชาสัมพันธ์</span>
-          <h3>ปรับเวลาให้บริการช่วงเทศกาลสงกรานต์</h3>
-          <p>แจ้งเวลาทำการช่วงวันหยุดยาว พร้อมช่องทางติดต่อฉุกเฉิน</p>
-          <div class="meta"><span>1 เม.ย. 2569</span><a href="#">อ่านเพิ่มเติม →</a></div>
-        </div>
-      </div>
-      <div class="news-card">
-        <div class="thumb" style="background:var(--apricot-50);">
-          <svg viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6M9 5h6"/><path d="M7 8h10l-1 12a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2L7 8z"/></svg>
-        </div>
-        <div class="body">
-          <span class="kicker" style="background:var(--apricot-100);color:#8C1D26;">โปรโมชั่น</span>
-          <h3>วัคซีนไข้หวัดใหญ่ ราคาพิเศษเดือนนี้</h3>
-          <p>สำหรับผู้สูงอายุและกลุ่มเสี่ยง จองคิวล่วงหน้าผ่าน LINE</p>
-          <div class="meta"><span>ถึง 31 ก.ค. 2569</span><a href="#">อ่านเพิ่มเติม →</a></div>
-        </div>
-      </div>
-      <div class="news-card">
-        <div class="thumb" style="background:var(--teal-100);">
-          <svg viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 0 1 5 0c0 1.5-2.5 2-2.5 3.5M12 17h.01"/></svg>
-        </div>
-        <div class="body">
-          <span class="kicker" style="background:var(--teal-100);color:var(--teal-700);">บทความสุขภาพ</span>
-          <h3>สังเกตอาการไข้เลือดออกในเด็กช่วงหน้าฝน</h3>
-          <p>สัญญาณเตือนที่พ่อแม่ควรรู้ และควรพาลูกมาพบแพทย์เมื่อไร</p>
-          <div class="meta"><span>28 มิ.ย. 2569</span><a href="#">อ่านเพิ่มเติม →</a></div>
-        </div>
-      </div>
+    <div class="news-grid" id="news-grid">
+      <div class="loading" style="grid-column:1/-1;text-align:center;color:var(--ink-soft);font-size:14px;padding:20px 0;">กำลังโหลดข่าวสาร...</div>
     </div>
     <div class="news-dots" id="news-dots"></div>
   </div>
@@ -770,43 +739,105 @@
 })();
 
 (function(){
-  var track = document.querySelector('.news-grid');
-  var dotsBox = document.getElementById('news-dots');
-  if(!track || !dotsBox) return;
-  var cards = Array.prototype.slice.call(track.querySelectorAll('.news-card'));
-  if(cards.length <= 1) return;
+  var SUPABASE_URL = 'https://brfddpdynusxiiqopark.supabase.co';
+  var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJyZmRkcGR5bnVzeGlpcW9wYXJrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAxNDA5MDgsImV4cCI6MjA5NTcxNjkwOH0.nP6zm_9DLc0ieocf6ad53mIjn4GoaGnXzozZtTsg2BM';
+  var sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-  cards.forEach(function(card, i){
-    var dot = document.createElement('button');
-    dot.type = 'button';
-    dot.className = 'dot' + (i === 0 ? ' active' : '');
-    dot.setAttribute('aria-label', 'บทความที่ ' + (i + 1));
-    dot.addEventListener('click', function(){
-      card.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
-    });
-    dotsBox.appendChild(dot);
-  });
-  var dots = Array.prototype.slice.call(dotsBox.querySelectorAll('.dot'));
+  var CATEGORY_META = {
+    news: { label: 'ข่าวประชาสัมพันธ์', bg: 'var(--mint-100)', fg: 'var(--mint-700)',
+      icon: '<path d="M4 4v16l4-3h12V4H4z"/><path d="M8 9h8M8 13h5"/>' },
+    promotion: { label: 'โปรโมชั่น', bg: 'var(--apricot-100)', fg: '#8C1D26', thumbBg: 'var(--apricot-50)', iconStroke: 'var(--red)',
+      icon: '<path d="M12 2v6M9 5h6"/><path d="M7 8h10l-1 12a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2L7 8z"/>' },
+    article: { label: 'บทความสุขภาพ', bg: 'var(--teal-100)', fg: 'var(--teal-700)',
+      icon: '<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 0 1 5 0c0 1.5-2.5 2-2.5 3.5M12 17h.01"/>' },
+  };
 
-  function updateActiveDot(){
-    var trackRect = track.getBoundingClientRect();
-    var center = trackRect.left + trackRect.width / 2;
-    var closest = 0, minDist = Infinity;
-    cards.forEach(function(card, i){
-      var rect = card.getBoundingClientRect();
-      var dist = Math.abs((rect.left + rect.width / 2) - center);
-      if(dist < minDist){ minDist = dist; closest = i; }
-    });
-    dots.forEach(function(d, i){ d.classList.toggle('active', i === closest); });
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]; });
+  }
+  function formatDate(d){
+    if(!d) return '';
+    return new Date(d).toLocaleDateString('th-TH', { year:'numeric', month:'short', day:'numeric' });
   }
 
-  var ticking = false;
-  track.addEventListener('scroll', function(){
-    if(!ticking){
-      window.requestAnimationFrame(function(){ updateActiveDot(); ticking = false; });
-      ticking = true;
+  function cardHtml(a){
+    var meta = CATEGORY_META[a.category] || CATEGORY_META.article;
+    var thumbBg = meta.thumbBg || meta.bg;
+    var iconStroke = meta.iconStroke || meta.fg;
+    return '' +
+      '<div class="news-card">' +
+        '<div class="thumb" style="background:' + thumbBg + ';">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="' + iconStroke + '" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">' + meta.icon + '</svg>' +
+        '</div>' +
+        '<div class="body">' +
+          '<span class="kicker" style="background:' + meta.bg + ';color:' + meta.fg + ';">' + meta.label + '</span>' +
+          '<h3>' + escapeHtml(a.title) + '</h3>' +
+          '<p>' + escapeHtml(a.excerpt || '') + '</p>' +
+          '<div class="meta"><span>' + formatDate(a.published_at) + '</span><a href="article.html?slug=' + encodeURIComponent(a.slug) + '">อ่านเพิ่มเติม →</a></div>' +
+        '</div>' +
+      '</div>';
+  }
+
+  function buildNewsDots(){
+    var track = document.querySelector('.news-grid');
+    var dotsBox = document.getElementById('news-dots');
+    if(!track || !dotsBox) return;
+    dotsBox.innerHTML = '';
+    var cards = Array.prototype.slice.call(track.querySelectorAll('.news-card'));
+    if(cards.length <= 1) return;
+
+    cards.forEach(function(card, i){
+      var dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'บทความที่ ' + (i + 1));
+      dot.addEventListener('click', function(){
+        card.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
+      });
+      dotsBox.appendChild(dot);
+    });
+    var dots = Array.prototype.slice.call(dotsBox.querySelectorAll('.dot'));
+
+    function updateActiveDot(){
+      var trackRect = track.getBoundingClientRect();
+      var center = trackRect.left + trackRect.width / 2;
+      var closest = 0, minDist = Infinity;
+      cards.forEach(function(card, i){
+        var rect = card.getBoundingClientRect();
+        var dist = Math.abs((rect.left + rect.width / 2) - center);
+        if(dist < minDist){ minDist = dist; closest = i; }
+      });
+      dots.forEach(function(d, i){ d.classList.toggle('active', i === closest); });
     }
-  });
+
+    var ticking = false;
+    track.addEventListener('scroll', function(){
+      if(!ticking){
+        window.requestAnimationFrame(function(){ updateActiveDot(); ticking = false; });
+        ticking = true;
+      }
+    });
+  }
+
+  async function loadNews(){
+    var grid = document.getElementById('news-grid');
+    var result = await sb
+      .from('hw_articles')
+      .select('*')
+      .eq('is_published', true)
+      .order('published_at', { ascending: false })
+      .limit(3);
+
+    if(result.error || !result.data || result.data.length === 0){
+      grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--ink-soft);font-size:14px;padding:20px 0;">ยังไม่มีข่าวสารในขณะนี้</div>';
+      return;
+    }
+
+    grid.innerHTML = result.data.map(cardHtml).join('');
+    buildNewsDots();
+  }
+
+  loadNews();
 })();
 
 /* FONT SIZE TOGGLE */
