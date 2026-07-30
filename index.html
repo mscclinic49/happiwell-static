@@ -292,6 +292,7 @@
     font-size:12.5px;color:var(--mint-200);
   }
 
+  .news-dots{display:none;}
   @media (max-width:900px){
     .hero-grid{grid-template-columns:1fr;}
     .hero h1{font-size:32px;}
@@ -822,19 +823,33 @@
 
   async function loadNews(){
     var grid = document.getElementById('news-grid');
-    var result = await sb
-      .from('hw_articles')
-      .select('*')
-      .eq('is_published', true)
-      .order('published_at', { ascending: false })
-      .limit(3);
+    var categories = ['news', 'promotion', 'article'];
 
-    if(result.error || !result.data || result.data.length === 0){
+    var results = await Promise.all(categories.map(function(cat){
+      return sb
+        .from('hw_articles')
+        .select('*')
+        .eq('is_published', true)
+        .eq('category', cat)
+        .order('published_at', { ascending: false })
+        .limit(1);
+    }));
+
+    var articles = [];
+    results.forEach(function(result){
+      if(!result.error && result.data && result.data.length > 0){
+        articles.push(result.data[0]);
+      }
+    });
+
+    if(articles.length === 0){
       grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--ink-soft);font-size:14px;padding:20px 0;">ยังไม่มีข่าวสารในขณะนี้</div>';
       return;
     }
 
-    grid.innerHTML = result.data.map(cardHtml).join('');
+    articles.sort(function(a, b){ return new Date(b.published_at) - new Date(a.published_at); });
+
+    grid.innerHTML = articles.map(cardHtml).join('');
     buildNewsDots();
   }
 
