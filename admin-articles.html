@@ -67,6 +67,27 @@
   }
   .badge.published{background:var(--teal-100);color:var(--teal-700);}
   .badge.draft{background:var(--apricot-100);color:#8C1D26;}
+  .tag-pill{
+    display:inline-block;font-size:11px;font-weight:600;color:var(--mint-700);background:var(--mint-50);
+    padding:2px 9px;border-radius:999px;margin:2px 4px 0 0;
+  }
+  .tag-input-wrap{
+    display:flex;flex-wrap:wrap;gap:8px;align-items:center;
+    border:1.5px solid var(--line);border-radius:10px;padding:9px 10px;background:var(--surface);
+  }
+  .tag-input-wrap:focus-within{border-color:var(--mint-600);}
+  .tag-chip{
+    display:inline-flex;align-items:center;gap:4px;background:var(--mint-100);color:var(--mint-700);
+    font-size:13px;font-weight:600;padding:5px 4px 5px 12px;border-radius:999px;white-space:nowrap;
+  }
+  .tag-chip button{
+    background:none;border:none;color:var(--mint-700);cursor:pointer;font-size:16px;line-height:1;
+    padding:3px 7px;border-radius:999px;font-family:inherit;
+  }
+  .tag-chip button:hover{background:var(--mint-200);}
+  #f-tag-input{
+    border:none;outline:none;flex:1;min-width:140px;font-family:inherit;font-size:14.5px;padding:4px;color:var(--ink);
+  }
   .row-actions{display:flex;gap:6px;flex-shrink:0;}
   .icon-btn{
     width:34px;height:34px;border-radius:9px;border:1px solid var(--line);background:var(--surface);
@@ -176,6 +197,14 @@
     </div>
 
     <div class="field">
+      <label>แท็ก</label>
+      <div class="tag-input-wrap" id="tag-input-wrap">
+        <input type="text" id="f-tag-input" placeholder="พิมพ์แท็กแล้วกด Enter หรือ , เช่น วัคซีน">
+      </div>
+      <div class="hint">พิมพ์คำแล้วกด Enter หรือ , เพื่อเพิ่มแท็ก คลิก × ที่แท็กเพื่อลบ ใส่กี่แท็กก็ได้ ไม่จำกัด</div>
+    </div>
+
+    <div class="field">
       <label>รูปหน้าปก</label>
       <div class="cover-upload" id="cover-upload" onclick="document.getElementById('cover-file').click()">
         <span id="cover-upload-text">คลิกเพื่ออัปโหลดรูปหน้าปก</span>
@@ -213,6 +242,7 @@
   let editorjs = null;
   let editingId = null;
   let coverImageUrl = null;
+  let currentTags = [];
 
   // ---- Auth guard ----
   (async () => {
@@ -259,6 +289,7 @@
             <span class="badge ${a.is_published ? 'published' : 'draft'}">${a.is_published ? 'เผยแพร่แล้ว' : 'ฉบับร่าง'}</span>
             &nbsp;${categoryLabel(a.category)} · ${a.published_at ? new Date(a.published_at).toLocaleDateString('th-TH') : 'ยังไม่กำหนดวันที่'}
           </div>
+          ${Array.isArray(a.tags) && a.tags.length ? `<div>${a.tags.map(t => `<span class="tag-pill">${escapeHtml(t)}</span>`).join('')}</div>` : ''}
         </div>
         <div class="row-actions">
           <button class="icon-btn" title="แก้ไข" onclick="openEditor('${a.id}')">✎</button>
@@ -271,6 +302,44 @@
   function categoryLabel(c) {
     return { news: 'ข่าวประชาสัมพันธ์', promotion: 'โปรโมชั่น', article: 'บทความสุขภาพ' }[c] || c;
   }
+
+  // ---- Tags ----
+  function renderTagChips() {
+    const wrap = document.getElementById('tag-input-wrap');
+    const input = document.getElementById('f-tag-input');
+    wrap.querySelectorAll('.tag-chip').forEach(el => el.remove());
+    currentTags.forEach(tag => {
+      const chip = document.createElement('span');
+      chip.className = 'tag-chip';
+      chip.innerHTML = `${escapeHtml(tag)} <button type="button" aria-label="ลบแท็ก ${escapeHtml(tag)}">×</button>`;
+      chip.querySelector('button').onclick = () => {
+        currentTags = currentTags.filter(t => t !== tag);
+        renderTagChips();
+      };
+      wrap.insertBefore(chip, input);
+    });
+  }
+
+  function addTagFromInput() {
+    const input = document.getElementById('f-tag-input');
+    const val = input.value.trim();
+    if (val && !currentTags.includes(val)) {
+      currentTags.push(val);
+      renderTagChips();
+    }
+    input.value = '';
+  }
+
+  document.getElementById('f-tag-input').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ',') {
+      e.preventDefault();
+      addTagFromInput();
+    } else if (e.key === 'Backspace' && !e.target.value && currentTags.length) {
+      currentTags.pop();
+      renderTagChips();
+    }
+  });
+  document.getElementById('f-tag-input').addEventListener('blur', addTagFromInput);
   function escapeHtml(s) {
     return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
   }
@@ -311,6 +380,9 @@
     document.getElementById('f-published-at').value = new Date().toISOString().slice(0, 10);
     document.getElementById('f-published').checked = false;
     document.getElementById('cover-upload').innerHTML = '<span id="cover-upload-text">คลิกเพื่ออัปโหลดรูปหน้าปก</span>';
+    currentTags = [];
+    document.getElementById('f-tag-input').value = '';
+    renderTagChips();
 
     let initialBlocks = { blocks: [] };
 
@@ -323,6 +395,8 @@
       document.getElementById('f-category').value = data.category || 'news';
       document.getElementById('f-published-at').value = data.published_at ? data.published_at.slice(0, 10) : '';
       document.getElementById('f-published').checked = !!data.is_published;
+      currentTags = Array.isArray(data.tags) ? [...data.tags] : [];
+      renderTagChips();
       coverImageUrl = data.cover_image || null;
       if (coverImageUrl) {
         document.getElementById('cover-upload').innerHTML = `<img src="${coverImageUrl}">`;
@@ -392,11 +466,14 @@
       return;
     }
 
+    addTagFromInput(); // catch any tag text left un-submitted in the input
+
     const payload = {
       title,
       slug,
       excerpt: document.getElementById('f-excerpt').value.trim(),
       category: document.getElementById('f-category').value,
+      tags: currentTags,
       published_at: document.getElementById('f-published-at').value || null,
       is_published: document.getElementById('f-published').checked,
       cover_image: coverImageUrl,
