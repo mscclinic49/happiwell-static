@@ -416,8 +416,8 @@
   <div class="wrap">
     <div class="page-head">
       <div class="eyebrow">ข่าวสารจากคลินิก</div>
-      <h1>ข่าวสาร บทความ และโปรโมชั่น</h1>
-      <p>รวมข่าวประชาสัมพันธ์ โปรโมชั่น และบทความสุขภาพทั้งหมดจาก HappiWell คลินิกเวชกรรม เรียงตามความล่าสุดในแต่ละหมวด</p>
+      <h1 id="page-heading">ข่าวสาร บทความ และโปรโมชั่น</h1>
+      <p id="page-subheading">รวมข่าวประชาสัมพันธ์ โปรโมชั่น และบทความสุขภาพทั้งหมดจาก HappiWell คลินิกเวชกรรม เรียงตามความล่าสุดในแต่ละหมวด</p>
     </div>
 
     <div class="category-tabs" id="category-tabs">
@@ -472,6 +472,7 @@
 
   let allArticles = [];
   let currentFilter = 'all';
+  const tagFilter = new URLSearchParams(window.location.search).get('tag');
 
   function escapeHtml(s) {
     return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
@@ -498,6 +499,24 @@
 
   function render() {
     const container = document.getElementById('content');
+
+    if (tagFilter) {
+      const items = allArticles.filter(a => Array.isArray(a.tags) && a.tags.includes(tagFilter));
+      if (items.length === 0) {
+        container.innerHTML = `<div class="empty-state">ยังไม่มีบทความที่แท็ก "${escapeHtml(tagFilter)}"<br><br><a href="articles.html">← ดูบทความทั้งหมด</a></div>`;
+        return;
+      }
+      container.innerHTML = `
+        <div class="category-block">
+          <div class="count">${items.length} บทความ · <a href="articles.html">← ดูบทความทั้งหมด</a></div>
+          <div class="article-list-grid">
+            ${items.map(cardHtml).join('')}
+          </div>
+        </div>
+      `;
+      return;
+    }
+
     const categoriesToShow = currentFilter === 'all' ? CATEGORY_ORDER : [currentFilter];
 
     let html = '';
@@ -534,6 +553,13 @@
     currentFilter = btn.getAttribute('data-filter');
     render();
   });
+
+  if (tagFilter) {
+    document.getElementById('category-tabs').style.display = 'none';
+    document.getElementById('page-heading').textContent = `บทความแท็ก: ${tagFilter}`;
+    document.getElementById('page-subheading').textContent = `รวมบทความทั้งหมดที่แท็กด้วย "${tagFilter}"`;
+    document.title = `แท็ก: ${tagFilter} | HappiWell คลินิกเวชกรรม`;
+  }
 
   async function loadArticles() {
     const { data, error } = await sb
