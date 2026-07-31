@@ -800,10 +800,13 @@
     var meta = CATEGORY_META[a.category] || CATEGORY_META.article;
     var thumbBg = meta.thumbBg || meta.bg;
     var iconStroke = meta.iconStroke || meta.fg;
+    var thumbInner = a.cover_image
+      ? '<img src="' + a.cover_image + '" alt="" style="width:100%;height:100%;object-fit:cover;display:block;">'
+      : '<svg viewBox="0 0 24 24" fill="none" stroke="' + iconStroke + '" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">' + meta.icon + '</svg>';
     return '' +
       '<div class="news-card">' +
         '<div class="thumb" style="background:' + thumbBg + ';">' +
-          '<svg viewBox="0 0 24 24" fill="none" stroke="' + iconStroke + '" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">' + meta.icon + '</svg>' +
+          thumbInner +
         '</div>' +
         '<div class="body">' +
           '<span class="kicker" style="background:' + meta.bg + ';color:' + meta.fg + ';">' + meta.label + '</span>' +
