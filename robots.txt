@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin-login.html
+Disallow: /admin-articles.html
+
+Sitemap: https://happiwellclinic.com/sitemap.xml
