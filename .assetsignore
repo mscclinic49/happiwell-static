@@ -1,0 +1,12 @@
+# ไฟล์ที่ไม่ต้องเสิร์ฟเป็นหน้าเว็บสาธารณะ
+src/
+test/
+wrangler.jsonc
+.assetsignore
+package.json
+package-lock.json
+node_modules/
+README.md
+sitemap.xml
+.gitignore
+.wrangler/
