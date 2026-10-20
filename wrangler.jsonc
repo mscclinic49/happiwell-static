@@ -1,8 +1,25 @@
 {
   "name": "happiwell-static",
+  "main": "src/worker.js",
   "compatibility_date": "2026-01-01",
   "assets": {
     "directory": "./",
-    "not_found_handling": "404-page"
-  }
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    // หน้าเหล่านี้ให้ Worker จัดการก่อน (SSR / redirect / sitemap)
+    // หน้าอื่นทั้งหมดยังเสิร์ฟเป็น static ตามเดิม
+    "run_worker_first": [
+      "/",
+      "/index.html",
+      "/articles",
+      "/articles/*",
+      "/articles.html",
+      "/article",
+      "/article.html",
+      "/privacy.html",
+      "/cookies.html",
+      "/sitemap.xml"
+    ]
+  },
+  "observability": { "enabled": true }
 }
