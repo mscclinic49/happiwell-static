@@ -364,18 +364,25 @@ async function sitemap() {
   let progs = [];
   try { progs = await listPrograms(); } catch (_) { /* ยังไม่มีตาราง/ล่ม: ข้ามไป */ }
   const day = (d) => (d ? new Date(d).toISOString().slice(0, 10) : undefined);
-  const newest = all[0] ? day(all[0].updated_at || all[0].published_at) : undefined;
+  const maxDay = (...ds) => ds.filter(Boolean).sort().pop();
+  const newestArticle = all.reduce((m, a) => maxDay(m, day(a.updated_at || a.published_at)), undefined);
+  const newestProgram = progs.reduce((m, p) => maxDay(m, day(p.updated_at)), undefined);
+  const LEGAL_UPDATED = '2026-08-25'; // วันที่แก้หน้า privacy / cookies ล่าสุด
+  const img = (u, title) => (safeUrl(u) ? [{ loc: safeUrl(u), title }] : []);
   const urls = [
-    { loc: SITE + '/', lastmod: newest, priority: '1.0' },
-    { loc: SITE + '/articles', lastmod: newest, priority: '0.9' },
-    { loc: SITE + '/programs', lastmod: progs[0] ? day(progs.reduce((m, p) => (p.updated_at > m ? p.updated_at : m), progs[0].updated_at)) : undefined, priority: '0.9' },
-    ...progs.map((p) => ({ loc: SITE + programUrl(p.slug), lastmod: day(p.updated_at), priority: '0.8' })),
-    ...all.map((a) => ({ loc: SITE + articleUrl(a.slug), lastmod: day(a.updated_at || a.published_at), priority: '0.7' })),
-    { loc: SITE + '/privacy', priority: '0.2' },
-    { loc: SITE + '/cookies', priority: '0.2' },
+    { loc: SITE + '/', lastmod: maxDay(newestArticle, newestProgram), priority: '1.0', images: [{ loc: DEFAULT_OG, title: SITE_NAME }] },
+    { loc: SITE + '/programs', lastmod: newestProgram, priority: '0.9' },
+    ...progs.map((p) => ({ loc: SITE + programUrl(p.slug), lastmod: day(p.updated_at), priority: '0.8', images: img(p.cover_image, p.name) })),
+    { loc: SITE + '/articles', lastmod: newestArticle, priority: '0.8' },
+    ...all.map((a) => ({ loc: SITE + articleUrl(a.slug), lastmod: day(a.updated_at || a.published_at), priority: '0.7', images: img(a.cover_image, a.title) })),
+    { loc: SITE + '/privacy', lastmod: LEGAL_UPDATED, priority: '0.2' },
+    { loc: SITE + '/cookies', lastmod: LEGAL_UPDATED, priority: '0.2' },
   ];
-  const xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
-    urls.map((u) => `  <url><loc>${esc(u.loc)}</loc>${u.lastmod ? `<lastmod>${u.lastmod}</lastmod>` : ''}<priority>${u.priority}</priority></url>`).join('\n') +
+  const xml = '<?xml version="1.0" encoding="UTF-8"?>\n' +
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n' +
+    urls.map((u) => `  <url><loc>${esc(u.loc)}</loc>${u.lastmod ? `<lastmod>${u.lastmod}</lastmod>` : ''}<priority>${u.priority}</priority>` +
+      (u.images || []).map((im) => `<image:image><image:loc>${esc(im.loc)}</image:loc><image:title>${esc(im.title)}</image:title></image:image>`).join('') +
+      `</url>`).join('\n') +
     '\n</urlset>\n';
   return new Response(xml, { headers: { 'content-type': 'application/xml; charset=utf-8', 'cache-control': PAGE_CACHE } });
 }
