@@ -127,7 +127,11 @@ DETAIL_CSS = COMMON_CSS + r'''
   .pd-opt .p{font-family:'Anuphan',sans-serif;font-weight:700;color:var(--apricot-600);white-space:nowrap;}
 
   .pd-book{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:26px;margin-top:8px;scroll-margin-top:90px;}
-  .pd-book h2{font-size:22px;margin-bottom:4px;}
+  .pd-book h2{font-size:22px;margin-bottom:12px;}
+  .pd-steps{margin:0 0 18px 20px;display:flex;flex-direction:column;gap:8px;font-size:14.5px;color:var(--ink-soft);}
+  .pd-steps b{color:var(--ink);}
+  .btn-line svg,.btn svg{width:18px;height:18px;}
+  .btn-ghost{background:var(--surface);color:var(--mint-900);border:1px solid var(--line);}
   .pd-book .sub{font-size:14px;color:var(--ink-soft);margin-bottom:18px;}
   .f-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;}
   .f{display:flex;flex-direction:column;gap:6px;}
@@ -170,7 +174,7 @@ LIST_BODY = r'''
   <section class="pg-hero" style="padding-bottom:0">
     <div class="eyebrow">โปรแกรมและราคา</div>
     <h1>ราคาวัคซีน ตรวจสุขภาพ และบริการที่คลินิก</h1>
-    <p>ดูราคาและสิ่งที่รวมในแต่ละโปรแกรมก่อนมาคลินิก จองคิวออนไลน์ได้ทันที ทีมงานจะติดต่อกลับเพื่อยืนยันวันเวลา</p>
+    <p>ดูราคาและสิ่งที่รวมในแต่ละโปรแกรมก่อนมาคลินิก กดจองผ่าน LINE ได้ทันที ทีมงานจะตอบกลับเพื่อยืนยันวันเวลา</p>
     <p class="pg-fee">ราคาทุกรายการยังไม่รวมค่าบริการทางการแพทย์ 30 บาท</p>
   </section>
   <div class="cat-chips" id="cat-chips" role="group" aria-label="กรองตามหมวดหมู่"></div>
@@ -218,71 +222,30 @@ DETAIL_BODY = r'''
 
 DETAIL_JS = r'''
 <script>
+  // อัปเดตราคาและข้อความจองใน LINE ตามตัวเลือกที่ลูกค้าเลือก
   (function(){
     var dataEl = document.getElementById('program-data');
     if(!dataEl) return;
     var P = JSON.parse(dataEl.textContent);
-    var SUPABASE_URL = 'https://brfddpdynusxiiqopark.supabase.co';
-    var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJyZmRkcGR5bnVzeGlpcW9wYXJrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAxNDA5MDgsImV4cCI6MjA5NTcxNjkwOH0.nP6zm_9DLc0ieocf6ad53mIjn4GoaGnXzozZtTsg2BM';
-    var sb = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
     if (document.querySelector('.pd-bar')) document.body.classList.add('has-bar');
-
-    function fmt(n){ return n == null ? 'สอบถามราคา' : '฿' + Number(n).toLocaleString('th-TH', {maximumFractionDigits: 2}); }
-    function selected(){
+    function fmt(n){ return n == null || n === '' ? 'สอบถามราคา' : '฿' + Number(n).toLocaleString('en-US', {maximumFractionDigits: 2}); }
+    function lineText(opt){
+      var price = opt && opt.price != null && opt.price !== '' ? opt.price : P.price;
+      return ['สวัสดีค่ะ ต้องการจองคิว',
+        'โปรแกรม: ' + P.name + (opt && opt.label ? ' (' + opt.label + ')' : ''),
+        'ราคา: ' + fmt(price),
+        'ชื่อ-นามสกุล: ', 'เบอร์โทร: ', 'วันที่สะดวก: '].join('\n');
+    }
+    function sync(){
       var r = document.querySelector('input[name="pd-opt"]:checked');
-      if(!r) return { label: null, price: P.price };
-      var o = P.options[Number(r.value)] || {};
-      return { label: o.label || null, price: o.price != null ? o.price : P.price };
+      var opt = r ? (P.options[Number(r.value)] || null) : null;
+      var price = opt && opt.price != null && opt.price !== '' ? opt.price : P.price;
+      document.querySelectorAll('[data-sel-price]').forEach(function(el){ el.textContent = fmt(price); });
+      var href = 'https://line.me/R/oaMessage/' + encodeURIComponent('@p49clinic') + '/?' + encodeURIComponent(lineText(opt));
+      document.querySelectorAll('.js-line-book').forEach(function(a){ a.href = href; });
     }
-    function syncPrice(){
-      var s = selected();
-      document.querySelectorAll('[data-sel-price]').forEach(function(el){ el.textContent = fmt(s.price); });
-      var lbl = document.getElementById('bk-option');
-      if(lbl) lbl.textContent = s.label ? s.label + ' · ' + fmt(s.price) : (P.price != null ? fmt(s.price) + (P.price_unit ? ' ' + P.price_unit : '') : 'สอบถามราคา');
-    }
-    document.querySelectorAll('input[name="pd-opt"]').forEach(function(r){ r.addEventListener('change', syncPrice); });
-    syncPrice();
-
-    var d = document.getElementById('bk-date');
-    if(d){
-      var t = new Date(Date.now() + 7*3600*1000).toISOString().slice(0,10);
-      d.min = t;
-    }
-
-    var form = document.getElementById('bk-form');
-    if(!form) return;
-    form.addEventListener('submit', async function(e){
-      e.preventDefault();
-      var msg = document.getElementById('bk-msg');
-      msg.className = 'form-msg'; msg.textContent = '';
-      var name = form.elements['name'].value.trim();
-      var phone = form.elements['phone'].value.trim();
-      if(!name){ msg.className = 'form-msg err'; msg.textContent = 'กรุณากรอกชื่อ'; form.elements['name'].focus(); return; }
-      if(!/^[0-9+() -]{9,20}$/.test(phone)){ msg.className = 'form-msg err'; msg.textContent = 'กรุณากรอกเบอร์โทรให้ถูกต้อง'; form.elements['phone'].focus(); return; }
-      if(!form.elements['pdpa'].checked){ msg.className = 'form-msg err'; msg.textContent = 'กรุณายินยอมให้คลินิกใช้ข้อมูลเพื่อติดต่อนัดหมาย'; return; }
-      if(!sb){ msg.className = 'form-msg err'; msg.textContent = 'ระบบจองขัดข้อง กรุณาทัก LINE @p49clinic'; return; }
-      var s = selected();
-      var btn = form.querySelector('button[type=submit]');
-      btn.disabled = true; btn.textContent = 'กำลังส่ง...';
-      var res = await sb.from('hw_program_bookings').insert({
-        program_id: P.id, program_name: P.name, option_label: s.label, price: s.price,
-        customer_name: name, phone: phone,
-        line_id: form.elements['line_id'].value.trim() || null,
-        preferred_date: form.elements['date'].value || null,
-        preferred_time: form.elements['time'].value || null,
-        note: form.elements['note'].value.trim() || null,
-        pdpa_consent: true
-      });
-      if(res.error){
-        btn.disabled = false; btn.textContent = 'ส่งคำขอจองคิว';
-        msg.className = 'form-msg err';
-        msg.textContent = 'ส่งไม่สำเร็จ กรุณาลองใหม่ หรือทัก LINE @p49clinic';
-        return;
-      }
-      document.getElementById('bk-body').innerHTML =
-        '<div class="book-done"><svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="var(--teal-600)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin:0 auto"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>' +
-        '<h3>ส่งคำขอจองคิวแล้ว</h3><p>ทีมงานจะโทรหรือทัก LINE กลับเพื่อยืนยันวันเวลา<br>หากต้องการด่วน โทร 02-000-4586 หรือ 088-683-7899</p></div>';
-    });
+    document.querySelectorAll('input[name="pd-opt"]').forEach(function(r){ r.addEventListener('change', sync); });
+    sync();
   })();
 '''
 

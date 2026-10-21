@@ -348,6 +348,19 @@ const listCategories = () => sb('hw_program_categories?select=slug,name,descript
 const listPrograms = () => sb(`hw_programs?select=${PROGRAM_FIELDS}&is_published=eq.true&order=sort_order.asc,name.asc`);
 const getProgram = async (slug) =>
   (await sb(`hw_programs?select=*&is_published=eq.true&slug=eq.${encodeURIComponent(slug)}&limit=1`))[0] || null;
+// ลิงก์เปิดแชท LINE OA พร้อมข้อความจองที่กรอกไว้ให้ (ต้องตรงกับ lineText ใน program.html)
+const LINE_OA = '@p49clinic';
+const LINE_ICON = '<svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.9 2 5.4 5 6.8-.2.8-.7 2.6-.8 3-.1.4.1.4.3.3.2-.1 2.6-1.7 3.6-2.4.6.1 1.3.1 1.9.1 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg>';
+function lineBookText(p, opt) {
+  const price = opt && opt.price != null && opt.price !== '' ? opt.price : p.price;
+  return ['สวัสดีค่ะ ต้องการจองคิว',
+    'โปรแกรม: ' + p.name + (opt && opt.label ? ' (' + opt.label + ')' : ''),
+    'ราคา: ' + (price == null ? 'สอบถามราคา' : baht(price)),
+    'ชื่อ-นามสกุล: ', 'เบอร์โทร: ', 'วันที่สะดวก: '].join('\n');
+}
+function lineBookUrl(p, opt) {
+  return 'https://line.me/R/oaMessage/' + encodeURIComponent(LINE_OA) + '/?' + encodeURIComponent(lineBookText(p, opt));
+}
 // slug เดิมที่เปลี่ยนชื่อแล้ว → slug ใหม่ (301)
 const PROGRAM_REDIRECTS = { 'hepatitis-a-b-vaccine': 'hepatitis-b-vaccine', 'annual-health-checkup': 'health-checkup-basic' };
 const FEE_NOTE = 'ราคายังไม่รวมค่าบริการทางการแพทย์ 30 บาท';
@@ -451,6 +464,7 @@ async function programPage(request, env, slug) {
     ? '<span class="price-ask" data-sel-price>สอบถามราคา</span>'
     : (options.length ? `<span class="price" data-sel-price>${esc(baht(firstPrice))}</span>` : priceHtml(p).replace('<span class="price">', '<span class="price" data-sel-price>'));
 
+  const lineHref = lineBookUrl(p, options[0] || null);
   const html =
     `<div class="crumbs" style="padding-top:22px"><a href="/">หน้าแรก</a> / <a href="/programs">โปรแกรมและราคา</a>${cat ? ` / <a href="/programs?cat=${esc(cat.slug)}">${esc(cat.name)}</a>` : ''}</div>` +
     `<div class="pd-layout"><article class="pd-main">` +
@@ -466,23 +480,18 @@ async function programPage(request, env, slug) {
     `<aside class="pd-aside" aria-label="ราคา"><span class="label">${options.length ? 'ราคาตัวเลือกที่เลือก' : 'ราคา'}</span><div>${bigPrice}</div>` +
     (p.price != null || options.length ? `<p class="pd-fee">${FEE_NOTE}</p>` : '') +
     (p.price_note ? `<p class="pg-note">${esc(p.price_note)}</p>` : '') + optsHtml +
-    `<a href="#booking" class="btn btn-primary">จองคิวโปรแกรมนี้</a>` +
-    `<a href="https://line.me/R/ti/p/@p49clinic" target="_blank" rel="noopener" class="btn btn-line">สอบถามทาง LINE</a></aside>`) +
-    `<div class="pd-book-wrap"><section class="pd-book" id="booking" aria-labelledby="bk-h"><h2 id="bk-h">จองคิว</h2><p class="sub">${esc(p.name)} · <span id="bk-option"></span></p>` +
-    `<div id="bk-body"><form id="bk-form" novalidate><div class="f-grid">` +
-    `<div class="f"><label for="bk-name">ชื่อ-นามสกุล</label><input id="bk-name" name="name" autocomplete="name" maxlength="120" required></div>` +
-    `<div class="f"><label for="bk-phone">เบอร์โทรศัพท์</label><input id="bk-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="08X-XXX-XXXX" maxlength="20" required></div>` +
-    `<div class="f"><label for="bk-line">LINE ID <small>(ถ้ามี)</small></label><input id="bk-line" name="line_id" maxlength="60"></div>` +
-    `<div class="f"><label for="bk-date">วันที่สะดวก <small>(ถ้ามี)</small></label><input id="bk-date" name="date" type="date"></div>` +
-    `<div class="f"><label for="bk-time">ช่วงเวลา <small>(ถ้ามี)</small></label><select id="bk-time" name="time"><option value="">ไม่ระบุ</option><option value="morning">ช่วงเช้า</option><option value="afternoon">ช่วงบ่าย</option><option value="evening">ช่วงเย็น (จ.–ศ.)</option></select></div>` +
-    `<div class="f full"><label for="bk-note">หมายเหตุ <small>(ถ้ามี)</small></label><textarea id="bk-note" name="note" maxlength="1000" placeholder="เช่น อายุ โรคประจำตัว หรือคำถามที่อยากถาม"></textarea></div>` +
-    `</div><label class="consent"><input type="checkbox" name="pdpa"><span>ข้าพเจ้ายินยอมให้คลินิกเก็บและใช้ข้อมูลนี้เพื่อติดต่อนัดหมาย ตาม<a href="/privacy" target="_blank">นโยบายความเป็นส่วนตัว</a></span></label>` +
-    `<button type="submit" class="btn btn-primary" style="width:100%;border:0;font-size:16px">ส่งคำขอจองคิว</button>` +
-    `<p class="pg-note" style="text-align:center;margin-top:10px">นี่เป็นคำขอนัดหมาย ทีมงานจะติดต่อกลับเพื่อยืนยันวันเวลา</p><div class="form-msg" id="bk-msg" role="status"></div></form></div></section>` +
+    `<a href="${esc(lineHref)}" target="_blank" rel="noopener" class="btn btn-line js-line-book">${LINE_ICON}จองผ่าน LINE</a>` +
+    `<a href="tel:0220004586" class="btn btn-ghost">โทร 02-000-4586</a></aside>`) +
+    `<div class="pd-book-wrap"><section class="pd-book" id="booking" aria-labelledby="bk-h"><h2 id="bk-h">จองคิวผ่าน LINE</h2>` +
+    `<ol class="pd-steps"><li><b>กดปุ่ม "จองผ่าน LINE"</b> ระบบจะเปิดแชท LINE ของคลินิก พร้อมข้อความจองที่กรอกโปรแกรมและราคาไว้ให้แล้ว</li>` +
+    `<li><b>เติมชื่อ เบอร์โทร และวันที่สะดวก</b> แล้วกดส่ง</li>` +
+    `<li><b>ทีมงานตอบกลับเพื่อยืนยันนัด</b> ในเวลาทำการ จ.–ศ. 08:00–18:00 / ส.–อา. 08:00–12:00</li></ol>` +
+    `<a href="${esc(lineHref)}" target="_blank" rel="noopener" class="btn btn-line js-line-book" style="width:100%">${LINE_ICON}จองผ่าน LINE @p49clinic</a>` +
+    `<p class="pg-note" style="text-align:center;margin-top:10px">ไม่สะดวกใช้ LINE โทร <a href="tel:0220004586" style="color:var(--mint-700);font-weight:600">02-000-4586</a> หรือ <a href="tel:0886837899" style="color:var(--mint-700);font-weight:600">088-683-7899</a></p></section>` +
     `<p class="pg-note" style="margin-top:20px">ราคาสำหรับผู้ชำระเงินสด ยังไม่รวมค่าบริการทางการแพทย์ 30 บาท อาจเปลี่ยนแปลงได้ ความเหมาะสมขึ้นกับการประเมินของแพทย์ ผลลัพธ์ของแต่ละบุคคลอาจแตกต่างกัน</p></div>` +
     `</div>` +
-    `<div class="pd-bar"><div>${firstPrice == null ? '<span class="price-ask">สอบถามราคา</span>' : `<span class="price" data-sel-price>${esc(baht(firstPrice))}</span><small class="pd-bar-fee">+ ค่าบริการ 30 บาท</small>`}</div><a href="#booking" class="btn btn-primary">จองคิว</a></div>` +
-    `<script type="application/json" id="program-data">${jsonLd({ id: p.id, name: p.name, price: p.price, price_unit: p.price_unit, options })}</script>`;
+    `<div class="pd-bar"><div>${firstPrice == null ? '<span class="price-ask">สอบถามราคา</span>' : `<span class="price" data-sel-price>${esc(baht(firstPrice))}</span><small class="pd-bar-fee">+ ค่าบริการ 30 บาท</small>`}</div><a href="${esc(lineHref)}" target="_blank" rel="noopener" class="btn btn-line js-line-book">${LINE_ICON}จองผ่าน LINE</a></div>` +
+    `<script type="application/json" id="program-data">${jsonLd({ name: p.name, price: p.price, price_unit: p.price_unit, options })}</script>`;
 
   const canonical = SITE + programUrl(p.slug);
   const title = p.seo_title || `${p.name} ราคา${p.price != null ? ' ' + baht(p.price) : ''} | HappiWell คลินิกเวชกรรม ทุ่งครุ`;

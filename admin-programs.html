@@ -137,6 +137,10 @@
   }
   .toast.show{display:block;}
   .toast.error{background:var(--apricot-600);}
+  .admin-tabs{display:flex;gap:4px;flex-wrap:wrap;}
+  .admin-tabs a{font-size:14px;font-weight:600;color:var(--ink-soft);text-decoration:none;padding:8px 14px;border-radius:999px;}
+  .admin-tabs a.active{background:var(--mint-100);color:var(--mint-700);}
+  header{flex-wrap:wrap;gap:10px;}
   /* ---- เพิ่มเติมสำหรับหน้าโปรแกรม ---- */
   .admin-tabs{display:flex;gap:4px;flex-wrap:wrap;}
   .admin-tabs a{font-size:14px;font-weight:600;color:var(--ink-soft);text-decoration:none;padding:8px 14px;border-radius:999px;}
@@ -180,7 +184,8 @@
   <nav class="admin-tabs" aria-label="เมนูแอดมิน">
     <a href="admin-articles.html">บทความ</a>
     <a href="#programs" data-tab="programs">โปรแกรมและราคา</a>
-    <a href="#bookings" data-tab="bookings">คำขอจองคิว<span class="count" id="new-count" hidden></span></a>
+    <!-- ปิดการจองผ่านเว็บแล้ว (จองผ่าน LINE แทน) เปิดกลับได้โดยเอา hidden ออก -->
+    <a href="#bookings" data-tab="bookings" hidden>คำขอจองคิว<span class="count" id="new-count" hidden></span></a>
   </nav>
   <button id="logout-btn">ออกจากระบบ</button>
 </header>
