@@ -216,7 +216,7 @@ add(slug='medical-certificate', category='certificate', name='ใบรับร
     tags=['ใบรับรองแพทย์'])
 
 # ---------------- สุขภาพทางเพศ ----------------
-add(slug='pep-prep', is_published=False, category='sexual-health', name='PEP / PrEP ยาป้องกันเอชไอวี',
+add(slug='pep-prep', category='sexual-health', name='PEP / PrEP ยาป้องกันเอชไอวี',
     short_desc='ให้คำปรึกษาเป็นความลับ ต้องนัดหมายทาง LINE ก่อนเข้ารับบริการ',
     price=None, price_note='สอบถามค่ายาทาง LINE @p49clinic', related_article_slug='pep-prep-2569',
     description=blocks('บริการ PEP (ยาต้านไวรัสหลังสัมผัสเชื้อ) และ PrEP (ยาป้องกันก่อนสัมผัสเชื้อ) พร้อมคำปรึกษาเป็นความลับ กรุณาทัก LINE เพื่อนัดหมายก่อนเข้ารับบริการทุกครั้ง'),
