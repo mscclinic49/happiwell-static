@@ -29,6 +29,18 @@
   .bk-actions input{flex:1;min-width:200px;padding:8px 12px;border:1.5px solid var(--line);border-radius:10px;font-family:inherit;font-size:14px;}
   .st-new{color:var(--mint-700)} .st-contacted{color:#8a5a00} .st-confirmed{color:var(--teal-700)} .st-done{color:var(--ink-soft)} .st-cancelled{color:#8C1D26}
   @media (max-width:640px){ .two-col,.three-col{grid-template-columns:1fr;} .opt-row{grid-template-columns:1fr 90px 34px;} .opt-row .opt-note{grid-column:1/3;} }
+
+  /* ---- English version ---- */
+  details.en-box{margin:28px 0 8px;border:1.5px solid var(--mint-200,#cfe9df);border-radius:14px;background:var(--surface,#fff);}
+  details.en-box > summary{cursor:pointer;list-style:none;padding:16px 18px;font-family:'Anuphan',sans-serif;font-size:16px;font-weight:700;color:var(--mint-900);display:flex;align-items:center;gap:10px;}
+  details.en-box > summary::-webkit-details-marker{display:none;}
+  details.en-box > summary::before{content:'▸';color:var(--mint-700);}
+  details.en-box[open] > summary::before{content:'▾';}
+  details.en-box .en-inner{padding:0 18px 18px;}
+  .en-state{font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px;background:var(--apricot-100);color:#8C1D26;}
+  .en-state.ok{background:var(--mint-100);color:var(--mint-700);}
+  .badge.en{background:#e8eefc;color:#2a4a9a;}
+  .badge.no-en{background:#f3f3f3;color:#888;}
 </style>
 </head>
 <body>
@@ -168,6 +180,30 @@
       <textarea id="f-seo-desc" maxlength="200" placeholder="ถ้าเว้นว่าง: ใช้คำอธิบายสั้น"></textarea>
     </div>
 
+    <details class="en-box" id="en-box">
+      <summary>ภาษาอังกฤษ (English) <span class="en-state" id="en-state">ยังไม่มี</span></summary>
+      <div class="en-inner">
+        <div class="hint" style="margin-bottom:14px">แสดงที่ happiwellclinic.com/en/programs/… ราคาใช้ตัวเลขเดียวกับภาษาไทย ถ้าไม่ใส่ชื่อภาษาอังกฤษ หน้าอังกฤษจะแสดงภาษาไทยแทน</div>
+        <div class="field"><label for="f-en-name">Name</label><input type="text" id="f-en-name" placeholder="e.g. Quadrivalent flu vaccine"></div>
+        <div class="field"><label for="f-en-short">Short description</label><textarea id="f-en-short" maxlength="220"></textarea></div>
+        <div class="two-col">
+          <div class="field"><label for="f-en-unit">Price unit</label><input type="text" id="f-en-unit" placeholder="per dose / per package"><div class="hint">ไม่ต้องใส่คำว่า from ระบบใส่ให้เองถ้าหน่วยภาษาไทยขึ้นต้นด้วย "เริ่มต้น"</div></div>
+          <div class="field"><label for="f-en-duration">Duration</label><input type="text" id="f-en-duration" placeholder="2 doses, 3 months apart"></div>
+        </div>
+        <div class="field"><label for="f-en-price-note">Price note</label><input type="text" id="f-en-price-note"></div>
+        <div class="field"><label for="f-en-options">ตัวเลือก (Options) <small style="font-weight:400">— 1 บรรทัดต่อ 1 ตัวเลือก เรียงตามภาษาไทย รูปแบบ: ชื่อ | หมายเหตุ</small></label><textarea id="f-en-options" rows="3" placeholder="2-dose course | Pay once for the full course"></textarea></div>
+        <div class="field"><label>Content</label><div id="editorjs-en-container"></div></div>
+        <div class="two-col">
+          <div class="field"><label for="f-en-suitable">Who is it for?</label><textarea id="f-en-suitable" rows="4" placeholder="1 บรรทัด = 1 ข้อ"></textarea></div>
+          <div class="field"><label for="f-en-includes">Included</label><textarea id="f-en-includes" rows="4" placeholder="1 บรรทัด = 1 ข้อ (ใช้ ' — ' คั่นรายละเอียดได้)"></textarea></div>
+        </div>
+        <div class="field"><label for="f-en-precautions">Good to know</label><textarea id="f-en-precautions" rows="3" placeholder="1 บรรทัด = 1 ข้อ"></textarea></div>
+        <div class="two-col">
+          <div class="field"><label for="f-en-seo-title">Google title (SEO)</label><input type="text" id="f-en-seo-title" maxlength="90"></div>
+          <div class="field"><label for="f-en-seo-desc">Google description (SEO)</label><textarea id="f-en-seo-desc" maxlength="200"></textarea></div>
+        </div>
+      </div>
+    </details>
     <div class="section-label">การเผยแพร่</div>
     <div class="notice">ก่อนเผยแพร่ ตรวจข้อความให้ตรงกฎโฆษณาสถานพยาบาล (สบส.): ห้ามใช้คำว่า ดีที่สุด / ถูกที่สุด / การันตีผล และห้ามเปรียบเทียบราคากับสถานพยาบาลอื่น</div>
     <div class="field">
@@ -292,6 +328,7 @@
           <div class="meta">
             <span class="badge ${p.is_published ? 'published' : 'draft'}">${p.is_published ? 'เผยแพร่แล้ว' : 'ฉบับร่าง'}</span>
             ${p.is_featured ? '<span class="badge featured">แนะนำ</span>' : ''}
+            <span class="badge ${p.en && p.en.name ? 'en' : 'no-en'}">${p.en && p.en.name ? 'EN ✓' : 'ไม่มี EN'}</span>
             &nbsp;${escapeHtml(catName(p.category))} · <span class="price-tag">${escapeHtml(baht(p.price))}</span> ${escapeHtml(p.price_unit || '')}
             ${Array.isArray(p.options) && p.options.length ? ` · ${p.options.length} ตัวเลือก` : ''}
           </div>
@@ -388,6 +425,8 @@
     document.getElementById('f-featured').checked = !!v('is_featured', false);
     document.getElementById('f-published').checked = !!v('is_published', false);
     setCover(v('cover_image', null));
+    loadEn(p);
+    initEnEditor();
 
     let initial = { blocks: [] };
     if (p && p.description) { try { initial = JSON.parse(p.description); } catch (e) { initial = { blocks: [{ type: 'paragraph', data: { text: escapeHtml(p.description) } }] }; } }
@@ -410,6 +449,44 @@
         }
       }
     });
+  }
+  // ---- English version (คอลัมน์ en) ----
+  let editorjsEn = null, currentEn = {};
+  function loadEn(p) {
+    currentEn = (p && p.en && typeof p.en === 'object') ? { ...p.en } : {};
+    const e = currentEn;
+    document.getElementById('f-en-name').value = e.name || '';
+    document.getElementById('f-en-short').value = e.short_desc || '';
+    document.getElementById('f-en-unit').value = e.price_unit || '';
+    document.getElementById('f-en-duration').value = e.duration || '';
+    document.getElementById('f-en-price-note').value = e.price_note || '';
+    document.getElementById('f-en-options').value = (Array.isArray(e.options) ? e.options : []).map(o => (o.label || '') + (o.note ? ' | ' + o.note : '')).join('\n');
+    setLines('f-en-suitable', e.suitable_for); setLines('f-en-includes', e.includes); setLines('f-en-precautions', e.precautions);
+    document.getElementById('f-en-seo-title').value = e.seo_title || '';
+    document.getElementById('f-en-seo-desc').value = e.seo_description || '';
+    document.getElementById('en-state').textContent = e.name ? 'มีแล้ว ✓' : 'ยังไม่มี';
+    document.getElementById('en-state').className = 'en-state' + (e.name ? ' ok' : '');
+  }
+  async function initEnEditor() {
+    let data = { blocks: [] };
+    if (currentEn.description) { try { data = JSON.parse(currentEn.description); } catch (e) {} }
+    if (editorjsEn) { try { await editorjsEn.isReady; editorjsEn.destroy(); } catch (e) {} editorjsEn = null; }
+    editorjsEn = new EditorJS({ holder: 'editorjs-en-container', placeholder: 'English description...', data,
+      tools: { header: { class: Header, inlineToolbar: true, config: { levels: [2, 3], defaultLevel: 2 } }, list: { class: List, inlineToolbar: true } } });
+  }
+  async function readEn() {
+    const en = { ...currentEn };
+    const set = (k, v) => { if (v && (!Array.isArray(v) || v.length)) en[k] = v; else delete en[k]; };
+    const val = (id) => document.getElementById(id).value.trim();
+    set('name', val('f-en-name')); set('short_desc', val('f-en-short')); set('price_unit', val('f-en-unit'));
+    set('duration', val('f-en-duration')); set('price_note', val('f-en-price-note'));
+    set('options', lines('f-en-options').map(l => { const [label, ...note] = l.split('|'); return { label: label.trim(), note: note.join('|').trim() }; }));
+    set('suitable_for', lines('f-en-suitable')); set('includes', lines('f-en-includes')); set('precautions', lines('f-en-precautions'));
+    set('seo_title', val('f-en-seo-title')); set('seo_description', val('f-en-seo-desc'));
+    let blocks = [];
+    if (editorjsEn) { try { blocks = (await editorjsEn.save()).blocks || []; } catch (e) {} }
+    set('description', blocks.length ? JSON.stringify({ time: Date.now(), blocks, version: '2.29.1' }) : '');
+    return en;
   }
   function closeEditor() {
     document.getElementById('editor-view').style.display = 'none';
@@ -450,6 +527,7 @@
       sort_order: parseInt(document.getElementById('f-sort').value, 10) || 0,
       is_featured: document.getElementById('f-featured').checked,
       is_published: document.getElementById('f-published').checked,
+      en: await readEn(),
     };
     const res = editingId
       ? await sb.from('hw_programs').update(payload).eq('id', editingId)

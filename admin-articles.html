@@ -155,6 +155,19 @@
   .seo-checks li::before{content:'○';display:inline-block;width:20px;color:var(--ink-soft);}
   .seo-checks li.pass::before{content:'✓';color:var(--teal-700);font-weight:700;}
   .seo-checks li.fail::before{content:'!';color:#b26a00;font-weight:700;}
+
+  /* ---- English version ---- */
+  details.en-box{margin:28px 0 8px;border:1.5px solid var(--mint-200,#cfe9df);border-radius:14px;background:var(--surface,#fff);}
+  details.en-box > summary{cursor:pointer;list-style:none;padding:16px 18px;font-family:'Anuphan',sans-serif;font-size:16px;font-weight:700;color:var(--mint-900);display:flex;align-items:center;gap:10px;}
+  details.en-box > summary::-webkit-details-marker{display:none;}
+  details.en-box > summary::before{content:'▸';color:var(--mint-700);}
+  details.en-box[open] > summary::before{content:'▾';}
+  details.en-box .en-inner{padding:0 18px 18px;}
+  .en-state{font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px;background:var(--apricot-100);color:#8C1D26;}
+  .en-state.ok{background:var(--mint-100);color:var(--mint-700);}
+  .badge.en{background:#e8eefc;color:#2a4a9a;}
+  .badge.no-en{background:#f3f3f3;color:#888;}
+  #en-import-bar{display:none;align-items:center;gap:10px;flex-wrap:wrap;background:#eef4ff;border:1px solid #c9d8f5;border-radius:12px;padding:12px 14px;margin-bottom:16px;font-size:14px;}
 </style>
 </head>
 <body>
@@ -179,6 +192,7 @@
       <h1>บทความทั้งหมด</h1>
       <button class="btn-primary" onclick="openEditor()">+ เพิ่มบทความใหม่</button>
     </div>
+    <div id="en-import-bar"><span id="en-import-text">มีคำแปลภาษาอังกฤษพร้อมนำเข้า</span><button class="btn-primary" style="padding:8px 16px;font-size:13.5px" onclick="importEnglish()">นำเข้าคำแปลภาษาอังกฤษ</button></div>
     <div id="article-list"></div>
   </div>
 
@@ -260,6 +274,20 @@
       </div>
       <ul class="seo-checks" id="seo-checks"></ul>
     </div>
+    <details class="en-box" id="en-box">
+      <summary>ภาษาอังกฤษ (English) <span class="en-state" id="en-state">ยังไม่มี</span></summary>
+      <div class="en-inner">
+        <div class="hint" style="margin-bottom:14px">แสดงที่ happiwellclinic.com/en/articles/… ถ้าเว้นว่าง หน้าอังกฤษจะแสดงภาษาไทยแทน (และไม่ขึ้น Google ภาษาอังกฤษ)</div>
+        <div class="field"><label for="f-en-title">Title</label><input type="text" id="f-en-title" placeholder="English title"></div>
+        <div class="field"><label for="f-en-excerpt">Excerpt</label><textarea id="f-en-excerpt" placeholder="Short summary"></textarea></div>
+        <div class="field"><label>Content</label><div id="editorjs-en-container"></div></div>
+        <div class="two-col">
+          <div class="field"><label for="f-en-seo-title">Google title (SEO)</label><input type="text" id="f-en-seo-title" maxlength="90" placeholder="ถ้าเว้นว่าง จะใช้ Title"></div>
+          <div class="field"><label for="f-en-seo-desc">Google description (SEO)</label><textarea id="f-en-seo-desc" maxlength="200" placeholder="ถ้าเว้นว่าง จะใช้ Excerpt"></textarea></div>
+        </div>
+      </div>
+    </details>
+
     <div class="field">
       <label style="display:flex;align-items:center;gap:8px;">
         <input type="checkbox" id="f-published" style="width:auto;">
@@ -283,6 +311,8 @@
   const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
   let editorjs = null;
+  let editorjsEn = null;
+  let currentEn = {};
   let editingId = null;
   let coverImageUrl = null;
   let currentTags = [];
@@ -323,6 +353,7 @@
       return;
     }
 
+    checkEnglishImport(data);
     container.innerHTML = data.map(a => `
       <div class="article-row">
         <div class="thumb" style="${a.cover_image ? `background-image:url('${a.cover_image}')` : ''}"></div>
@@ -330,6 +361,7 @@
           <h3>${escapeHtml(a.title || '(ไม่มีชื่อ)')}</h3>
           <div class="meta">
             <span class="badge ${a.is_published ? 'published' : 'draft'}">${a.is_published ? 'เผยแพร่แล้ว' : 'ฉบับร่าง'}</span>
+            <span class="badge ${a.en && a.en.title ? 'en' : 'no-en'}">${a.en && a.en.title ? 'EN ✓' : 'ไม่มี EN'}</span>
             &nbsp;${categoryLabel(a.category)} · ${a.published_at ? new Date(a.published_at).toLocaleDateString('th-TH') : 'ยังไม่กำหนดวันที่'}
           </div>
           ${Array.isArray(a.tags) && a.tags.length ? `<div>${a.tags.map(t => `<span class="tag-pill">${escapeHtml(t)}</span>`).join('')}</div>` : ''}
@@ -469,6 +501,8 @@
     document.getElementById('f-excerpt').value = '';
     document.getElementById('f-seo-title').value = '';
     document.getElementById('f-seo-desc').value = '';
+    ['f-en-title','f-en-excerpt','f-en-seo-title','f-en-seo-desc'].forEach(k => document.getElementById(k).value = '');
+    currentEn = {};
     document.getElementById('f-category').value = 'news';
     document.getElementById('f-published-at').value = new Date().toISOString().slice(0, 10);
     document.getElementById('f-published').checked = false;
@@ -487,6 +521,11 @@
       document.getElementById('f-excerpt').value = data.excerpt || '';
       document.getElementById('f-seo-title').value = data.seo_title || '';
       document.getElementById('f-seo-desc').value = data.seo_description || '';
+      currentEn = (data.en && typeof data.en === 'object') ? data.en : {};
+      document.getElementById('f-en-title').value = currentEn.title || '';
+      document.getElementById('f-en-excerpt').value = currentEn.excerpt || '';
+      document.getElementById('f-en-seo-title').value = currentEn.seo_title || '';
+      document.getElementById('f-en-seo-desc').value = currentEn.seo_description || '';
       document.getElementById('f-category').value = data.category || 'news';
       document.getElementById('f-published-at').value = data.published_at ? data.published_at.slice(0, 10) : '';
       document.getElementById('f-published').checked = !!data.is_published;
@@ -502,6 +541,7 @@
     }
 
     setTimeout(updateSeo, 800);
+    initEnEditor();
     if (editorjs) { await editorjs.isReady; editorjs.destroy(); editorjs = null; }
     editorjs = new EditorJS({
       holder: 'editorjs-container',
@@ -527,6 +567,80 @@
         }
       }
     });
+  }
+
+  async function initEnEditor() {
+    let enBlocks = { blocks: [] };
+    if (currentEn.content) { try { enBlocks = JSON.parse(currentEn.content); } catch (e) {} }
+    document.getElementById('en-state').textContent = currentEn.title ? 'มีแล้ว ✓' : 'ยังไม่มี';
+    document.getElementById('en-state').className = 'en-state' + (currentEn.title ? ' ok' : '');
+    if (editorjsEn) { try { await editorjsEn.isReady; editorjsEn.destroy(); } catch (e) {} editorjsEn = null; }
+    editorjsEn = new EditorJS({
+      holder: 'editorjs-en-container',
+      placeholder: 'English content...',
+      data: enBlocks,
+      tools: {
+        header: { class: Header, inlineToolbar: true, config: { levels: [2, 3], defaultLevel: 2 } },
+        list: { class: List, inlineToolbar: true },
+        quote: { class: Quote, inlineToolbar: true },
+        image: { class: ImageTool, config: { uploader: { uploadByFile: async (file) => {
+          const path = `content/${Date.now()}-${file.name}`;
+          const { error } = await sb.storage.from('article-images').upload(path, file);
+          if (error) { showToast('อัปโหลดรูปไม่สำเร็จ: ' + error.message, true); return { success: 0 }; }
+          return { success: 1, file: { url: sb.storage.from('article-images').getPublicUrl(path).data.publicUrl } };
+        } } } }
+      }
+    });
+  }
+  async function readEn() {
+    const en = { ...currentEn };
+    const set = (k, v) => { if (v) en[k] = v; else delete en[k]; };
+    set('title', document.getElementById('f-en-title').value.trim());
+    set('excerpt', document.getElementById('f-en-excerpt').value.trim());
+    set('seo_title', document.getElementById('f-en-seo-title').value.trim());
+    set('seo_description', document.getElementById('f-en-seo-desc').value.trim());
+    let blocks = [];
+    if (editorjsEn) { try { blocks = (await editorjsEn.save()).blocks || []; } catch (e) {} }
+    set('content', blocks.length ? JSON.stringify({ time: Date.now(), blocks, version: '2.29.1' }) : '');
+    return en;
+  }
+
+  // ---- นำเข้าคำแปลภาษาอังกฤษ (ไฟล์ /admin-data/en-import.json) ใส่เฉพาะรายการที่ยังไม่มี EN ----
+  let enImport = null;
+  async function checkEnglishImport(rows) {
+    try {
+      if (!enImport) { const r = await fetch('/admin-data/en-import.json', { cache: 'no-store' }); if (!r.ok) return; enImport = await r.json(); }
+      const [{ data: progs }, { data: cats }] = await Promise.all([
+        sb.from('hw_programs').select('slug,en'), sb.from('hw_program_categories').select('slug,en')]);
+      const empty = (x) => !x || !x.en || !Object.keys(x.en).length;
+      const todo = {
+        articles: rows.filter(a => empty(a) && enImport.articles[a.slug]).map(a => a.slug),
+        programs: (progs || []).filter(p => (empty(p) || Object.keys(p.en).length < 4) && enImport.programs[p.slug]).map(p => p.slug),
+        categories: (cats || []).filter(c => empty(c) && enImport.categories[c.slug]).map(c => c.slug),
+      };
+      enImport.todo = todo;
+      const n = todo.articles.length + todo.programs.length + todo.categories.length;
+      const bar = document.getElementById('en-import-bar');
+      bar.style.display = n ? 'flex' : 'none';
+      document.getElementById('en-import-text').textContent = `มีคำแปลภาษาอังกฤษพร้อมนำเข้า: บทความ ${todo.articles.length} · โปรแกรม ${todo.programs.length} · หมวดหมู่ ${todo.categories.length} (จะใส่เฉพาะรายการที่ยังไม่มีภาษาอังกฤษ)`;
+    } catch (e) {}
+  }
+  async function importEnglish() {
+    if (!enImport || !enImport.todo) return;
+    const t = enImport.todo, jobs = [
+      ...t.categories.map(s => ['hw_program_categories', s, enImport.categories[s]]),
+      ...t.programs.map(s => ['hw_programs', s, enImport.programs[s]]),
+      ...t.articles.map(s => ['hw_articles', s, enImport.articles[s]]),
+    ];
+    let ok = 0, fail = 0;
+    for (const [table, slug, en] of jobs) {
+      document.getElementById('en-import-text').textContent = `กำลังนำเข้า ${ok + fail + 1}/${jobs.length} ...`;
+      const { error } = await sb.from(table).update({ en }).eq('slug', slug);
+      if (error) fail++; else ok++;
+    }
+    showToast(`นำเข้าภาษาอังกฤษแล้ว ${ok} รายการ` + (fail ? ` (ไม่สำเร็จ ${fail})` : ''), !!fail);
+    enImport.todo = null;
+    loadArticles();
   }
 
   function closeEditor() {
@@ -576,6 +690,7 @@
       is_published: document.getElementById('f-published').checked,
       cover_image: coverImageUrl,
       content: JSON.stringify(content),
+      en: await readEn(),
     };
 
     let result;

@@ -384,6 +384,11 @@
   /* ลิงก์ราคา/โปรแกรมบนมือถือ (เมนูหลักถูกซ่อนบนจอเล็ก) */
   .nav-prog{display:none;font-size:14px;font-weight:600;color:var(--mint-700);background:var(--mint-100);padding:8px 14px;border-radius:999px;margin-left:auto;margin-right:8px;white-space:nowrap;}
   @media (max-width:840px){ .nav-prog{display:inline-flex;} .nav-cta{white-space:nowrap;} }
+  .lang-sw{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:700;color:var(--mint-900);border:1.5px solid var(--mint-200);background:var(--surface);padding:7px 13px;border-radius:999px;margin-right:8px;white-space:nowrap;text-decoration:none;}
+  .lang-sw:hover{border-color:var(--mint-600);color:var(--mint-700);}
+  .lang-sw svg{width:16px;height:16px;stroke:currentColor;fill:none;}
+  @media (min-width:841px){ nav .nav-links{margin-left:auto;margin-right:22px;} }
+  @media (max-width:480px){ nav{padding:12px 14px;} nav .brand img{height:32px !important;} .lang-sw{padding:6px 10px;margin-right:6px;font-size:13.5px;} .lang-sw svg{display:none;} .nav-prog{padding:7px 11px;margin-right:6px;} .nav-cta{padding:8px 12px;font-size:13.5px;} }
 </style>
 </head>
 <body>
@@ -410,6 +415,7 @@
       <a href="#contact">ติดต่อ / แผนที่</a>
     </div>
     <a href="/programs" class="nav-prog">ดูราคา</a>
+    <a href="/en/" class="lang-sw" hreflang="en" lang="en" aria-label="English version"><svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>EN</a>
     <a href="https://line.me/R/ti/p/@p49clinic" target="_blank" rel="noopener" class="nav-cta">
       <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.9 2 5.4 5 6.8-.2.8-.7 2.6-.8 3-.1.4.1.4.3.3.2-.1 2.6-1.7 3.6-2.4.6.1 1.3.1 1.9.1 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg>
       แชท LINE
@@ -452,7 +458,7 @@
       <div class="coverage-row">
         <span class="chip">บัตรทอง 30 บาท</span>
         <span class="chip">ประกันสังคม</span>
-        <span class="chip">ชำระเงินสด</span>
+        <span class="chip">เหมาจ่าย 360 บาท</span>
       </div>
     </div>
 
@@ -577,15 +583,15 @@
       </div>
       <div class="coverage-card">
         <h3>ประกันสังคม</h3>
-        <p>ผู้ประกันตนสามารถใช้บริการได้โดยไม่ต้องสำรองจ่าย ตั้งแต่วันที่ 1 มกราคม 2570</p>
+        <p>ผู้ประกันตนที่ใช้สิทธิ <b>โรงพยาบาลราษฎร์บูรณะ</b> และ <b>โรงพยาบาลสุขสวัสดิ์อินเตอร์</b> รักษาที่คลินิกได้โดยไม่ต้องสำรองจ่าย เริ่ม 1 มกราคม 2570</p>
       </div>
       <div class="coverage-card">
         <h3>ประกันเอกชน</h3>
         <p>อยู่ระหว่างเจรจากับบริษัทประกัน</p>
       </div>
       <div class="coverage-card">
-        <h3>ชำระเงินสด</h3>
-        <p>สำหรับสิทธิอื่นๆ สามารถขอรับใบรับรองแพทย์และใบเสร็จ เพื่อเบิกตรงกับหน่วยงาน</p>
+        <h3>เหมาจ่าย 360 บาท</h3>
+        <p>สำหรับผู้ไม่มีสิทธิ จ่ายครั้งเดียว 360 บาท ได้ทั้ง <b>ตรวจรักษา ยา และใบรับรองแพทย์</b></p>
       </div>
     </div>
   </div>

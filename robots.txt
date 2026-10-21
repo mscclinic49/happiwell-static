@@ -3,5 +3,6 @@ Allow: /
 Disallow: /admin-login.html
 Disallow: /admin-articles.html
 Disallow: /admin-programs.html
+Disallow: /admin-data/
 
 Sitemap: https://happiwellclinic.com/sitemap.xml

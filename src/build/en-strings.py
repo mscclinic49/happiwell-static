@@ -1,0 +1,265 @@
+# -*- coding: utf-8 -*-
+"""คำแปลภาษาอังกฤษของข้อความคงที่ในหน้าเว็บ (ใช้โดย en-pages.py)
+key = ข้อความภาษาไทยทั้งท่อน (ตรงตามไฟล์ต้นฉบับ), value = ภาษาอังกฤษ
+ถ้าแก้ข้อความภาษาไทยในหน้าเว็บ ให้มาแก้ key ที่นี่ด้วย แล้วรัน python3 src/build/en-pages.py
+"""
+
+T = {
+  # ---------- head / meta ----------
+  'คลินิกเวชกรรมเขตทุ่งครุ ซอยประชาอุทิศ 49 ตรวจรักษาโรคทั่วไป ฉีดวัคซีน ตรวจสุขภาพ ดูแลโรคเรื้อรัง รับสิทธิบัตรทอง 30 บาท และประกันสังคม เปิดทุกวัน':
+    'Medical clinic in Thung Khru, Soi Pracha Uthit 49, Bangkok. General practice, vaccinations, health check-ups and chronic disease care. Open every day.',
+  'แฮปปี้เวลล์ คลินิกเวชกรรม | HappiWell Medical Clinic': 'HappiWell Medical Clinic | Thung Khru, Bangkok',
+  'ลิงก์ราคา/โปรแกรมบนมือถือ (เมนูหลักถูกซ่อนบนจอเล็ก) */': 'mobile price link */',
+  'ใช้ตัวแปรสีเดียวกับทั้งเว็บ) */': 'shared colour variables) */',
+  'ดีไซน์ใหม่: อ่านง่ายสำหรับผู้สูงอายุ ===== */': 'easy-to-read layout ===== */',
+  'เทียบแพ็กเกจ */': 'package switcher */',
+  'กล่องราคา */': 'price box */',
+  'หัวข้อรายการ */': 'list headings */',
+  'จองคิว */': 'booking */',
+  'ตัวกรองหมวดหมู่ (เนื้อหาถูก render มาจาก server แล้ว ฝั่ง client แค่ซ่อน/แสดง)': 'category filter (content is server-rendered; client only shows/hides)',
+  'อัปเดตราคาและข้อความจองใน LINE ตามตัวเลือกที่ลูกค้าเลือก': 'update price and LINE booking text for the selected option',
+  'ถ้า server (Cloudflare Worker) render เนื้อหามาแล้ว ไม่ต้องโหลดซ้ำ': 'skip loading if the server already rendered the article',
+
+  # ---------- toolbar / header / footer ----------
+  'ปรับขนาดตัวอักษร': 'Text size',
+  'ปรับขนาดตัวอักษรและธีม': 'Text size and theme',
+  'ขนาดปกติ': 'Normal text',
+  'ก': 'A',
+  'ขนาดใหญ่': 'Large text',
+  'ขนาดใหญ่มาก': 'Extra large text',
+  'สลับโหมดมืด/สว่าง': 'Toggle dark/light mode',
+  "สลับเป็นโหมดสว่าง' : 'สลับเป็นโหมดมืด');": "Switch to light mode' : 'Switch to dark mode');",
+  'กลับหน้าแรก': 'Back to home page',
+  'ภาษาไทย': 'ภาษาไทย',  # ปุ่มเปลี่ยนเป็นภาษาไทย
+  'แฮปปี้เวลล์ คลินิกเวชกรรม': 'HappiWell Medical Clinic',
+  'บริการ': 'Services',
+  'ราคา/โปรแกรม': 'Prices',
+  'สิทธิการรักษา': 'Coverage',
+  'ข่าว/โปรโมชั่น': 'News',
+  'เกี่ยวกับเรา': 'About us',
+  'ติดต่อ / แผนที่': 'Contact / Map',
+  'ดูราคา': 'Prices',
+  'แชท LINE': 'Chat on LINE',
+  'สงวนลิขสิทธิ์.': 'All rights reserved.',
+  'นโยบายความเป็นส่วนตัว (PDPA)': 'Privacy Policy (PDPA)',
+  'นโยบายคุกกี้': 'Cookie Policy',
+  'เลขที่ใบอนุญาตประกอบกิจการสถานพยาบาล 10101035068': 'Healthcare facility license no. 10101035068',
+  'คลินิกเวชกรรม': 'Medical Clinic',
+
+  # ---------- home: hero ----------
+  'คลินิกเวชกรรม · เขตทุ่งครุ กรุงเทพฯ': 'Medical Clinic · Thung Khru, Bangkok',
+  'หมอใกล้บ้าน ที่ดูแลคุณเหมือนคนในครอบครัว': 'Your neighbourhood doctor, caring for you like family',
+  'แฮปปี้เวลล์ คลินิกเวชกรรม ให้บริการตรวจรักษาโรคทั่วไป รับสิทธิบัตรทอง 30 บาท และประกันสังคม พร้อมทีมแพทย์และพยาบาลที่พร้อมดูแลทุกช่วงวัย':
+    'HappiWell Medical Clinic offers general practice care for all ages, with a friendly team of doctors and nurses. Thai Gold Card (UCS) and Social Security accepted.',
+  'กำลังตรวจสอบเวลาทำการ…': 'Checking opening hours…',
+  'แชทผ่าน LINE': 'Chat on LINE',
+  'ดูแผนที่': 'View map',
+  'บัตรทอง 30 บาท': 'Gold Card (30 baht scheme)',
+  'ประกันสังคม': 'Social Security',
+  'เหมาจ่าย 360 บาท': 'Flat fee 360 baht',
+  'เวลาทำการ': 'Opening hours',
+  'เปิดทุกวัน ยกเว้นวันหยุดนักขัตฤกษ์': 'Open every day except public holidays',
+  'จันทร์': 'Monday',
+  'อังคาร': 'Tuesday',
+  'พุธ': 'Wednesday',
+  'พฤหัสบดี': 'Thursday',
+  'ศุกร์': 'Friday',
+  'เสาร์': 'Saturday',
+  'อาทิตย์': 'Sunday',
+  'เจ็บป่วยฉุกเฉิน โทรสายด่วน': 'Medical emergency? Call the hotline',
+  'หน่วยแพทย์ฉุกเฉิน': 'Emergency medical service',
+  'จาก 19 รีวิวใน Google': 'from 19 Google reviews',
+  'หน่วยบริการปฐมภูมิ': 'Primary care unit',
+  'ในระบบ สปสช.': 'registered with NHSO',
+  'ใบอนุญาตเลขที่': 'License no.',
+
+  # ---------- home: services ----------
+  'บริการของเรา': 'Our services',
+  'ดูแลตั้งแต่อาการเล็กน้อยถึงสุขภาพระยะยาว': 'From minor illness to long-term health',
+  'ทีมแพทย์ตรวจวินิจฉัยและให้คำแนะนำอย่างใกล้ชิด': 'Our doctors examine, diagnose and advise you personally',
+  'ตรวจรักษาโรคทั่วไป': 'General practice',
+  'ไข้ ไอ หวัด ท้องเสีย ปวดเมื่อย และอาการเจ็บป่วยเบื้องต้น': 'Fever, cough, colds, diarrhoea, aches and other common illnesses',
+  'ฉีดวัคซีน': 'Vaccinations',
+  'วัคซีนตามวัย วัคซีนไข้หวัดใหญ่ และวัคซีนสำหรับผู้เดินทาง': 'Age-appropriate vaccines, flu vaccine and travel vaccines',
+  'ตรวจสุขภาพ': 'Health check-ups',
+  'ตรวจสุขภาพประจำปี เจาะเลือด ตรวจปัสสาวะ และตรวจคัดกรองโรคเบื้องต้น พร้อมอ่านผลและให้คำแนะนำ':
+    'Annual check-ups, blood and urine tests and basic screening, with results explained by a doctor',
+  'ทำแผล เย็บแผล': 'Wound care and stitches',
+  'ทำแผลสด แผลผ่าตัด และติดตามอาการจนแผลหาย': 'Fresh wounds and surgical wounds, followed up until healed',
+  'ดูแลผู้สูงอายุ': 'Elderly care',
+  'ตรวจรักษาและติดตามอาการผู้สูงอายุ โรคความดัน เบาหวาน ที่คลินิก': 'Treatment and follow-up for older adults, including high blood pressure and diabetes, at the clinic',
+  'ดูแลโรคเรื้อรัง (NCD)': 'Chronic disease care (NCDs)',
+  'ติดตามความดันโลหิตสูง เบาหวาน ไขมันในเลือด อย่างต่อเนื่อง': 'Ongoing care for high blood pressure, diabetes and high cholesterol',
+  'วางแผนครอบครัว': 'Family planning',
+  'ให้คำปรึกษาคุมกำเนิด และวางแผนมีบุตร': 'Contraception advice and pregnancy planning',
+  'ตรวจโรคติดต่อทางเพศสัมพันธ์': 'Sexual health (STI) testing',
+  'ตรวจคัดกรอง ให้คำปรึกษาเป็นความลับ จ่ายยา PrEP / PEP และรักษาโรคติดต่อทางเพศสัมพันธ์':
+    'Confidential screening and counselling, PrEP / PEP, and treatment of sexually transmitted infections',
+  'ใบรับรองแพทย์': 'Medical certificates',
+  'ออกใบรับรองแพทย์ เช่น ใบขับขี่ สมัครงาน ตรวจสารเสพติด': 'Certificates for driving licences, job applications and drug tests',
+  'ดูราคาวัคซีนและโปรแกรมทั้งหมด →': 'See all vaccine and service prices →',
+  'จองคิวผ่าน LINE ได้ทันที': 'Book instantly via LINE',
+
+  # ---------- home: coverage ----------
+  'เลือกใช้สิทธิที่คุณมีได้ทันที': 'Use the coverage you already have',
+  'แจ้งเจ้าหน้าที่หน้าเคาน์เตอร์พร้อมบัตรประชาชนหรือบัตรแสดงสิทธิของคุณ': 'Show your ID card, passport or coverage card at the front desk',
+  'ยอดนิยม': 'Popular',
+  'รักษาฟรีตามสิทธิหลักประกันสุขภาพแห่งชาติ สำหรับผู้มีสิทธิในพื้นที่และปริมณฑล': 'Free treatment under Thailand’s Universal Coverage Scheme for eligible residents of the area',
+  'ผู้ประกันตนที่ใช้สิทธิ': 'Insured persons registered with',
+  'โรงพยาบาลราษฎร์บูรณะ': 'Rajburana Hospital',
+  'และ': 'and',
+  'โรงพยาบาลสุขสวัสดิ์อินเตอร์': 'Suksawat Inter Hospital',
+  'รักษาที่คลินิกได้โดยไม่ต้องสำรองจ่าย เริ่ม 1 มกราคม 2570': 'can be treated at the clinic with no upfront payment, starting 1 January 2027',
+  'ประกันเอกชน': 'Private insurance',
+  'อยู่ระหว่างเจรจากับบริษัทประกัน': 'Currently in discussion with insurers',
+  'สำหรับผู้ไม่มีสิทธิ จ่ายครั้งเดียว 360 บาท ได้ทั้ง': 'No coverage? Pay a single fee of 360 baht for',
+  'ตรวจรักษา ยา และใบรับรองแพทย์': 'consultation, medicine and a medical certificate',
+
+  # ---------- home: doctors ----------
+  'ทีมแพทย์': 'Our doctors',
+  'แพทย์ประจำคลินิก': 'Clinic doctors',
+  'ตารางเวรอาจมีการปรับเปลี่ยน แนะนำให้โทรสอบถามก่อนเข้ารับบริการ': 'Schedules may change. Please call before your visit.',
+  'พญ.กานต์ธีรา รัชพงษ์ไทย': 'Dr. Kanteera Ratchaphongthai',
+  'พญ.ณิชกานต์ ดีประเสริฐ': 'Dr. Nichakan Deeprasert',
+  'พญ.สิริลักษณ์ รุ่งศรี': 'Dr. Siriluk Rungsri',
+  'เวชกรรม': 'Medicine',
+  'เวชปฏิบัติทั่วไป': 'General practice',
+  'ใบประกอบวิชาชีพเวชกรรม ว.79019': 'Medical license no. 79019',
+  'ใบประกอบวิชาชีพเวชกรรม ว.75918': 'Medical license no. 75918',
+  'ใบประกอบวิชาชีพเวชกรรม ว.23726': 'Medical license no. 23726',
+  'วันที่ออกตรวจ': 'Clinic days',
+  'จันทร์ 08:00–18:00': 'Monday 08:00–18:00',
+  'อังคาร 08:00–18:00': 'Tuesday 08:00–18:00',
+  'พฤหัสบดี 08:00–18:00': 'Thursday 08:00–18:00',
+  'ศุกร์ 08:00–18:00': 'Friday 08:00–18:00',
+  'อาทิตย์ 08:00–12:00': 'Sunday 08:00–12:00',
+
+  # ---------- home: news / contact ----------
+  'ข่าวสารจากคลินิก': 'Clinic news',
+  'ข่าวประชาสัมพันธ์ โปรโมชั่น และบทความสุขภาพ': 'Announcements, promotions and health articles',
+  'กำลังโหลดข่าวสาร...': 'Loading news...',
+  'ติดต่อเรา': 'Contact us',
+  'แวะมาหาเราได้เลย': 'Come and visit us',
+  'แผนที่ HappiWell คลินิกเวชกรรม': 'Map of HappiWell Medical Clinic',
+  'ที่อยู่': 'Address',
+  'ซอยประชาอุทิศ 49 แขวงบางมด เขตทุ่งครุ กรุงเทพฯ 10140': 'Soi Pracha Uthit 49, Bang Mot, Thung Khru, Bangkok 10140',
+  'โทรศัพท์': 'Phone',
+  'เวลาทำการวันนี้': 'Today’s hours',
+
+  # ---------- home: scripts ----------
+  "อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์'];": "Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];",
+  'เปิดให้บริการอยู่ตอนนี้': 'Open now',
+  "ปิด ' + minToLabel(sch.close) + ' น.';": "Closes at ' + minToLabel(sch.close) + '';",
+  "เปิดวันนี้ ' + minToLabel(sch.open) + ' น.';": "Opens today at ' + minToLabel(sch.open) + '';",
+  "เปิดพรุ่งนี้ ' + minToLabel(schedule[nextDay].open) + ' น.';": "Opens tomorrow at ' + minToLabel(schedule[nextDay].open) + '';",
+  'ปิดรับผู้ป่วยแล้ว': 'Closed now',
+  "น.';": "';",
+  "ข่าวประชาสัมพันธ์', bg: 'var(--mint-100)', fg: 'var(--mint-700)',": "News', bg: 'var(--mint-100)', fg: 'var(--mint-700)',",
+  "โปรโมชั่น', bg: 'var(--apricot-100)', fg: '#8C1D26', thumbBg: 'var(--apricot-50)', iconStroke: 'var(--red)',": "Promotion', bg: 'var(--apricot-100)', fg: '#8C1D26', thumbBg: 'var(--apricot-50)', iconStroke: 'var(--red)',",
+  "บทความสุขภาพ', bg: 'var(--teal-100)', fg: 'var(--teal-700)',": "Health article', bg: 'var(--teal-100)', fg: 'var(--teal-700)',",
+  'อ่านเพิ่มเติม →': 'Read more →',
+  "บทความที่ ' + (i + 1));": "Article ' + (i + 1));",
+  'ยังไม่มีข่าวสารในขณะนี้': 'No news at the moment',
+
+  # ---------- programs ----------
+  'โปรแกรมและราคา | HappiWell คลินิกเวชกรรม': 'Prices & Services | HappiWell Medical Clinic',
+  'ราคาวัคซีน ตรวจสุขภาพ ยาฉีดคุมกำเนิด และบริการอื่น ๆ ที่แฮปปี้เวลล์ คลินิกเวชกรรม เขตทุ่งครุ':
+    'Prices for vaccines, health check-ups, contraceptive injections and other services at HappiWell Medical Clinic, Thung Khru, Bangkok',
+  'โปรแกรมและราคา': 'Prices & Services',
+  'ราคาวัคซีน ตรวจสุขภาพ และบริการที่คลินิก': 'Vaccine, check-up and clinic service prices',
+  'ดูราคาและสิ่งที่รวมในแต่ละโปรแกรมก่อนมาคลินิก กดจองผ่าน LINE ได้ทันที ทีมงานจะตอบกลับเพื่อยืนยันวันเวลา':
+    'See the price and what is included before you visit. Book via LINE and our team will reply to confirm your date and time.',
+  'ราคาทุกรายการยังไม่รวมค่าบริการทางการแพทย์ 30 บาท': 'All prices exclude the 30 baht medical service fee',
+  'กรองตามหมวดหมู่': 'Filter by category',
+  'กำลังโหลดโปรแกรม...': 'Loading services...',
+  'ไม่แน่ใจว่าโปรแกรมไหนเหมาะกับคุณ?': 'Not sure which service is right for you?',
+  'ทักถามทีมงานทาง LINE ก่อนนัดหมายได้ทุกวัน': 'Ask our team on LINE before booking, any day',
+  'ราคาที่แสดงเป็นราคาสำหรับผู้ชำระเงินสด ยังไม่รวมค่าบริการทางการแพทย์ 30 บาท อาจเปลี่ยนแปลงได้ ความเหมาะสมของแต่ละบริการขึ้นกับการประเมินของแพทย์ ผลลัพธ์ของแต่ละบุคคลอาจแตกต่างกัน สิทธิบัตรทองและประกันสังคมเป็นไปตามเงื่อนไขของแต่ละสิทธิ':
+    'Prices shown are for self-paying patients and exclude the 30 baht medical service fee. Prices may change. Suitability of each service depends on the doctor’s assessment, and individual results may vary. Gold Card and Social Security coverage follow the conditions of each scheme.',
+  "สอบถามราคา' : '฿' + Number(n).toLocaleString('en-US', {maximumFractionDigits: 2}); }":
+    "Ask for price' : '฿' + Number(n).toLocaleString('en-US', {maximumFractionDigits: 2}); }",
+  "สวัสดีค่ะ ต้องการจองคิว',": "Hello, I would like to book an appointment',",
+  "โปรแกรม: ' + P.name + (opt && opt.label ? ' (' + opt.label + ')' : ''),": "Service: ' + P.name + (opt && opt.label ? ' (' + opt.label + ')' : ''),",
+  "ราคา: ' + fmt(price),": "Price: ' + fmt(price),",
+  "ชื่อ-นามสกุล: ', 'เบอร์โทร: ', 'วันที่สะดวก: '].join('\\n');": "Full name: ', 'Phone: ', 'Preferred date: '].join('\\n');",
+
+  # ---------- articles ----------
+  'ข่าวสาร บทความ และโปรโมชั่น | HappiWell คลินิกเวชกรรม': 'News, Articles & Promotions | HappiWell Medical Clinic',
+  'รวมข่าวประชาสัมพันธ์ โปรโมชั่น และบทความสุขภาพจาก HappiWell คลินิกเวชกรรม เขตทุ่งครุ กรุงเทพฯ':
+    'Announcements, promotions and health articles from HappiWell Medical Clinic, Thung Khru, Bangkok',
+  'ข่าวสาร บทความ และโปรโมชั่น': 'News, articles & promotions',
+  'รวมข่าวประชาสัมพันธ์ โปรโมชั่น และบทความสุขภาพทั้งหมดจาก HappiWell คลินิกเวชกรรม เรียงตามความล่าสุดในแต่ละหมวด':
+    'All announcements, promotions and health articles from HappiWell Medical Clinic, newest first in each category',
+  'ทั้งหมด': 'All',
+  'ข่าวประชาสัมพันธ์': 'News',
+  'โปรโมชั่น': 'Promotions',
+  'บทความสุขภาพ': 'Health articles',
+  'กำลังโหลดบทความ...': 'Loading articles...',
+  "ข่าวประชาสัมพันธ์',": "News',",
+  "โปรโมชั่น',": "Promotions',",
+  "บทความสุขภาพ',": "Health articles',",
+  'ยังไม่มีบทความที่แท็ก': 'No articles tagged',
+  'ดูบทความทั้งหมด': 'See all articles',
+  'บทความ ·': 'articles ·',
+  'บทความ': 'articles',
+  'ยังไม่มีบทความในหมวดนี้': 'No articles in this category yet',
+  'บทความแท็ก: ${tagFilter}': 'Articles tagged: ${tagFilter}',
+  'รวมบทความทั้งหมดที่แท็กด้วย': 'All articles tagged',
+  'แท็ก: ${tagFilter} | HappiWell คลินิกเวชกรรม': 'Tag: ${tagFilter} | HappiWell Medical Clinic',
+  'โหลดบทความไม่สำเร็จ กรุณาลองใหม่อีกครั้ง': 'Could not load articles. Please try again.',
+  'กำลังโหลดบทความ... | HappiWell คลินิกเวชกรรม': 'Loading article... | HappiWell Medical Clinic',
+  'บทความจาก HappiWell คลินิกเวชกรรม': 'Article from HappiWell Medical Clinic',
+  'กลับไปหน้าข่าวสารทั้งหมด': 'Back to all news',
+  "ไม่พบบทความ | HappiWell คลินิกเวชกรรม';": "Article not found | HappiWell Medical Clinic';",
+  "ไม่พบบทความที่ต้องการ กรุณากลับไปหน้ารายการข่าวสาร');": "Article not found. Please go back to the news page.');",
+  "ไม่พบบทความนี้ หรือบทความอาจถูกถอดออกแล้ว กรุณากลับไปหน้ารายการข่าวสาร');": "This article was not found or has been removed. Please go back to the news page.');",
+  'เผยแพร่เมื่อ ${formatDate(data.published_at)}': 'Published ${formatDate(data.published_at)}',
+  'มีคำถามเพิ่มเติมไหม?': 'Have a question?',
+  'ทักแชทสอบถามหรือนัดหมายได้ที่ LINE Official Account ของคลินิก': 'Chat with us or book an appointment on the clinic’s LINE Official Account',
+
+  # ---------- privacy ----------
+  'นโยบายความเป็นส่วนตัว | HappiWell คลินิกเวชกรรม': 'Privacy Policy | HappiWell Medical Clinic',
+  'ปรับปรุงล่าสุด: 5 กรกฎาคม 2569': 'Last updated: 5 July 2026',
+  'แฮปปี้เวลล์ คลินิกเวชกรรม (': 'HappiWell Medical Clinic (',
+  'คลินิก': 'the Clinic',
+  'ให้ความสำคัญกับการคุ้มครองข้อมูลส่วนบุคคลของผู้ใช้บริการ ตามพระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA) นโยบายฉบับนี้อธิบายว่าคลินิกเก็บรวบรวม ใช้ และเปิดเผยข้อมูลส่วนบุคคลของท่านอย่างไร':
+    'is committed to protecting the personal data of its patients in accordance with Thailand’s Personal Data Protection Act B.E. 2562 (2019) (PDPA). This policy explains how the Clinic collects, uses and discloses your personal data. If there is any difference between this English translation and the Thai version, the Thai version prevails.',
+  'ข้อมูลที่เราเก็บรวบรวม': 'Data we collect',
+  'ข้อมูลระบุตัวตน เช่น ชื่อ-นามสกุล เลขบัตรประชาชน วันเดือนปีเกิด': 'Identity data, such as full name, ID card or passport number and date of birth',
+  'ข้อมูลติดต่อ เช่น ที่อยู่ เบอร์โทรศัพท์ LINE ID': 'Contact data, such as address, phone number and LINE ID',
+  'ข้อมูลสุขภาพ เช่น ประวัติการรักษา ผลตรวจ ผลแล็บ การแพ้ยา': 'Health data, such as medical history, examination and lab results, and drug allergies',
+  'ข้อมูลสิทธิการรักษา เช่น สิทธิบัตรทอง ประกันสังคม': 'Coverage data, such as Gold Card or Social Security entitlement',
+  'วัตถุประสงค์ในการใช้ข้อมูล': 'How we use your data',
+  'คลินิกใช้ข้อมูลของท่านเพื่อการตรวจวินิจฉัย รักษาพยาบาล ติดต่อนัดหมาย ออกใบรับรองแพทย์ ดำเนินการเบิกจ่ายตามสิทธิการรักษา และปฏิบัติตามกฎหมายที่เกี่ยวข้องกับสถานพยาบาล':
+    'The Clinic uses your data for diagnosis and treatment, appointments, issuing medical certificates, processing claims under your coverage, and complying with laws that apply to healthcare facilities.',
+  'การเปิดเผยข้อมูล': 'Disclosure of data',
+  'คลินิกจะไม่เปิดเผยข้อมูลส่วนบุคคลของท่านแก่บุคคลภายนอก เว้นแต่ได้รับความยินยอมจากท่าน หรือเป็นการเปิดเผยตามที่กฎหมายกำหนด เช่น การส่งต่อข้อมูลเพื่อการรักษาต่อเนื่องกับโรงพยาบาล หรือหน่วยงานผู้ให้สิทธิการรักษา (สปสช. / ประกันสังคม)':
+    'The Clinic will not disclose your personal data to third parties without your consent, except where required by law, for example when referring you to a hospital for continued care or to the agency that provides your coverage (NHSO / Social Security Office).',
+  'ระยะเวลาการเก็บข้อมูล': 'How long we keep data',
+  'คลินิกเก็บรักษาข้อมูลทางการแพทย์ตามระยะเวลาที่กฎหมายและมาตรฐานทางการแพทย์กำหนด และจะทำการลบหรือทำให้ข้อมูลไม่สามารถระบุตัวตนได้เมื่อพ้นระยะเวลาที่จำเป็น':
+    'The Clinic keeps medical records for the period required by law and medical standards, and deletes or anonymises data once it is no longer needed.',
+  'สิทธิของเจ้าของข้อมูล': 'Your rights',
+  'ท่านมีสิทธิขอเข้าถึง ขอสำเนา ขอแก้ไข ขอลบ หรือขอถอนความยินยอมการใช้ข้อมูลส่วนบุคคลของท่าน โดยติดต่อคลินิกตามช่องทางด้านล่าง':
+    'You have the right to access, obtain a copy of, correct or delete your personal data, or to withdraw your consent, by contacting the Clinic using the details below.',
+  'ช่องทางติดต่อ': 'Contact',
+  'หากมีข้อสงสัยเกี่ยวกับนโยบายความเป็นส่วนตัวนี้ ติดต่อคลินิกได้ที่ 02-000-4586 หรือ LINE @p49clinic':
+    'If you have questions about this privacy policy, contact the Clinic at 02-000-4586 or LINE @p49clinic.',
+
+  # ---------- cookies ----------
+  'นโยบายคุกกี้ | HappiWell คลินิกเวชกรรม': 'Cookie Policy | HappiWell Medical Clinic',
+  'เว็บไซต์นี้ใช้คุกกี้ (Cookies) เพื่อพัฒนาประสบการณ์การใช้งานของท่าน นโยบายฉบับนี้อธิบายว่าเราใช้คุกกี้อย่างไรและท่านสามารถจัดการคุกกี้ได้อย่างไร':
+    'This website uses cookies to improve your experience. This policy explains how we use cookies and how you can manage them.',
+  'คุกกี้คืออะไร': 'What are cookies?',
+  'คุกกี้คือไฟล์ข้อมูลขนาดเล็กที่เว็บไซต์บันทึกไว้บนอุปกรณ์ของท่านเมื่อเข้าชมเว็บไซต์ เพื่อจดจำการตั้งค่าและพฤติกรรมการใช้งาน':
+    'Cookies are small data files that a website stores on your device when you visit, to remember your settings and how you use the site.',
+  'ประเภทคุกกี้ที่ใช้': 'Cookies we use',
+  'คุกกี้ที่จำเป็น': 'Essential cookies',
+  'ใช้เพื่อให้เว็บไซต์ทำงานได้ปกติ ไม่สามารถปิดการใช้งานได้': 'Needed for the website to work properly. These cannot be turned off.',
+  'คุกกี้เพื่อการวิเคราะห์': 'Analytics cookies',
+  'ใช้เพื่อวิเคราะห์การเข้าใช้งานเว็บไซต์ เพื่อปรับปรุงเนื้อหาให้ตรงความต้องการ': 'Help us understand how the website is used so we can improve it.',
+  'การจัดการคุกกี้': 'Managing cookies',
+  'ท่านสามารถตั้งค่าเบราว์เซอร์ของท่านเพื่อปฏิเสธคุกกี้ หรือแจ้งเตือนเมื่อมีการส่งคุกกี้มายังอุปกรณ์ของท่าน อย่างไรก็ตาม การปิดใช้งานคุกกี้บางประเภทอาจส่งผลต่อการใช้งานเว็บไซต์บางส่วน':
+    'You can set your browser to refuse cookies or to alert you when cookies are sent. Turning off some cookies may affect parts of the website.',
+  'หากมีข้อสงสัยเกี่ยวกับนโยบายคุกกี้นี้ ติดต่อคลินิกได้ที่ 02-000-4586 หรือ LINE @p49clinic':
+    'If you have questions about this cookie policy, contact the Clinic at 02-000-4586 or LINE @p49clinic.',
+}

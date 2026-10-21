@@ -18,6 +18,7 @@ toggle_js = src[src.index('/* FONT SIZE + THEME TOGGLE */'):src.index('</script>
 head = src[:head_end]
 between = src[style_close:body_start]  # </style></head><body> + fs-toggle + header
 footer = src[footer_start:footer_end]
+between = between.replace('href="/en/articles" class="lang-sw"', 'href="/en/programs" class="lang-sw"')
 
 # หัวข้อหน้า: title/description ถูกแทนที่โดย Worker อีกชั้น ค่านี้เป็นค่าเริ่มต้น
 head = re.sub(r'<title id="page-title">.*?</title>', '<title id="page-title">โปรแกรมและราคา | HappiWell คลินิกเวชกรรม</title>', head)
@@ -26,6 +27,11 @@ head = re.sub(r'\s*<meta id="og-(title|description|image)"[^>]*>', '', head)
 
 COMMON_CSS = r'''
   /* PROGRAMS (ใช้ตัวแปรสีเดียวกับทั้งเว็บ) */
+  .lang-sw{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:700;color:var(--mint-900);border:1.5px solid var(--mint-200);background:var(--surface);padding:7px 13px;border-radius:999px;margin-right:8px;white-space:nowrap;text-decoration:none;}
+  .lang-sw:hover{border-color:var(--mint-600);color:var(--mint-700);}
+  .lang-sw svg{width:16px;height:16px;stroke:currentColor;fill:none;}
+  @media (min-width:841px){ nav .nav-links{margin-left:auto;margin-right:22px;} }
+  @media (max-width:480px){ nav{padding:12px 14px;} nav .brand img{height:32px !important;} .lang-sw{padding:6px 10px;margin-right:6px;font-size:13.5px;} .lang-sw svg{display:none;} .nav-prog{padding:7px 11px;margin-right:6px;} .nav-cta{padding:8px 12px;font-size:13.5px;} }
   .pg-hero{padding:44px 0 8px;}
   .pg-hero h1{font-size:34px;margin:10px 0 10px;}
   .pg-hero p{color:var(--ink-soft);font-size:16px;max-width:640px;}
