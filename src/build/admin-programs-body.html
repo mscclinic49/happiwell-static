@@ -1,0 +1,515 @@
+  /* ---- เพิ่มเติมสำหรับหน้าโปรแกรม ---- */
+  .admin-tabs{display:flex;gap:4px;flex-wrap:wrap;}
+  .admin-tabs a{font-size:14px;font-weight:600;color:var(--ink-soft);text-decoration:none;padding:8px 14px;border-radius:999px;}
+  .admin-tabs a.active{background:var(--mint-100);color:var(--mint-700);}
+  .admin-tabs .count{display:inline-block;min-width:20px;padding:0 6px;margin-left:4px;border-radius:999px;background:var(--apricot-600);color:#fff;font-size:11.5px;text-align:center;}
+  header{flex-wrap:wrap;gap:10px;}
+  .wrap{max-width:980px;}
+  .seg{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;}
+  .seg button{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 14px;font-family:inherit;font-size:13.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;}
+  .seg button.active{background:var(--mint-600);border-color:var(--mint-600);color:#fff;}
+  .price-tag{font-family:'Anuphan',sans-serif;font-weight:700;color:var(--apricot-600);}
+  .badge.featured{background:var(--mint-100);color:var(--mint-700);}
+  .opt-row{display:grid;grid-template-columns:minmax(0,2fr) 120px minmax(0,2fr) 34px;gap:8px;margin-bottom:8px;}
+  .opt-row input{padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;font-family:inherit;font-size:14px;width:100%;}
+  .opt-row input:focus{outline:none;border-color:var(--mint-600);}
+  .three-col{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;}
+  .section-label{font-family:'Anuphan',sans-serif;font-size:16px;color:var(--mint-900);margin:28px 0 12px;padding-top:18px;border-top:1px solid var(--line);}
+  .notice{background:var(--apricot-100);color:#8C1D26;border-radius:10px;padding:12px 14px;font-size:13px;margin-bottom:12px;}
+  .bk-row{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:10px;}
+  .bk-row.new{border-color:var(--mint-600);box-shadow:0 0 0 1px var(--mint-600) inset;}
+  .bk-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:flex-start;}
+  .bk-top h3{font-size:16px;color:var(--ink);}
+  .bk-top .when{font-size:12.5px;color:var(--ink-soft);}
+  .bk-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:6px 18px;font-size:14px;margin:10px 0;}
+  .bk-grid b{font-weight:600;color:var(--ink-soft);font-size:12.5px;display:block;}
+  .bk-grid a{color:var(--mint-700);font-weight:600;}
+  .bk-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;}
+  .bk-actions select{padding:8px 12px;border:1.5px solid var(--line);border-radius:10px;font-family:inherit;font-size:14px;}
+  .bk-actions input{flex:1;min-width:200px;padding:8px 12px;border:1.5px solid var(--line);border-radius:10px;font-family:inherit;font-size:14px;}
+  .st-new{color:var(--mint-700)} .st-contacted{color:#8a5a00} .st-confirmed{color:var(--teal-700)} .st-done{color:var(--ink-soft)} .st-cancelled{color:#8C1D26}
+  @media (max-width:640px){ .two-col,.three-col{grid-template-columns:1fr;} .opt-row{grid-template-columns:1fr 90px 34px;} .opt-row .opt-note{grid-column:1/3;} }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <div class="mark"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-9.5-8.5C.5 8.5 3 5 6.5 5c2 0 3.5 1.2 5.5 3 2-1.8 3.5-3 5.5-3 3.5 0 6 3.5 4 7.5C19 16.65 12 21 12 21z"/></svg></div>
+    <span>HappiWell Admin</span>
+  </div>
+  <nav class="admin-tabs" aria-label="เมนูแอดมิน">
+    <a href="admin-articles.html">บทความ</a>
+    <a href="#programs" data-tab="programs">โปรแกรมและราคา</a>
+    <a href="#bookings" data-tab="bookings">คำขอจองคิว<span class="count" id="new-count" hidden></span></a>
+  </nav>
+  <button id="logout-btn">ออกจากระบบ</button>
+</header>
+
+<div class="wrap">
+
+  <!-- PROGRAM LIST -->
+  <div id="list-view">
+    <div class="list-head">
+      <h1>โปรแกรมและราคา</h1>
+      <button class="btn-primary" onclick="openEditor()">+ เพิ่มโปรแกรม</button>
+    </div>
+    <div class="seg" id="cat-filter"></div>
+    <div id="program-list"></div>
+  </div>
+
+  <!-- PROGRAM EDITOR -->
+  <div id="editor-view">
+    <button class="back-link" onclick="closeEditor()">← กลับไปหน้ารายการ</button>
+    <h1 id="editor-title" style="font-size:20px;margin-bottom:22px;">เพิ่มโปรแกรม</h1>
+
+    <div class="field">
+      <label for="f-name">ชื่อโปรแกรม</label>
+      <input type="text" id="f-name" oninput="autoSlug()" placeholder="เช่น วัคซีนไข้หวัดใหญ่ 4 สายพันธุ์">
+    </div>
+    <div class="two-col">
+      <div class="field">
+        <label for="f-slug">Slug (สำหรับ URL)</label>
+        <input type="text" id="f-slug" placeholder="flu-vaccine">
+        <div class="hint">ภาษาอังกฤษตัวเล็ก ตัวเลข และ - เท่านั้น จะเป็น happiwellclinic.com/programs/<b>slug</b></div>
+      </div>
+      <div class="field">
+        <label for="f-category">หมวดหมู่</label>
+        <select id="f-category"></select>
+      </div>
+    </div>
+    <div class="field">
+      <label for="f-short">คำอธิบายสั้น (แสดงบนการ์ด)</label>
+      <textarea id="f-short" maxlength="200" placeholder="1–2 บรรทัด"></textarea>
+    </div>
+
+    <div class="section-label">ราคา</div>
+    <div class="three-col">
+      <div class="field">
+        <label for="f-price">ราคา (บาท)</label>
+        <input type="text" id="f-price" inputmode="decimal" placeholder="เว้นว่าง = สอบถามราคา">
+      </div>
+      <div class="field">
+        <label for="f-unit">หน่วย</label>
+        <input type="text" id="f-unit" list="unit-list" placeholder="ต่อเข็ม">
+        <datalist id="unit-list"><option value="ต่อเข็ม"><option value="ต่อครั้ง"><option value="เริ่มต้น"><option value="เริ่มต้นต่อรายการ"><option value="คอร์ส 3 เข็ม"><option value="ต่อฉบับ"></datalist>
+        <div class="hint">ขึ้นต้นด้วย "เริ่มต้น" จะแสดงเป็น เริ่มต้น ฿999</div>
+      </div>
+      <div class="field">
+        <label for="f-sort">ลำดับการแสดง</label>
+        <input type="text" id="f-sort" inputmode="numeric" placeholder="1">
+      </div>
+    </div>
+    <div class="field">
+      <label for="f-price-note">หมายเหตุราคา</label>
+      <input type="text" id="f-price-note" placeholder="เช่น จองคอร์ส 2 เข็ม 3,450 บาท">
+    </div>
+    <div class="field">
+      <label>ตัวเลือก / แพ็กเกจย่อย <small style="font-weight:400">(ถ้ามี ลูกค้าจะเลือกได้ก่อนจอง)</small></label>
+      <div id="opt-list"></div>
+      <button type="button" class="btn-ghost" style="padding:8px 16px;font-size:13.5px" onclick="addOption()">+ เพิ่มตัวเลือก</button>
+    </div>
+
+    <div class="section-label">รายละเอียด</div>
+    <div class="field">
+      <label>รูปหน้าปก</label>
+      <div class="cover-upload" id="cover-upload" onclick="document.getElementById('cover-file').click()">
+        <span>คลิกเพื่ออัปโหลดรูปหน้าปก (ไม่ใส่ก็ได้ จะแสดงไอคอนแทน)</span>
+      </div>
+      <input type="file" id="cover-file" accept="image/*" style="display:none" onchange="uploadCover(event)">
+      <button type="button" class="btn-ghost" id="cover-remove" style="padding:6px 14px;font-size:13px;margin-top:8px;display:none" onclick="removeCover()">ลบรูปหน้าปก</button>
+    </div>
+    <div class="field">
+      <label>เนื้อหา</label>
+      <div id="editorjs-container"></div>
+    </div>
+    <div class="two-col">
+      <div class="field">
+        <label for="f-suitable">เหมาะกับใคร</label>
+        <textarea id="f-suitable" rows="4" placeholder="1 บรรทัด = 1 ข้อ"></textarea>
+      </div>
+      <div class="field">
+        <label for="f-includes">รวมอยู่ในราคา</label>
+        <textarea id="f-includes" rows="4" placeholder="1 บรรทัด = 1 ข้อ"></textarea>
+      </div>
+    </div>
+    <div class="field">
+      <label for="f-precautions">ข้อควรทราบ</label>
+      <textarea id="f-precautions" rows="3" placeholder="1 บรรทัด = 1 ข้อ"></textarea>
+    </div>
+    <div class="three-col">
+      <div class="field">
+        <label for="f-duration">ระยะเวลา / จำนวนเข็ม</label>
+        <input type="text" id="f-duration" placeholder="2 เข็ม ห่างกัน 3 เดือน">
+      </div>
+      <div class="field">
+        <label for="f-brand">ผลิตภัณฑ์ / ยี่ห้อ</label>
+        <input type="text" id="f-brand">
+      </div>
+      <div class="field">
+        <label for="f-fda">เลขทะเบียน อย.</label>
+        <input type="text" id="f-fda">
+      </div>
+    </div>
+    <div class="field">
+      <label for="f-article">บทความที่เกี่ยวข้อง</label>
+      <select id="f-article"><option value="">— ไม่มี —</option></select>
+      <div class="hint">จะแสดงลิงก์ "อ่านเพิ่มเติม" ไปที่บทความ ช่วย SEO ทั้งสองหน้า</div>
+    </div>
+
+    <div class="section-label">SEO (ไม่ใส่ก็ได้)</div>
+    <div class="field">
+      <label for="f-seo-title">หัวข้อบน Google</label>
+      <input type="text" id="f-seo-title" maxlength="80" placeholder="ถ้าเว้นว่าง: ชื่อโปรแกรม + ราคา">
+    </div>
+    <div class="field">
+      <label for="f-seo-desc">คำอธิบายบน Google</label>
+      <textarea id="f-seo-desc" maxlength="200" placeholder="ถ้าเว้นว่าง: ใช้คำอธิบายสั้น"></textarea>
+    </div>
+
+    <div class="section-label">การเผยแพร่</div>
+    <div class="notice">ก่อนเผยแพร่ ตรวจข้อความให้ตรงกฎโฆษณาสถานพยาบาล (สบส.): ห้ามใช้คำว่า ดีที่สุด / ถูกที่สุด / การันตีผล และห้ามเปรียบเทียบราคากับสถานพยาบาลอื่น</div>
+    <div class="field">
+      <label style="display:flex;align-items:center;gap:8px;"><input type="checkbox" id="f-featured" style="width:auto;"> ติดป้าย "แนะนำ"</label>
+    </div>
+    <div class="field">
+      <label style="display:flex;align-items:center;gap:8px;"><input type="checkbox" id="f-published" style="width:auto;"> เผยแพร่บนเว็บ</label>
+      <div class="hint">หน้าเว็บอัปเดตภายในประมาณ 5 นาทีหลังบันทึก</div>
+    </div>
+
+    <div class="editor-actions">
+      <button class="btn-primary" onclick="saveProgram()">บันทึก</button>
+      <button class="btn-ghost" onclick="closeEditor()">ยกเลิก</button>
+    </div>
+  </div>
+
+  <!-- BOOKINGS -->
+  <div id="bookings-view" style="display:none">
+    <div class="list-head">
+      <h1>คำขอจองคิว</h1>
+      <button class="btn-ghost" onclick="loadBookings()">รีเฟรช</button>
+    </div>
+    <div class="seg" id="bk-filter">
+      <button data-st="open" class="active">ต้องจัดการ</button>
+      <button data-st="new">ใหม่</button>
+      <button data-st="contacted">ติดต่อแล้ว</button>
+      <button data-st="confirmed">ยืนยันนัด</button>
+      <button data-st="done">มาแล้ว</button>
+      <button data-st="cancelled">ยกเลิก</button>
+      <button data-st="all">ทั้งหมด</button>
+    </div>
+    <div id="booking-list"></div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const SUPABASE_URL = 'https://brfddpdynusxiiqopark.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJyZmRkcGR5bnVzeGlpcW9wYXJrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAxNDA5MDgsImV4cCI6MjA5NTcxNjkwOH0.nP6zm_9DLc0ieocf6ad53mIjn4GoaGnXzozZtTsg2BM';
+  const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  const STATUS = { new: 'ใหม่', contacted: 'ติดต่อแล้ว', confirmed: 'ยืนยันนัด', done: 'มาแล้ว', cancelled: 'ยกเลิก' };
+  const TIMES = { morning: 'ช่วงเช้า', afternoon: 'ช่วงบ่าย', evening: 'ช่วงเย็น' };
+  let editorjs = null, editingId = null, coverImageUrl = null;
+  let categories = [], programs = [], catFilter = 'all', bkFilter = 'open';
+
+  function escapeHtml(s) {
+    return String(s ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  }
+  function baht(n) { return n == null || n === '' ? 'สอบถามราคา' : '฿' + Number(n).toLocaleString('en-US', { maximumFractionDigits: 2 }); }
+  function showToast(msg, isError) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'toast show' + (isError ? ' error' : '');
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+  function lines(id) { return document.getElementById(id).value.split('\n').map(s => s.trim()).filter(Boolean); }
+  function setLines(id, arr) { document.getElementById(id).value = (arr || []).join('\n'); }
+  function num(v) { v = String(v ?? '').replace(/[,฿\s]/g, ''); return v === '' ? null : Number(v); }
+
+  // ---- Auth ----
+  (async () => {
+    const { data: { session } } = await sb.auth.getSession();
+    if (!session) { window.location.href = 'admin-login.html'; return; }
+    await loadCategories();
+    loadPrograms();
+    loadArticleOptions();
+    refreshNewCount();
+    route();
+  })();
+  document.getElementById('logout-btn').addEventListener('click', async () => {
+    await sb.auth.signOut();
+    window.location.href = 'admin-login.html';
+  });
+
+  // ---- Tabs ----
+  function route() {
+    const tab = location.hash === '#bookings' ? 'bookings' : 'programs';
+    document.querySelectorAll('.admin-tabs a[data-tab]').forEach(a => a.classList.toggle('active', a.dataset.tab === tab));
+    document.getElementById('bookings-view').style.display = tab === 'bookings' ? 'block' : 'none';
+    document.getElementById('list-view').style.display = tab === 'programs' ? 'block' : 'none';
+    document.getElementById('editor-view').style.display = 'none';
+    if (tab === 'bookings') loadBookings();
+  }
+  window.addEventListener('hashchange', route);
+
+  // ---- Categories / articles ----
+  async function loadCategories() {
+    const { data, error } = await sb.from('hw_program_categories').select('*').order('sort_order');
+    if (error) { showToast('โหลดหมวดหมู่ไม่สำเร็จ: ' + error.message, true); return; }
+    categories = data || [];
+    document.getElementById('f-category').innerHTML = categories.map(c => `<option value="${escapeHtml(c.slug)}">${escapeHtml(c.name)}</option>`).join('');
+  }
+  function catName(slug) { const c = categories.find(c => c.slug === slug); return c ? c.name : slug; }
+  async function loadArticleOptions() {
+    const { data } = await sb.from('hw_articles').select('slug,title').eq('is_published', true).order('published_at', { ascending: false });
+    document.getElementById('f-article').innerHTML = '<option value="">— ไม่มี —</option>' +
+      (data || []).map(a => `<option value="${escapeHtml(a.slug)}">${escapeHtml(a.title)}</option>`).join('');
+  }
+
+  // ---- Program list ----
+  async function loadPrograms() {
+    const box = document.getElementById('program-list');
+    const { data, error } = await sb.from('hw_programs').select('*').order('category').order('sort_order');
+    if (error) { box.innerHTML = `<div class="empty-state">โหลดโปรแกรมไม่สำเร็จ: ${escapeHtml(error.message)}</div>`; return; }
+    programs = data || [];
+    const counts = {};
+    programs.forEach(p => counts[p.category] = (counts[p.category] || 0) + 1);
+    document.getElementById('cat-filter').innerHTML =
+      `<button data-cat="all" class="${catFilter === 'all' ? 'active' : ''}">ทั้งหมด (${programs.length})</button>` +
+      categories.filter(c => counts[c.slug]).map(c => `<button data-cat="${escapeHtml(c.slug)}" class="${catFilter === c.slug ? 'active' : ''}">${escapeHtml(c.name)} (${counts[c.slug]})</button>`).join('');
+    const list = programs.filter(p => catFilter === 'all' || p.category === catFilter)
+      .sort((a, b) => (categories.findIndex(c => c.slug === a.category) - categories.findIndex(c => c.slug === b.category)) || (a.sort_order - b.sort_order));
+    if (!list.length) { box.innerHTML = '<div class="empty-state">ยังไม่มีโปรแกรม กด "เพิ่มโปรแกรม" เพื่อเริ่ม</div>'; return; }
+    box.innerHTML = list.map(p => `
+      <div class="article-row">
+        <div class="thumb" style="${p.cover_image ? `background-image:url('${escapeHtml(p.cover_image)}')` : ''}"></div>
+        <div class="info">
+          <h3>${escapeHtml(p.name)}</h3>
+          <div class="meta">
+            <span class="badge ${p.is_published ? 'published' : 'draft'}">${p.is_published ? 'เผยแพร่แล้ว' : 'ฉบับร่าง'}</span>
+            ${p.is_featured ? '<span class="badge featured">แนะนำ</span>' : ''}
+            &nbsp;${escapeHtml(catName(p.category))} · <span class="price-tag">${escapeHtml(baht(p.price))}</span> ${escapeHtml(p.price_unit || '')}
+            ${Array.isArray(p.options) && p.options.length ? ` · ${p.options.length} ตัวเลือก` : ''}
+          </div>
+        </div>
+        <div class="row-actions">
+          ${p.is_published ? `<a class="icon-btn" title="ดูบนเว็บ" href="/programs/${encodeURIComponent(p.slug)}" target="_blank" rel="noopener">↗</a>` : ''}
+          <button class="icon-btn" title="แก้ไข" onclick="openEditor('${p.id}')">✎</button>
+          <button class="icon-btn danger" title="ลบ" onclick="deleteProgram('${p.id}')">✕</button>
+        </div>
+      </div>`).join('');
+  }
+  document.getElementById('cat-filter').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    catFilter = b.dataset.cat; loadPrograms();
+  });
+  async function deleteProgram(id) {
+    const p = programs.find(x => x.id === id);
+    if (!confirm(`ลบโปรแกรม "${p ? p.name : ''}" ใช่ไหม? ไม่สามารถกู้คืนได้\n(ถ้าแค่อยากซ่อน ให้เอาติ๊ก "เผยแพร่บนเว็บ" ออกแทน)`)) return;
+    const { error } = await sb.from('hw_programs').delete().eq('id', id);
+    if (error) { showToast('ลบไม่สำเร็จ: ' + error.message, true); return; }
+    showToast('ลบโปรแกรมแล้ว'); loadPrograms();
+  }
+
+  // ---- Options repeater ----
+  function addOption(o = {}) {
+    const row = document.createElement('div');
+    row.className = 'opt-row';
+    row.innerHTML = `
+      <input class="opt-label" placeholder="ชื่อตัวเลือก เช่น คอร์ส 2 เข็ม" value="${escapeHtml(o.label || '')}" aria-label="ชื่อตัวเลือก">
+      <input class="opt-price" placeholder="ราคา" inputmode="decimal" value="${o.price ?? ''}" aria-label="ราคาตัวเลือก">
+      <input class="opt-note" placeholder="หมายเหตุ (ถ้ามี)" value="${escapeHtml(o.note || '')}" aria-label="หมายเหตุตัวเลือก">
+      <button type="button" class="icon-btn danger" title="ลบตัวเลือก" aria-label="ลบตัวเลือก">✕</button>`;
+    row.querySelector('button').onclick = () => row.remove();
+    document.getElementById('opt-list').appendChild(row);
+  }
+  function readOptions() {
+    return [...document.querySelectorAll('#opt-list .opt-row')].map(r => ({
+      label: r.querySelector('.opt-label').value.trim(),
+      price: num(r.querySelector('.opt-price').value),
+      note: r.querySelector('.opt-note').value.trim(),
+    })).filter(o => o.label);
+  }
+
+  // ---- Editor ----
+  function autoSlug() {
+    if (editingId) return;
+    const v = document.getElementById('f-name').value.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-').replace(/-+/g, '-');
+    if (v) document.getElementById('f-slug').value = v;
+  }
+  function setCover(url) {
+    coverImageUrl = url || null;
+    document.getElementById('cover-upload').innerHTML = url ? `<img src="${escapeHtml(url)}" alt="">` : '<span>คลิกเพื่ออัปโหลดรูปหน้าปก (ไม่ใส่ก็ได้ จะแสดงไอคอนแทน)</span>';
+    document.getElementById('cover-remove').style.display = url ? 'inline-block' : 'none';
+  }
+  function removeCover() { setCover(null); }
+  async function uploadCover(evt) {
+    const file = evt.target.files[0]; if (!file) return;
+    document.getElementById('cover-upload').innerHTML = '<span>กำลังอัปโหลด...</span>';
+    const path = `programs/${Date.now()}-${file.name.replace(/[^a-zA-Z0-9._-]/g, '_')}`;
+    const { error } = await sb.storage.from('article-images').upload(path, file);
+    if (error) { showToast('อัปโหลดรูปไม่สำเร็จ: ' + error.message, true); setCover(coverImageUrl); return; }
+    setCover(sb.storage.from('article-images').getPublicUrl(path).data.publicUrl);
+  }
+
+  async function openEditor(id) {
+    editingId = id || null;
+    document.getElementById('list-view').style.display = 'none';
+    document.getElementById('bookings-view').style.display = 'none';
+    document.getElementById('editor-view').style.display = 'block';
+    document.getElementById('editor-title').textContent = id ? 'แก้ไขโปรแกรม' : 'เพิ่มโปรแกรม';
+    window.scrollTo(0, 0);
+
+    const p = id ? programs.find(x => x.id === id) : null;
+    const v = (k, d = '') => (p && p[k] != null ? p[k] : d);
+    document.getElementById('f-name').value = v('name');
+    document.getElementById('f-slug').value = v('slug');
+    document.getElementById('f-category').value = v('category', catFilter !== 'all' ? catFilter : (categories[0] || {}).slug);
+    document.getElementById('f-short').value = v('short_desc');
+    document.getElementById('f-price').value = v('price');
+    document.getElementById('f-unit').value = v('price_unit');
+    document.getElementById('f-sort').value = v('sort_order', programs.length + 1);
+    document.getElementById('f-price-note').value = v('price_note');
+    document.getElementById('opt-list').innerHTML = '';
+    (p && Array.isArray(p.options) ? p.options : []).forEach(addOption);
+    setLines('f-suitable', p && p.suitable_for);
+    setLines('f-includes', p && p.includes);
+    setLines('f-precautions', p && p.precautions);
+    document.getElementById('f-duration').value = v('duration');
+    document.getElementById('f-brand').value = v('brand');
+    document.getElementById('f-fda').value = v('fda_reg_no');
+    document.getElementById('f-article').value = v('related_article_slug');
+    document.getElementById('f-seo-title').value = v('seo_title');
+    document.getElementById('f-seo-desc').value = v('seo_description');
+    document.getElementById('f-featured').checked = !!v('is_featured', false);
+    document.getElementById('f-published').checked = !!v('is_published', false);
+    setCover(v('cover_image', null));
+
+    let initial = { blocks: [] };
+    if (p && p.description) { try { initial = JSON.parse(p.description); } catch (e) { initial = { blocks: [{ type: 'paragraph', data: { text: escapeHtml(p.description) } }] }; } }
+    if (editorjs) { await editorjs.isReady; editorjs.destroy(); editorjs = null; }
+    editorjs = new EditorJS({
+      holder: 'editorjs-container',
+      placeholder: 'อธิบายโปรแกรม: คืออะไร ทำอย่างไร ฉีดกี่เข็ม...',
+      data: initial,
+      tools: {
+        header: { class: Header, inlineToolbar: true, config: { levels: [2, 3], defaultLevel: 2 } },
+        list: { class: List, inlineToolbar: true },
+        image: {
+          class: ImageTool,
+          config: { uploader: { uploadByFile: async (file) => {
+            const path = `programs/content/${Date.now()}-${file.name.replace(/[^a-zA-Z0-9._-]/g, '_')}`;
+            const { error } = await sb.storage.from('article-images').upload(path, file);
+            if (error) { showToast('อัปโหลดรูปไม่สำเร็จ: ' + error.message, true); return { success: 0 }; }
+            return { success: 1, file: { url: sb.storage.from('article-images').getPublicUrl(path).data.publicUrl } };
+          } } }
+        }
+      }
+    });
+  }
+  function closeEditor() {
+    document.getElementById('editor-view').style.display = 'none';
+    document.getElementById('list-view').style.display = 'block';
+    loadPrograms();
+  }
+
+  async function saveProgram() {
+    const name = document.getElementById('f-name').value.trim();
+    const slug = document.getElementById('f-slug').value.trim().toLowerCase();
+    if (!name) { showToast('กรุณากรอกชื่อโปรแกรม', true); return; }
+    if (!/^[a-z0-9-]{2,80}$/.test(slug)) { showToast('Slug ใช้ได้เฉพาะ a-z 0-9 และ - (2–80 ตัว)', true); return; }
+    const price = num(document.getElementById('f-price').value);
+    if (price != null && (isNaN(price) || price < 0)) { showToast('ราคาไม่ถูกต้อง', true); return; }
+    const options = readOptions();
+    if (options.some(o => o.price != null && isNaN(o.price))) { showToast('ราคาในตัวเลือกไม่ถูกต้อง', true); return; }
+    const description = editorjs ? JSON.stringify(await editorjs.save()) : null;
+
+    const payload = {
+      name, slug,
+      category: document.getElementById('f-category').value,
+      short_desc: document.getElementById('f-short').value.trim() || null,
+      description,
+      price,
+      price_unit: document.getElementById('f-unit').value.trim() || null,
+      price_note: document.getElementById('f-price-note').value.trim() || null,
+      options,
+      suitable_for: lines('f-suitable'),
+      includes: lines('f-includes'),
+      precautions: lines('f-precautions'),
+      duration: document.getElementById('f-duration').value.trim() || null,
+      brand: document.getElementById('f-brand').value.trim() || null,
+      fda_reg_no: document.getElementById('f-fda').value.trim() || null,
+      related_article_slug: document.getElementById('f-article').value || null,
+      seo_title: document.getElementById('f-seo-title').value.trim() || null,
+      seo_description: document.getElementById('f-seo-desc').value.trim() || null,
+      cover_image: coverImageUrl,
+      sort_order: parseInt(document.getElementById('f-sort').value, 10) || 0,
+      is_featured: document.getElementById('f-featured').checked,
+      is_published: document.getElementById('f-published').checked,
+    };
+    const res = editingId
+      ? await sb.from('hw_programs').update(payload).eq('id', editingId)
+      : await sb.from('hw_programs').insert(payload);
+    if (res.error) {
+      showToast('บันทึกไม่สำเร็จ: ' + (res.error.code === '23505' ? 'slug นี้มีอยู่แล้ว' : res.error.message), true);
+      return;
+    }
+    showToast('บันทึกโปรแกรมแล้ว');
+    closeEditor();
+  }
+
+  // ---- Bookings ----
+  async function refreshNewCount() {
+    const { count } = await sb.from('hw_program_bookings').select('id', { count: 'exact', head: true }).eq('status', 'new');
+    const el = document.getElementById('new-count');
+    el.hidden = !count; el.textContent = count || '';
+  }
+  document.getElementById('bk-filter').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    bkFilter = b.dataset.st;
+    document.querySelectorAll('#bk-filter button').forEach(x => x.classList.toggle('active', x === b));
+    loadBookings();
+  });
+  async function loadBookings() {
+    const box = document.getElementById('booking-list');
+    let q = sb.from('hw_program_bookings').select('*').order('created_at', { ascending: false }).limit(200);
+    if (bkFilter === 'open') q = q.in('status', ['new', 'contacted', 'confirmed']);
+    else if (bkFilter !== 'all') q = q.eq('status', bkFilter);
+    const { data, error } = await q;
+    if (error) { box.innerHTML = `<div class="empty-state">โหลดไม่สำเร็จ: ${escapeHtml(error.message)}</div>`; return; }
+    if (!data.length) { box.innerHTML = '<div class="empty-state">ไม่มีคำขอจองคิวในสถานะนี้</div>'; return; }
+    box.innerHTML = data.map(b => `
+      <div class="bk-row ${b.status === 'new' ? 'new' : ''}">
+        <div class="bk-top">
+          <div><h3>${escapeHtml(b.customer_name)}</h3><div class="when">ส่งเมื่อ ${new Date(b.created_at).toLocaleString('th-TH', { dateStyle: 'medium', timeStyle: 'short' })}</div></div>
+          <b class="st-${b.status}">${STATUS[b.status] || b.status}</b>
+        </div>
+        <div class="bk-grid">
+          <div><b>โทร</b><a href="tel:${escapeHtml(b.phone.replace(/[^0-9+]/g, ''))}">${escapeHtml(b.phone)}</a></div>
+          <div><b>LINE</b>${escapeHtml(b.line_id || '-')}</div>
+          <div><b>โปรแกรม</b>${escapeHtml(b.program_name)}${b.option_label ? ' · ' + escapeHtml(b.option_label) : ''} <span class="price-tag">${b.price != null ? escapeHtml(baht(b.price)) : ''}</span></div>
+          <div><b>วัน/เวลาที่สะดวก</b>${b.preferred_date ? new Date(b.preferred_date + 'T00:00:00').toLocaleDateString('th-TH', { dateStyle: 'medium' }) : 'ไม่ระบุ'} ${b.preferred_time ? '· ' + TIMES[b.preferred_time] : ''}</div>
+          ${b.note ? `<div style="grid-column:1/-1"><b>หมายเหตุจากลูกค้า</b>${escapeHtml(b.note)}</div>` : ''}
+        </div>
+        <div class="bk-actions">
+          <select aria-label="สถานะ" onchange="updateBooking('${b.id}', { status: this.value })">
+            ${Object.entries(STATUS).map(([k, v]) => `<option value="${k}" ${k === b.status ? 'selected' : ''}>${v}</option>`).join('')}
+          </select>
+          <input aria-label="บันทึกของแอดมิน" placeholder="บันทึกภายใน เช่น นัดวันที่..." value="${escapeHtml(b.admin_note || '')}" onchange="updateBooking('${b.id}', { admin_note: this.value.trim() || null })">
+        </div>
+      </div>`).join('');
+  }
+  async function updateBooking(id, patch) {
+    const { error } = await sb.from('hw_program_bookings').update(patch).eq('id', id);
+    if (error) { showToast('บันทึกไม่สำเร็จ: ' + error.message, true); return; }
+    showToast('บันทึกแล้ว');
+    refreshNewCount();
+    if (patch.status) loadBookings();
+  }
+</script>
+
+</body>
+</html>

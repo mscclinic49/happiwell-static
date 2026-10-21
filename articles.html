@@ -420,6 +420,10 @@
     .page-head h1{font-size:23px;}
   }
 
+
+  /* ลิงก์ราคา/โปรแกรมบนมือถือ (เมนูหลักถูกซ่อนบนจอเล็ก) */
+  .nav-prog{display:none;font-size:14px;font-weight:600;color:var(--mint-700);background:var(--mint-100);padding:8px 14px;border-radius:999px;margin-left:auto;margin-right:8px;white-space:nowrap;}
+  @media (max-width:840px){ .nav-prog{display:inline-flex;} .nav-cta{white-space:nowrap;} }
 </style>
 </head>
 <body>
@@ -439,11 +443,13 @@
     </a>
     <div class="nav-links">
       <a href="/#services">บริการ</a>
+      <a href="/programs">ราคา/โปรแกรม</a>
       <a href="/#coverage">สิทธิการรักษา</a>
       <a href="/articles">ข่าว/โปรโมชั่น</a>
       <a href="/#doctor">เกี่ยวกับเรา</a>
       <a href="/#contact">ติดต่อ / แผนที่</a>
     </div>
+    <a href="/programs" class="nav-prog">ดูราคา</a>
     <a href="https://line.me/R/ti/p/@p49clinic" target="_blank" rel="noopener" class="nav-cta">
       <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.9 2 5.4 5 6.8-.2.8-.7 2.6-.8 3-.1.4.1.4.3.3.2-.1 2.6-1.7 3.6-2.4.6.1 1.3.1 1.9.1 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg>
       แชท LINE

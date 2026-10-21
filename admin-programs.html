@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="data:image/png;base64,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">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>โปรแกรมและราคา | HappiWell Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@2.29.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/header@2.8.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/list@1.9.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/quote@2.6.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/image@2.9.0"></script>
+<style>
+  :root{
+    --bg:#F7F9FD; --surface:#FFFFFF;
+    --mint-900:#1B3A8C; --mint-700:#2E4FC7; --mint-600:#4361EE;
+    --mint-200:#C7D4FA; --mint-100:#E1E8FC; --mint-50:#F1F4FE;
+    --apricot-600:#E63946; --apricot-100:#FBDADC;
+    --teal-600:#2CB8A8; --teal-700:#1F8F82; --teal-100:#DBF4F0;
+    --ink:#1B2230; --ink-soft:#525A6B; --line:#E6EAF6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans Thai',sans-serif;line-height:1.6;}
+  h1,h2,h3{font-family:'Anuphan',sans-serif;color:var(--mint-900);}
+  a{color:inherit;}
+
+  header{
+    background:var(--surface);border-bottom:1px solid var(--line);
+    padding:14px 24px;display:flex;align-items:center;justify-content:space-between;
+    position:sticky;top:0;z-index:10;
+  }
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand .mark{width:32px;height:32px;border-radius:9px;background:var(--mint-600);display:flex;align-items:center;justify-content:center;}
+  .brand .mark svg{width:17px;height:17px;stroke:#fff;fill:none;}
+  .brand span{font-family:'Anuphan',sans-serif;font-weight:700;color:var(--mint-900);}
+  #logout-btn{
+    background:none;border:1px solid var(--line);border-radius:999px;padding:8px 16px;
+    font-family:inherit;font-size:13.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;
+  }
+
+  .wrap{max-width:900px;margin:0 auto;padding:32px 24px 80px;}
+
+  /* LIST VIEW */
+  .list-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px;}
+  .list-head h1{font-size:22px;}
+  .btn-primary{
+    background:var(--mint-600);color:#fff;border:none;border-radius:999px;
+    padding:11px 20px;font-family:inherit;font-weight:700;font-size:14px;cursor:pointer;
+  }
+  .article-row{
+    background:var(--surface);border:1px solid var(--line);border-radius:14px;
+    padding:16px 18px;display:flex;align-items:center;gap:14px;margin-bottom:10px;
+  }
+  .article-row .thumb{
+    width:56px;height:56px;border-radius:10px;background:var(--mint-50);flex-shrink:0;
+    background-size:cover;background-position:center;
+  }
+  .article-row .info{flex:1;min-width:0;}
+  .article-row h3{font-size:15.5px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .article-row .meta{font-size:12.5px;color:var(--ink-soft);margin-top:2px;}
+  .badge{
+    display:inline-block;font-size:11.5px;font-weight:700;padding:3px 10px;border-radius:999px;
+  }
+  .badge.published{background:var(--teal-100);color:var(--teal-700);}
+  .badge.draft{background:var(--apricot-100);color:#8C1D26;}
+  .tag-pill{
+    display:inline-block;font-size:11px;font-weight:600;color:var(--mint-700);background:var(--mint-50);
+    padding:2px 9px;border-radius:999px;margin:2px 4px 0 0;
+  }
+  .tag-input-wrap{
+    display:flex;flex-wrap:wrap;gap:8px;align-items:center;
+    border:1.5px solid var(--line);border-radius:10px;padding:9px 10px;background:var(--surface);
+  }
+  .tag-input-wrap:focus-within{border-color:var(--mint-600);}
+  .tag-chip{
+    display:inline-flex;align-items:center;gap:4px;background:var(--mint-100);color:var(--mint-700);
+    font-size:13px;font-weight:600;padding:5px 4px 5px 12px;border-radius:999px;white-space:nowrap;
+  }
+  .tag-chip button{
+    background:none;border:none;color:var(--mint-700);cursor:pointer;font-size:16px;line-height:1;
+    padding:3px 7px;border-radius:999px;font-family:inherit;
+  }
+  .tag-chip button:hover{background:var(--mint-200);}
+  #f-tag-input{
+    border:none;outline:none;flex:1;min-width:140px;font-family:inherit;font-size:14.5px;padding:4px;color:var(--ink);
+  }
+  .row-actions{display:flex;gap:6px;flex-shrink:0;}
+  .icon-btn{
+    width:34px;height:34px;border-radius:9px;border:1px solid var(--line);background:var(--surface);
+    display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--ink-soft);
+  }
+  .icon-btn:hover{background:var(--mint-50);color:var(--mint-700);}
+  .icon-btn.danger:hover{background:var(--apricot-100);color:#8C1D26;}
+  .empty-state{text-align:center;padding:60px 20px;color:var(--ink-soft);}
+
+  /* EDITOR VIEW */
+  #editor-view{display:none;}
+  .back-link{
+    display:inline-flex;align-items:center;gap:6px;color:var(--mint-700);font-weight:600;
+    font-size:14px;margin-bottom:18px;background:none;border:none;cursor:pointer;font-family:inherit;
+  }
+  .field{margin-bottom:18px;}
+  .field label{display:block;font-size:13px;font-weight:600;color:var(--ink-soft);margin-bottom:6px;}
+  .field input[type=text], .field textarea, .field select, .field input[type=date]{
+    width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;
+    font-family:inherit;font-size:15px;color:var(--ink);
+  }
+  .field textarea{resize:vertical;min-height:70px;}
+  .field input:focus, .field textarea:focus, .field select:focus{outline:none;border-color:var(--mint-600);}
+  .field .hint{font-size:12px;color:var(--ink-soft);margin-top:5px;}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+
+  .cover-upload{
+    border:2px dashed var(--mint-200);border-radius:12px;background:var(--mint-50);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+    padding:24px;cursor:pointer;color:var(--mint-700);font-size:13.5px;font-weight:600;
+    text-align:center;
+  }
+  .cover-upload img{max-width:100%;max-height:160px;border-radius:8px;}
+
+  #editorjs-container{
+    border:1.5px solid var(--line);border-radius:12px;padding:16px;min-height:280px;background:var(--surface);
+  }
+  .editor-actions{display:flex;gap:10px;margin-top:24px;}
+  .btn-ghost{
+    background:var(--surface);border:1.5px solid var(--line);color:var(--ink);
+    border-radius:999px;padding:11px 20px;font-family:inherit;font-weight:600;font-size:14px;cursor:pointer;
+  }
+  .toast{
+    position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+    background:var(--mint-900);color:#fff;padding:12px 22px;border-radius:999px;
+    font-size:14px;font-weight:600;display:none;z-index:50;
+  }
+  .toast.show{display:block;}
+  .toast.error{background:var(--apricot-600);}
+  /* ---- เพิ่มเติมสำหรับหน้าโปรแกรม ---- */
+  .admin-tabs{display:flex;gap:4px;flex-wrap:wrap;}
+  .admin-tabs a{font-size:14px;font-weight:600;color:var(--ink-soft);text-decoration:none;padding:8px 14px;border-radius:999px;}
+  .admin-tabs a.active{background:var(--mint-100);color:var(--mint-700);}
+  .admin-tabs .count{display:inline-block;min-width:20px;padding:0 6px;margin-left:4px;border-radius:999px;background:var(--apricot-600);color:#fff;font-size:11.5px;text-align:center;}
+  header{flex-wrap:wrap;gap:10px;}
+  .wrap{max-width:980px;}
+  .seg{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;}
+  .seg button{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 14px;font-family:inherit;font-size:13.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;}
+  .seg button.active{background:var(--mint-600);border-color:var(--mint-600);color:#fff;}
+  .price-tag{font-family:'Anuphan',sans-serif;font-weight:700;color:var(--apricot-600);}
+  .badge.featured{background:var(--mint-100);color:var(--mint-700);}
+  .opt-row{display:grid;grid-template-columns:minmax(0,2fr) 120px minmax(0,2fr) 34px;gap:8px;margin-bottom:8px;}
+  .opt-row input{padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;font-family:inherit;font-size:14px;width:100%;}
+  .opt-row input:focus{outline:none;border-color:var(--mint-600);}
+  .three-col{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;}
+  .section-label{font-family:'Anuphan',sans-serif;font-size:16px;color:var(--mint-900);margin:28px 0 12px;padding-top:18px;border-top:1px solid var(--line);}
+  .notice{background:var(--apricot-100);color:#8C1D26;border-radius:10px;padding:12px 14px;font-size:13px;margin-bottom:12px;}
+  .bk-row{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:10px;}
+  .bk-row.new{border-color:var(--mint-600);box-shadow:0 0 0 1px var(--mint-600) inset;}
+  .bk-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:flex-start;}
+  .bk-top h3{font-size:16px;color:var(--ink);}
+  .bk-top .when{font-size:12.5px;color:var(--ink-soft);}
+  .bk-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:6px 18px;font-size:14px;margin:10px 0;}
+  .bk-grid b{font-weight:600;color:var(--ink-soft);font-size:12.5px;display:block;}
+  .bk-grid a{color:var(--mint-700);font-weight:600;}
+  .bk-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;}
+  .bk-actions select{padding:8px 12px;border:1.5px solid var(--line);border-radius:10px;font-family:inherit;font-size:14px;}
+  .bk-actions input{flex:1;min-width:200px;padding:8px 12px;border:1.5px solid var(--line);border-radius:10px;font-family:inherit;font-size:14px;}
+  .st-new{color:var(--mint-700)} .st-contacted{color:#8a5a00} .st-confirmed{color:var(--teal-700)} .st-done{color:var(--ink-soft)} .st-cancelled{color:#8C1D26}
+  @media (max-width:640px){ .two-col,.three-col{grid-template-columns:1fr;} .opt-row{grid-template-columns:1fr 90px 34px;} .opt-row .opt-note{grid-column:1/3;} }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <div class="mark"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-9.5-8.5C.5 8.5 3 5 6.5 5c2 0 3.5 1.2 5.5 3 2-1.8 3.5-3 5.5-3 3.5 0 6 3.5 4 7.5C19 16.65 12 21 12 21z"/></svg></div>
+    <span>HappiWell Admin</span>
+  </div>
+  <nav class="admin-tabs" aria-label="เมนูแอดมิน">
+    <a href="admin-articles.html">บทความ</a>
+    <a href="#programs" data-tab="programs">โปรแกรมและราคา</a>
+    <a href="#bookings" data-tab="bookings">คำขอจองคิว<span class="count" id="new-count" hidden></span></a>
+  </nav>
+  <button id="logout-btn">ออกจากระบบ</button>
+</header>
+
+<div class="wrap">
+
+  <!-- PROGRAM LIST -->
+  <div id="list-view">
+    <div class="list-head">
+      <h1>โปรแกรมและราคา</h1>
+      <button class="btn-primary" onclick="openEditor()">+ เพิ่มโปรแกรม</button>
+    </div>
+    <div class="seg" id="cat-filter"></div>
+    <div id="program-list"></div>
+  </div>
+
+  <!-- PROGRAM EDITOR -->
+  <div id="editor-view">
+    <button class="back-link" onclick="closeEditor()">← กลับไปหน้ารายการ</button>
+    <h1 id="editor-title" style="font-size:20px;margin-bottom:22px;">เพิ่มโปรแกรม</h1>
+
+    <div class="field">
+      <label for="f-name">ชื่อโปรแกรม</label>
+      <input type="text" id="f-name" oninput="autoSlug()" placeholder="เช่น วัคซีนไข้หวัดใหญ่ 4 สายพันธุ์">
+    </div>
+    <div class="two-col">
+      <div class="field">
+        <label for="f-slug">Slug (สำหรับ URL)</label>
+        <input type="text" id="f-slug" placeholder="flu-vaccine">
+        <div class="hint">ภาษาอังกฤษตัวเล็ก ตัวเลข และ - เท่านั้น จะเป็น happiwellclinic.com/programs/<b>slug</b></div>
+      </div>
+      <div class="field">
+        <label for="f-category">หมวดหมู่</label>
+        <select id="f-category"></select>
+      </div>
+    </div>
+    <div class="field">
+      <label for="f-short">คำอธิบายสั้น (แสดงบนการ์ด)</label>
+      <textarea id="f-short" maxlength="200" placeholder="1–2 บรรทัด"></textarea>
+    </div>
+
+    <div class="section-label">ราคา</div>
+    <div class="three-col">
+      <div class="field">
+        <label for="f-price">ราคา (บาท)</label>
+        <input type="text" id="f-price" inputmode="decimal" placeholder="เว้นว่าง = สอบถามราคา">
+      </div>
+      <div class="field">
+        <label for="f-unit">หน่วย</label>
+        <input type="text" id="f-unit" list="unit-list" placeholder="ต่อเข็ม">
+        <datalist id="unit-list"><option value="ต่อเข็ม"><option value="ต่อครั้ง"><option value="เริ่มต้น"><option value="เริ่มต้นต่อรายการ"><option value="คอร์ส 3 เข็ม"><option value="ต่อฉบับ"></datalist>
+        <div class="hint">ขึ้นต้นด้วย "เริ่มต้น" จะแสดงเป็น เริ่มต้น ฿999</div>
+      </div>
+      <div class="field">
+        <label for="f-sort">ลำดับการแสดง</label>
+        <input type="text" id="f-sort" inputmode="numeric" placeholder="1">
+      </div>
+    </div>
+    <div class="field">
+      <label for="f-price-note">หมายเหตุราคา</label>
+      <input type="text" id="f-price-note" placeholder="เช่น จองคอร์ส 2 เข็ม 3,450 บาท">
+    </div>
+    <div class="field">
+      <label>ตัวเลือก / แพ็กเกจย่อย <small style="font-weight:400">(ถ้ามี ลูกค้าจะเลือกได้ก่อนจอง)</small></label>
+      <div id="opt-list"></div>
+      <button type="button" class="btn-ghost" style="padding:8px 16px;font-size:13.5px" onclick="addOption()">+ เพิ่มตัวเลือก</button>
+    </div>
+
+    <div class="section-label">รายละเอียด</div>
+    <div class="field">
+      <label>รูปหน้าปก</label>
+      <div class="cover-upload" id="cover-upload" onclick="document.getElementById('cover-file').click()">
+        <span>คลิกเพื่ออัปโหลดรูปหน้าปก (ไม่ใส่ก็ได้ จะแสดงไอคอนแทน)</span>
+      </div>
+      <input type="file" id="cover-file" accept="image/*" style="display:none" onchange="uploadCover(event)">
+      <button type="button" class="btn-ghost" id="cover-remove" style="padding:6px 14px;font-size:13px;margin-top:8px;display:none" onclick="removeCover()">ลบรูปหน้าปก</button>
+    </div>
+    <div class="field">
+      <label>เนื้อหา</label>
+      <div id="editorjs-container"></div>
+    </div>
+    <div class="two-col">
+      <div class="field">
+        <label for="f-suitable">เหมาะกับใคร</label>
+        <textarea id="f-suitable" rows="4" placeholder="1 บรรทัด = 1 ข้อ"></textarea>
+      </div>
+      <div class="field">
+        <label for="f-includes">รวมอยู่ในราคา</label>
+        <textarea id="f-includes" rows="4" placeholder="1 บรรทัด = 1 ข้อ"></textarea>
+      </div>
+    </div>
+    <div class="field">
+      <label for="f-precautions">ข้อควรทราบ</label>
+      <textarea id="f-precautions" rows="3" placeholder="1 บรรทัด = 1 ข้อ"></textarea>
+    </div>
+    <div class="three-col">
+      <div class="field">
+        <label for="f-duration">ระยะเวลา / จำนวนเข็ม</label>
+        <input type="text" id="f-duration" placeholder="2 เข็ม ห่างกัน 3 เดือน">
+      </div>
+      <div class="field">
+        <label for="f-brand">ผลิตภัณฑ์ / ยี่ห้อ</label>
+        <input type="text" id="f-brand">
+      </div>
+      <div class="field">
+        <label for="f-fda">เลขทะเบียน อย.</label>
+        <input type="text" id="f-fda">
+      </div>
+    </div>
+    <div class="field">
+      <label for="f-article">บทความที่เกี่ยวข้อง</label>
+      <select id="f-article"><option value="">— ไม่มี —</option></select>
+      <div class="hint">จะแสดงลิงก์ "อ่านเพิ่มเติม" ไปที่บทความ ช่วย SEO ทั้งสองหน้า</div>
+    </div>
+
+    <div class="section-label">SEO (ไม่ใส่ก็ได้)</div>
+    <div class="field">
+      <label for="f-seo-title">หัวข้อบน Google</label>
+      <input type="text" id="f-seo-title" maxlength="80" placeholder="ถ้าเว้นว่าง: ชื่อโปรแกรม + ราคา">
+    </div>
+    <div class="field">
+      <label for="f-seo-desc">คำอธิบายบน Google</label>
+      <textarea id="f-seo-desc" maxlength="200" placeholder="ถ้าเว้นว่าง: ใช้คำอธิบายสั้น"></textarea>
+    </div>
+
+    <div class="section-label">การเผยแพร่</div>
+    <div class="notice">ก่อนเผยแพร่ ตรวจข้อความให้ตรงกฎโฆษณาสถานพยาบาล (สบส.): ห้ามใช้คำว่า ดีที่สุด / ถูกที่สุด / การันตีผล และห้ามเปรียบเทียบราคากับสถานพยาบาลอื่น</div>
+    <div class="field">
+      <label style="display:flex;align-items:center;gap:8px;"><input type="checkbox" id="f-featured" style="width:auto;"> ติดป้าย "แนะนำ"</label>
+    </div>
+    <div class="field">
+      <label style="display:flex;align-items:center;gap:8px;"><input type="checkbox" id="f-published" style="width:auto;"> เผยแพร่บนเว็บ</label>
+      <div class="hint">หน้าเว็บอัปเดตภายในประมาณ 5 นาทีหลังบันทึก</div>
+    </div>
+
+    <div class="editor-actions">
+      <button class="btn-primary" onclick="saveProgram()">บันทึก</button>
+      <button class="btn-ghost" onclick="closeEditor()">ยกเลิก</button>
+    </div>
+  </div>
+
+  <!-- BOOKINGS -->
+  <div id="bookings-view" style="display:none">
+    <div class="list-head">
+      <h1>คำขอจองคิว</h1>
+      <button class="btn-ghost" onclick="loadBookings()">รีเฟรช</button>
+    </div>
+    <div class="seg" id="bk-filter">
+      <button data-st="open" class="active">ต้องจัดการ</button>
+      <button data-st="new">ใหม่</button>
+      <button data-st="contacted">ติดต่อแล้ว</button>
+      <button data-st="confirmed">ยืนยันนัด</button>
+      <button data-st="done">มาแล้ว</button>
+      <button data-st="cancelled">ยกเลิก</button>
+      <button data-st="all">ทั้งหมด</button>
+    </div>
+    <div id="booking-list"></div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const SUPABASE_URL = 'https://brfddpdynusxiiqopark.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJyZmRkcGR5bnVzeGlpcW9wYXJrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAxNDA5MDgsImV4cCI6MjA5NTcxNjkwOH0.nP6zm_9DLc0ieocf6ad53mIjn4GoaGnXzozZtTsg2BM';
+  const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  const STATUS = { new: 'ใหม่', contacted: 'ติดต่อแล้ว', confirmed: 'ยืนยันนัด', done: 'มาแล้ว', cancelled: 'ยกเลิก' };
+  const TIMES = { morning: 'ช่วงเช้า', afternoon: 'ช่วงบ่าย', evening: 'ช่วงเย็น' };
+  let editorjs = null, editingId = null, coverImageUrl = null;
+  let categories = [], programs = [], catFilter = 'all', bkFilter = 'open';
+
+  function escapeHtml(s) {
+    return String(s ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  }
+  function baht(n) { return n == null || n === '' ? 'สอบถามราคา' : '฿' + Number(n).toLocaleString('en-US', { maximumFractionDigits: 2 }); }
+  function showToast(msg, isError) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'toast show' + (isError ? ' error' : '');
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+  function lines(id) { return document.getElementById(id).value.split('\n').map(s => s.trim()).filter(Boolean); }
+  function setLines(id, arr) { document.getElementById(id).value = (arr || []).join('\n'); }
+  function num(v) { v = String(v ?? '').replace(/[,฿\s]/g, ''); return v === '' ? null : Number(v); }
+
+  // ---- Auth ----
+  (async () => {
+    const { data: { session } } = await sb.auth.getSession();
+    if (!session) { window.location.href = 'admin-login.html'; return; }
+    await loadCategories();
+    loadPrograms();
+    loadArticleOptions();
+    refreshNewCount();
+    route();
+  })();
+  document.getElementById('logout-btn').addEventListener('click', async () => {
+    await sb.auth.signOut();
+    window.location.href = 'admin-login.html';
+  });
+
+  // ---- Tabs ----
+  function route() {
+    const tab = location.hash === '#bookings' ? 'bookings' : 'programs';
+    document.querySelectorAll('.admin-tabs a[data-tab]').forEach(a => a.classList.toggle('active', a.dataset.tab === tab));
+    document.getElementById('bookings-view').style.display = tab === 'bookings' ? 'block' : 'none';
+    document.getElementById('list-view').style.display = tab === 'programs' ? 'block' : 'none';
+    document.getElementById('editor-view').style.display = 'none';
+    if (tab === 'bookings') loadBookings();
+  }
+  window.addEventListener('hashchange', route);
+
+  // ---- Categories / articles ----
+  async function loadCategories() {
+    const { data, error } = await sb.from('hw_program_categories').select('*').order('sort_order');
+    if (error) { showToast('โหลดหมวดหมู่ไม่สำเร็จ: ' + error.message, true); return; }
+    categories = data || [];
+    document.getElementById('f-category').innerHTML = categories.map(c => `<option value="${escapeHtml(c.slug)}">${escapeHtml(c.name)}</option>`).join('');
+  }
+  function catName(slug) { const c = categories.find(c => c.slug === slug); return c ? c.name : slug; }
+  async function loadArticleOptions() {
+    const { data } = await sb.from('hw_articles').select('slug,title').eq('is_published', true).order('published_at', { ascending: false });
+    document.getElementById('f-article').innerHTML = '<option value="">— ไม่มี —</option>' +
+      (data || []).map(a => `<option value="${escapeHtml(a.slug)}">${escapeHtml(a.title)}</option>`).join('');
+  }
+
+  // ---- Program list ----
+  async function loadPrograms() {
+    const box = document.getElementById('program-list');
+    const { data, error } = await sb.from('hw_programs').select('*').order('category').order('sort_order');
+    if (error) { box.innerHTML = `<div class="empty-state">โหลดโปรแกรมไม่สำเร็จ: ${escapeHtml(error.message)}</div>`; return; }
+    programs = data || [];
+    const counts = {};
+    programs.forEach(p => counts[p.category] = (counts[p.category] || 0) + 1);
+    document.getElementById('cat-filter').innerHTML =
+      `<button data-cat="all" class="${catFilter === 'all' ? 'active' : ''}">ทั้งหมด (${programs.length})</button>` +
+      categories.filter(c => counts[c.slug]).map(c => `<button data-cat="${escapeHtml(c.slug)}" class="${catFilter === c.slug ? 'active' : ''}">${escapeHtml(c.name)} (${counts[c.slug]})</button>`).join('');
+    const list = programs.filter(p => catFilter === 'all' || p.category === catFilter)
+      .sort((a, b) => (categories.findIndex(c => c.slug === a.category) - categories.findIndex(c => c.slug === b.category)) || (a.sort_order - b.sort_order));
+    if (!list.length) { box.innerHTML = '<div class="empty-state">ยังไม่มีโปรแกรม กด "เพิ่มโปรแกรม" เพื่อเริ่ม</div>'; return; }
+    box.innerHTML = list.map(p => `
+      <div class="article-row">
+        <div class="thumb" style="${p.cover_image ? `background-image:url('${escapeHtml(p.cover_image)}')` : ''}"></div>
+        <div class="info">
+          <h3>${escapeHtml(p.name)}</h3>
+          <div class="meta">
+            <span class="badge ${p.is_published ? 'published' : 'draft'}">${p.is_published ? 'เผยแพร่แล้ว' : 'ฉบับร่าง'}</span>
+            ${p.is_featured ? '<span class="badge featured">แนะนำ</span>' : ''}
+            &nbsp;${escapeHtml(catName(p.category))} · <span class="price-tag">${escapeHtml(baht(p.price))}</span> ${escapeHtml(p.price_unit || '')}
+            ${Array.isArray(p.options) && p.options.length ? ` · ${p.options.length} ตัวเลือก` : ''}
+          </div>
+        </div>
+        <div class="row-actions">
+          ${p.is_published ? `<a class="icon-btn" title="ดูบนเว็บ" href="/programs/${encodeURIComponent(p.slug)}" target="_blank" rel="noopener">↗</a>` : ''}
+          <button class="icon-btn" title="แก้ไข" onclick="openEditor('${p.id}')">✎</button>
+          <button class="icon-btn danger" title="ลบ" onclick="deleteProgram('${p.id}')">✕</button>
+        </div>
+      </div>`).join('');
+  }
+  document.getElementById('cat-filter').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    catFilter = b.dataset.cat; loadPrograms();
+  });
+  async function deleteProgram(id) {
+    const p = programs.find(x => x.id === id);
+    if (!confirm(`ลบโปรแกรม "${p ? p.name : ''}" ใช่ไหม? ไม่สามารถกู้คืนได้\n(ถ้าแค่อยากซ่อน ให้เอาติ๊ก "เผยแพร่บนเว็บ" ออกแทน)`)) return;
+    const { error } = await sb.from('hw_programs').delete().eq('id', id);
+    if (error) { showToast('ลบไม่สำเร็จ: ' + error.message, true); return; }
+    showToast('ลบโปรแกรมแล้ว'); loadPrograms();
+  }
+
+  // ---- Options repeater ----
+  function addOption(o = {}) {
+    const row = document.createElement('div');
+    row.className = 'opt-row';
+    row.innerHTML = `
+      <input class="opt-label" placeholder="ชื่อตัวเลือก เช่น คอร์ส 2 เข็ม" value="${escapeHtml(o.label || '')}" aria-label="ชื่อตัวเลือก">
+      <input class="opt-price" placeholder="ราคา" inputmode="decimal" value="${o.price ?? ''}" aria-label="ราคาตัวเลือก">
+      <input class="opt-note" placeholder="หมายเหตุ (ถ้ามี)" value="${escapeHtml(o.note || '')}" aria-label="หมายเหตุตัวเลือก">
+      <button type="button" class="icon-btn danger" title="ลบตัวเลือก" aria-label="ลบตัวเลือก">✕</button>`;
+    row.querySelector('button').onclick = () => row.remove();
+    document.getElementById('opt-list').appendChild(row);
+  }
+  function readOptions() {
+    return [...document.querySelectorAll('#opt-list .opt-row')].map(r => ({
+      label: r.querySelector('.opt-label').value.trim(),
+      price: num(r.querySelector('.opt-price').value),
+      note: r.querySelector('.opt-note').value.trim(),
+    })).filter(o => o.label);
+  }
+
+  // ---- Editor ----
+  function autoSlug() {
+    if (editingId) return;
+    const v = document.getElementById('f-name').value.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-').replace(/-+/g, '-');
+    if (v) document.getElementById('f-slug').value = v;
+  }
+  function setCover(url) {
+    coverImageUrl = url || null;
+    document.getElementById('cover-upload').innerHTML = url ? `<img src="${escapeHtml(url)}" alt="">` : '<span>คลิกเพื่ออัปโหลดรูปหน้าปก (ไม่ใส่ก็ได้ จะแสดงไอคอนแทน)</span>';
+    document.getElementById('cover-remove').style.display = url ? 'inline-block' : 'none';
+  }
+  function removeCover() { setCover(null); }
+  async function uploadCover(evt) {
+    const file = evt.target.files[0]; if (!file) return;
+    document.getElementById('cover-upload').innerHTML = '<span>กำลังอัปโหลด...</span>';
+    const path = `programs/${Date.now()}-${file.name.replace(/[^a-zA-Z0-9._-]/g, '_')}`;
+    const { error } = await sb.storage.from('article-images').upload(path, file);
+    if (error) { showToast('อัปโหลดรูปไม่สำเร็จ: ' + error.message, true); setCover(coverImageUrl); return; }
+    setCover(sb.storage.from('article-images').getPublicUrl(path).data.publicUrl);
+  }
+
+  async function openEditor(id) {
+    editingId = id || null;
+    document.getElementById('list-view').style.display = 'none';
+    document.getElementById('bookings-view').style.display = 'none';
+    document.getElementById('editor-view').style.display = 'block';
+    document.getElementById('editor-title').textContent = id ? 'แก้ไขโปรแกรม' : 'เพิ่มโปรแกรม';
+    window.scrollTo(0, 0);
+
+    const p = id ? programs.find(x => x.id === id) : null;
+    const v = (k, d = '') => (p && p[k] != null ? p[k] : d);
+    document.getElementById('f-name').value = v('name');
+    document.getElementById('f-slug').value = v('slug');
+    document.getElementById('f-category').value = v('category', catFilter !== 'all' ? catFilter : (categories[0] || {}).slug);
+    document.getElementById('f-short').value = v('short_desc');
+    document.getElementById('f-price').value = v('price');
+    document.getElementById('f-unit').value = v('price_unit');
+    document.getElementById('f-sort').value = v('sort_order', programs.length + 1);
+    document.getElementById('f-price-note').value = v('price_note');
+    document.getElementById('opt-list').innerHTML = '';
+    (p && Array.isArray(p.options) ? p.options : []).forEach(addOption);
+    setLines('f-suitable', p && p.suitable_for);
+    setLines('f-includes', p && p.includes);
+    setLines('f-precautions', p && p.precautions);
+    document.getElementById('f-duration').value = v('duration');
+    document.getElementById('f-brand').value = v('brand');
+    document.getElementById('f-fda').value = v('fda_reg_no');
+    document.getElementById('f-article').value = v('related_article_slug');
+    document.getElementById('f-seo-title').value = v('seo_title');
+    document.getElementById('f-seo-desc').value = v('seo_description');
+    document.getElementById('f-featured').checked = !!v('is_featured', false);
+    document.getElementById('f-published').checked = !!v('is_published', false);
+    setCover(v('cover_image', null));
+
+    let initial = { blocks: [] };
+    if (p && p.description) { try { initial = JSON.parse(p.description); } catch (e) { initial = { blocks: [{ type: 'paragraph', data: { text: escapeHtml(p.description) } }] }; } }
+    if (editorjs) { await editorjs.isReady; editorjs.destroy(); editorjs = null; }
+    editorjs = new EditorJS({
+      holder: 'editorjs-container',
+      placeholder: 'อธิบายโปรแกรม: คืออะไร ทำอย่างไร ฉีดกี่เข็ม...',
+      data: initial,
+      tools: {
+        header: { class: Header, inlineToolbar: true, config: { levels: [2, 3], defaultLevel: 2 } },
+        list: { class: List, inlineToolbar: true },
+        image: {
+          class: ImageTool,
+          config: { uploader: { uploadByFile: async (file) => {
+            const path = `programs/content/${Date.now()}-${file.name.replace(/[^a-zA-Z0-9._-]/g, '_')}`;
+            const { error } = await sb.storage.from('article-images').upload(path, file);
+            if (error) { showToast('อัปโหลดรูปไม่สำเร็จ: ' + error.message, true); return { success: 0 }; }
+            return { success: 1, file: { url: sb.storage.from('article-images').getPublicUrl(path).data.publicUrl } };
+          } } }
+        }
+      }
+    });
+  }
+  function closeEditor() {
+    document.getElementById('editor-view').style.display = 'none';
+    document.getElementById('list-view').style.display = 'block';
+    loadPrograms();
+  }
+
+  async function saveProgram() {
+    const name = document.getElementById('f-name').value.trim();
+    const slug = document.getElementById('f-slug').value.trim().toLowerCase();
+    if (!name) { showToast('กรุณากรอกชื่อโปรแกรม', true); return; }
+    if (!/^[a-z0-9-]{2,80}$/.test(slug)) { showToast('Slug ใช้ได้เฉพาะ a-z 0-9 และ - (2–80 ตัว)', true); return; }
+    const price = num(document.getElementById('f-price').value);
+    if (price != null && (isNaN(price) || price < 0)) { showToast('ราคาไม่ถูกต้อง', true); return; }
+    const options = readOptions();
+    if (options.some(o => o.price != null && isNaN(o.price))) { showToast('ราคาในตัวเลือกไม่ถูกต้อง', true); return; }
+    const description = editorjs ? JSON.stringify(await editorjs.save()) : null;
+
+    const payload = {
+      name, slug,
+      category: document.getElementById('f-category').value,
+      short_desc: document.getElementById('f-short').value.trim() || null,
+      description,
+      price,
+      price_unit: document.getElementById('f-unit').value.trim() || null,
+      price_note: document.getElementById('f-price-note').value.trim() || null,
+      options,
+      suitable_for: lines('f-suitable'),
+      includes: lines('f-includes'),
+      precautions: lines('f-precautions'),
+      duration: document.getElementById('f-duration').value.trim() || null,
+      brand: document.getElementById('f-brand').value.trim() || null,
+      fda_reg_no: document.getElementById('f-fda').value.trim() || null,
+      related_article_slug: document.getElementById('f-article').value || null,
+      seo_title: document.getElementById('f-seo-title').value.trim() || null,
+      seo_description: document.getElementById('f-seo-desc').value.trim() || null,
+      cover_image: coverImageUrl,
+      sort_order: parseInt(document.getElementById('f-sort').value, 10) || 0,
+      is_featured: document.getElementById('f-featured').checked,
+      is_published: document.getElementById('f-published').checked,
+    };
+    const res = editingId
+      ? await sb.from('hw_programs').update(payload).eq('id', editingId)
+      : await sb.from('hw_programs').insert(payload);
+    if (res.error) {
+      showToast('บันทึกไม่สำเร็จ: ' + (res.error.code === '23505' ? 'slug นี้มีอยู่แล้ว' : res.error.message), true);
+      return;
+    }
+    showToast('บันทึกโปรแกรมแล้ว');
+    closeEditor();
+  }
+
+  // ---- Bookings ----
+  async function refreshNewCount() {
+    const { count } = await sb.from('hw_program_bookings').select('id', { count: 'exact', head: true }).eq('status', 'new');
+    const el = document.getElementById('new-count');
+    el.hidden = !count; el.textContent = count || '';
+  }
+  document.getElementById('bk-filter').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    bkFilter = b.dataset.st;
+    document.querySelectorAll('#bk-filter button').forEach(x => x.classList.toggle('active', x === b));
+    loadBookings();
+  });
+  async function loadBookings() {
+    const box = document.getElementById('booking-list');
+    let q = sb.from('hw_program_bookings').select('*').order('created_at', { ascending: false }).limit(200);
+    if (bkFilter === 'open') q = q.in('status', ['new', 'contacted', 'confirmed']);
+    else if (bkFilter !== 'all') q = q.eq('status', bkFilter);
+    const { data, error } = await q;
+    if (error) { box.innerHTML = `<div class="empty-state">โหลดไม่สำเร็จ: ${escapeHtml(error.message)}</div>`; return; }
+    if (!data.length) { box.innerHTML = '<div class="empty-state">ไม่มีคำขอจองคิวในสถานะนี้</div>'; return; }
+    box.innerHTML = data.map(b => `
+      <div class="bk-row ${b.status === 'new' ? 'new' : ''}">
+        <div class="bk-top">
+          <div><h3>${escapeHtml(b.customer_name)}</h3><div class="when">ส่งเมื่อ ${new Date(b.created_at).toLocaleString('th-TH', { dateStyle: 'medium', timeStyle: 'short' })}</div></div>
+          <b class="st-${b.status}">${STATUS[b.status] || b.status}</b>
+        </div>
+        <div class="bk-grid">
+          <div><b>โทร</b><a href="tel:${escapeHtml(b.phone.replace(/[^0-9+]/g, ''))}">${escapeHtml(b.phone)}</a></div>
+          <div><b>LINE</b>${escapeHtml(b.line_id || '-')}</div>
+          <div><b>โปรแกรม</b>${escapeHtml(b.program_name)}${b.option_label ? ' · ' + escapeHtml(b.option_label) : ''} <span class="price-tag">${b.price != null ? escapeHtml(baht(b.price)) : ''}</span></div>
+          <div><b>วัน/เวลาที่สะดวก</b>${b.preferred_date ? new Date(b.preferred_date + 'T00:00:00').toLocaleDateString('th-TH', { dateStyle: 'medium' }) : 'ไม่ระบุ'} ${b.preferred_time ? '· ' + TIMES[b.preferred_time] : ''}</div>
+          ${b.note ? `<div style="grid-column:1/-1"><b>หมายเหตุจากลูกค้า</b>${escapeHtml(b.note)}</div>` : ''}
+        </div>
+        <div class="bk-actions">
+          <select aria-label="สถานะ" onchange="updateBooking('${b.id}', { status: this.value })">
+            ${Object.entries(STATUS).map(([k, v]) => `<option value="${k}" ${k === b.status ? 'selected' : ''}>${v}</option>`).join('')}
+          </select>
+          <input aria-label="บันทึกของแอดมิน" placeholder="บันทึกภายใน เช่น นัดวันที่..." value="${escapeHtml(b.admin_note || '')}" onchange="updateBooking('${b.id}', { admin_note: this.value.trim() || null })">
+        </div>
+      </div>`).join('');
+  }
+  async function updateBooking(id, patch) {
+    const { error } = await sb.from('hw_program_bookings').update(patch).eq('id', id);
+    if (error) { showToast('บันทึกไม่สำเร็จ: ' + error.message, true); return; }
+    showToast('บันทึกแล้ว');
+    refreshNewCount();
+    if (patch.status) loadBookings();
+  }
+</script>
+
+</body>
+</html>
