@@ -102,6 +102,7 @@ DETAIL_CSS = COMMON_CSS + r'''
   .pd-body h2{font-size:21px;margin:28px 0 12px;}
   .pd-body ul,.pd-body ol{margin:0 0 16px 22px;}
   .pd-body img{width:100%;border-radius:var(--radius-md);}
+  .pd-body a{color:var(--mint-700);text-decoration:underline;text-underline-offset:3px;}
   .pd-boxes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:26px 0;}
   .pd-box{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-md);padding:20px;}
   .pd-box h2{font-size:17px;margin-bottom:10px;}
