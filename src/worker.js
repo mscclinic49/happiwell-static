@@ -5,6 +5,7 @@
 
 const SITE = 'https://happiwellclinic.com';
 const SITE_NAME = 'แฮปปี้เวลล์ คลินิกเวชกรรม';
+const DEFAULT_OG = 'https://happiwellclinic.com/og-default.png';
 const SUPABASE_URL = 'https://brfddpdynusxiiqopark.supabase.co';
 // anon key ตัวเดียวกับที่ใช้ในหน้าเว็บอยู่แล้ว (สิทธิ์อ่านเฉพาะที่ RLS อนุญาต)
 const SUPABASE_ANON_KEY =
@@ -45,6 +46,13 @@ const CLINIC_JSONLD = {
     { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Saturday', 'Sunday'], opens: '08:00', closes: '12:00' },
   ],
   medicalSpecialty: 'PrimaryCare',
+  logo: SITE + '/logo.png',
+  image: [SITE + '/og-default.png'],
+  priceRange: '฿50 – ฿7,200',
+  currenciesAccepted: 'THB',
+  hasMap: 'https://www.google.com/maps?q=13.648962,100.4964886',
+  areaServed: ['ทุ่งครุ', 'บางมด', 'ประชาอุทิศ', 'ราษฎร์บูรณะ', 'จอมทอง', 'บางขุนเทียน', 'พระประแดง'].map((n) => ({ '@type': 'Place', name: n })),
+  isAcceptingNewPatients: true,
   sameAs: [
     'https://www.facebook.com/profile.php?id=61580877520013',
     'https://www.youtube.com/channel/UC5Eq6FRHeLwGObkBY81NtTw',
@@ -147,8 +155,8 @@ function headTags({ canonical, title, description, image, type = 'website', robo
     canonical && `<meta property="og:url" content="${esc(canonical)}">`,
     `<meta property="og:title" content="${esc(title)}">`,
     `<meta property="og:description" content="${esc(description)}">`,
-    image && `<meta property="og:image" content="${esc(image)}">`,
-    `<meta name="twitter:card" content="${image ? 'summary_large_image' : 'summary'}">`,
+    `<meta property="og:image" content="${esc(image || DEFAULT_OG)}">`,
+    `<meta name="twitter:card" content="summary_large_image">`,
     ...jsonld.map((o) => `<script type="application/ld+json">${jsonLd(o)}</script>`),
   ];
   return '\n' + tags.filter(Boolean).join('\n') + '\n';
@@ -197,13 +205,32 @@ async function homePage(request, env) {
       `<div class="meta"><span>${esc(thaiDate(a.published_at, 'short'))}</span><a href="${articleUrl(a.slug)}">อ่านเพิ่มเติม →</a></div></div></div>`;
   }).join('');
 
-  let rw = new HTMLRewriter().on('head', new AppendHead(headTags({
+  let featured = [];
+  try {
+    const progs = await listPrograms();
+    featured = progs.filter((p) => p.price != null).sort((a, b) => (b.is_featured - a.is_featured) || (a.sort_order - b.sort_order)).slice(0, 6);
+  } catch (_) {}
+  const featuredHtml = featured.length
+    ? `<section id="prices"><div class="wrap"><div class="section-head"><div class="eyebrow">ราคาชัดเจน</div><h2>ราคาวัคซีนและโปรแกรมยอดนิยม</h2>` +
+      `<p>ราคายังไม่รวมค่าบริการทางการแพทย์ 30 บาท จองคิวผ่าน LINE ได้ทันที</p></div><div class="service-grid">` +
+      featured.map((p) => `<a class="service-card" href="${programUrl(p.slug)}" style="display:flex;flex-direction:column;gap:6px;text-decoration:none">` +
+        `<h3>${esc(p.name)}</h3><p>${esc(p.short_desc || '')}</p>` +
+        `<div style="margin-top:auto;padding-top:8px;display:flex;justify-content:space-between;align-items:baseline;gap:8px">` +
+        `<span style="font-family:Anuphan,sans-serif;font-weight:700;font-size:20px;color:var(--apricot-600)">${/^เริ่มต้น/.test(p.price_unit || '') ? '<small style="font-size:13px;color:var(--ink-soft);font-weight:500">เริ่มต้น </small>' : ''}${esc(baht(p.price))}</span>` +
+        `<span style="font-size:13.5px;font-weight:600;color:var(--mint-700)">ดูรายละเอียด →</span></div></a>`).join('') +
+      `</div><div style="margin-top:22px"><a href="/programs" class="btn btn-primary">ดูราคาทั้งหมด →</a></div></div></section>`
+    : '';
+
+  let rw = new HTMLRewriter()
+    .on('title', new SetText('คลินิกทุ่งครุ ประชาอุทิศ 49 รับบัตรทอง วัคซีน ตรวจสุขภาพ | แฮปปี้เวลล์ คลินิกเวชกรรม'))
+    .on('head', new AppendHead(headTags({
     canonical: SITE + '/',
-    title: `${SITE_NAME} | HappiWell Medical Clinic`,
+    title: `${SITE_NAME} | คลินิกทุ่งครุ ประชาอุทิศ 49`,
     description: 'คลินิกเวชกรรมเขตทุ่งครุ ซอยประชาอุทิศ 49 ตรวจรักษาโรคทั่วไป ฉีดวัคซีน ตรวจสุขภาพ ดูแลโรคเรื้อรัง รับสิทธิบัตรทอง 30 บาท และประกันสังคม เปิดทุกวัน',
     jsonld: [CLINIC_JSONLD],
   })));
   if (cards) rw = rw.on('#news-grid', new SetHtml(cards));
+  if (featuredHtml) rw = rw.on('section#coverage', { element(el) { el.before(featuredHtml, { html: true }); } });
   return htmlResponse(rw.transform(tpl));
 }
 
@@ -234,7 +261,7 @@ async function listPage(request, env) {
     }
   }
 
-  const title = tag ? `แท็ก: ${tag} | HappiWell คลินิกเวชกรรม` : 'ข่าวสาร บทความ และโปรโมชั่น | HappiWell คลินิกเวชกรรม';
+  const title = tag ? `แท็ก: ${tag} | HappiWell คลินิกเวชกรรม` : 'บทความสุขภาพ ข่าวสาร และโปรโมชั่น | แฮปปี้เวลล์ คลินิก ทุ่งครุ';
   const description = tag
     ? `รวมบทความสุขภาพที่แท็ก "${tag}" จาก ${SITE_NAME} เขตทุ่งครุ`
     : `บทความสุขภาพ ข่าวประชาสัมพันธ์ และโปรโมชั่นจาก ${SITE_NAME} เขตทุ่งครุ กรุงเทพฯ`;
@@ -253,8 +280,13 @@ async function listPage(request, env) {
 
 async function articlePage(request, env, slug) {
   const tpl = await asset(env, request, '/article');
-  let a = null;
-  try { a = await getArticle(slug); } catch (_) {
+  let a = null, related = [];
+  try {
+    [a, related] = await Promise.all([
+      getArticle(slug),
+      sb(`hw_programs?select=slug,name,price,price_unit&is_published=eq.true&related_article_slug=eq.${encodeURIComponent(slug)}&order=sort_order.asc`).catch(() => []),
+    ]);
+  } catch (_) {
     return htmlResponse(tpl); // Supabase ล่ม: ปล่อยให้ client JS ลองโหลดเอง
   }
   if (!a) {
@@ -282,6 +314,11 @@ async function articlePage(request, env, slug) {
     `<div class="article-meta">เผยแพร่เมื่อ <time datetime="${esc(a.published_at)}">${esc(thaiDate(a.published_at))}</time></div>` +
     (cover ? `<img class="article-cover" src="${esc(cover)}" alt="${esc(a.title)}">` : '') +
     `<div class="article-body">${body}</div>` +
+    (related.length ? `<div style="margin-top:36px;padding:22px 24px;border-radius:16px;background:var(--surface);border:1.5px solid var(--mint-200)">` +
+      `<div style="font-family:Anuphan,sans-serif;font-weight:700;font-size:18px;color:var(--mint-900);margin-bottom:12px">บริการนี้ที่แฮปปี้เวลล์ คลินิก ทุ่งครุ</div>` +
+      related.map((r) => `<a href="${programUrl(r.slug)}" style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--line);text-decoration:none;color:var(--ink)">` +
+        `<span style="font-weight:600">${esc(r.name)}</span><span style="white-space:nowrap;font-family:Anuphan,sans-serif;font-weight:700;color:var(--apricot-600)">${r.price == null ? 'สอบถามราคา' : (/^เริ่มต้น/.test(r.price_unit || '') ? 'เริ่มต้น ' : '') + esc(baht(r.price))} →</span></a>`).join('') +
+      `<div style="font-size:12.5px;color:var(--ink-soft);margin-top:8px">ราคายังไม่รวมค่าบริการทางการแพทย์ 30 บาท · จองผ่าน LINE ได้จากหน้าราคา</div></div>` : '') +
     `<div class="related-cta"><h3>มีคำถามเพิ่มเติมไหม?</h3><p>ทักแชทสอบถามหรือนัดหมายได้ที่ LINE Official Account ของคลินิก</p>` +
     `<a href="https://line.me/R/ti/p/@p49clinic" target="_blank" rel="noopener" class="btn btn-line">แชทผ่าน LINE</a></div>`;
 
@@ -434,8 +471,8 @@ async function programsPage(request, env) {
 
 async function programPage(request, env, slug) {
   const tpl = await asset(env, request, '/program');
-  let p = null, cats = [];
-  try { [p, cats] = await Promise.all([getProgram(slug), listCategories()]); } catch (_) {
+  let p = null, cats = [], all = [];
+  try { [p, cats, all] = await Promise.all([getProgram(slug), listCategories(), listPrograms().catch(() => [])]); } catch (_) {
     return htmlResponse(new HTMLRewriter().on('#pd-root', new SetHtml('<div class="pg-empty">โหลดข้อมูลไม่สำเร็จ กรุณาลองใหม่ หรือทัก LINE @p49clinic</div>')).transform(tpl), 503);
   }
   if (!p) {
@@ -477,6 +514,14 @@ async function programPage(request, env, slug) {
     `<div class="pd-body">${body}</div>` +
     `<div class="pd-boxes">${box('เหมาะกับใคร', p.suitable_for)}${box('รวมอยู่ในราคา', p.includes)}${box('ข้อควรทราบ', p.precautions, 'warn')}</div>` +
     (p.related_article_slug ? `<div class="pd-related">อ่านเพิ่มเติม: <a href="${articleUrl(p.related_article_slug)}">บทความเกี่ยวกับ${esc(p.name)} →</a></div>` : '') +
+    (() => {
+      const others = all.filter((x) => x.category === p.category && x.slug !== p.slug).slice(0, 4);
+      if (!others.length) return '';
+      return `<div class="pd-box" style="margin-bottom:20px"><h2>${esc(cat ? cat.name : 'โปรแกรม')}อื่น ๆ ที่คลินิก</h2><div>` +
+        others.map((x) => `<a href="${programUrl(x.slug)}" style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line);text-decoration:none">` +
+          `<span style="color:var(--mint-700);font-weight:600;text-align:left">${esc(x.name)}</span>` +
+          `<span style="white-space:nowrap;font-weight:700;color:var(--apricot-600)">${x.price == null ? 'สอบถามราคา' : esc(baht(x.price))}</span></a>`).join('') + `</div></div>`;
+    })() +
     `</article>` + (
     `<aside class="pd-aside" aria-label="ราคา"><span class="label">${options.length ? 'ราคาตัวเลือกที่เลือก' : 'ราคา'}</span><div>${bigPrice}</div>` +
     (p.price != null || options.length ? `<p class="pd-fee">${FEE_NOTE}</p>` : '') +
