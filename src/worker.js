@@ -490,7 +490,12 @@ async function programPage(request, env, slug) {
 
   const meta = [p.duration && `ระยะเวลา: ${p.duration}`, p.brand && `ผลิตภัณฑ์: ${p.brand}`, p.fda_reg_no && `เลขทะเบียน อย. ${p.fda_reg_no}`]
     .filter(Boolean).map((m) => `<span>${esc(m)}</span>`).join('');
-  const box = (title, arr, cls = '') => (Array.isArray(arr) && arr.length ? `<div class="pd-box ${cls}"><h2>${title}</h2><ul>${listItems(arr)}</ul></div>` : '');
+  const isPackage = /แพ็กเกจ|แพ็คเกจ/.test(p.name);
+  // รายการ "ชื่อหลัก — รายละเอียด" แสดงชื่อหลักตัวใหญ่ รายละเอียดตัวเล็ก (อ่านง่ายสำหรับผู้สูงอายุ)
+  const bigList = (arr) => (Array.isArray(arr) ? arr : []).filter(Boolean).map((x) => {
+    const [main, ...rest] = String(x).split(' — ');
+    return `<li><span class="ck" aria-hidden="true"></span><span><b>${esc(main)}</b>${rest.length ? `<small>${esc(rest.join(' — '))}</small>` : ''}</span></li>`;
+  }).join('');
   const optsHtml = options.length
     ? `<div class="pd-opts" role="radiogroup" aria-label="เลือกตัวเลือก">${options.map((o, i) =>
       `<label class="pd-opt"><input type="radio" name="pd-opt" value="${i}"${i === 0 ? ' checked' : ''}>` +
@@ -501,39 +506,51 @@ async function programPage(request, env, slug) {
   const bigPrice = firstPrice == null
     ? '<span class="price-ask" data-sel-price>สอบถามราคา</span>'
     : (options.length ? `<span class="price" data-sel-price>${esc(baht(firstPrice))}</span>` : priceHtml(p).replace('<span class="price">', '<span class="price" data-sel-price>'));
-
   const lineHref = lineBookUrl(p, options[0] || null);
+
+  // ตัวเลือกเทียบแพ็กเกจตรวจสุขภาพ (ชุดเล็ก / ชุดใหญ่หญิง / ชุดใหญ่ชาย)
+  const siblings = /^health-checkup-/.test(p.slug) ? all.filter((x) => /^health-checkup-/.test(x.slug)) : [];
+  const shortName = (n) => n.replace(/^แพ็กเกจตรวจสุขภาพ\s*/, '').replace(/[()]/g, '').trim();
+  const countOf = (t) => ((t || '').match(/(\d+)\s*รายการ/) || [])[1];
+  const switcher = siblings.length > 1
+    ? `<div class="pd-pkgs" role="list" aria-label="เลือกชุดตรวจ">${siblings.map((x) =>
+      `<a role="listitem" href="${programUrl(x.slug)}" class="pd-pkg${x.slug === p.slug ? ' on' : ''}"${x.slug === p.slug ? ' aria-current="page"' : ''}>` +
+      `<span class="n">${esc(shortName(x.name))}</span>` +
+      `<span class="pr">${esc(baht(x.price))}</span>` +
+      (countOf(x.short_desc) ? `<span class="c">${countOf(x.short_desc)} รายการ</span>` : '') + `</a>`).join('')}</div>`
+    : '';
+
+  const others = all.filter((x) => x.category === p.category && x.slug !== p.slug && !siblings.some((s2) => s2.slug === x.slug)).slice(0, 4);
+
   const html =
     `<div class="crumbs" style="padding-top:22px"><a href="/">หน้าแรก</a> / <a href="/programs">โปรแกรมและราคา</a>${cat ? ` / <a href="/programs?cat=${esc(cat.slug)}">${esc(cat.name)}</a>` : ''}</div>` +
-    `<div class="pd-layout"><article class="pd-main">` +
-    (cover ? `<img class="pd-cover" src="${esc(cover)}" alt="${esc(p.name)}">` : `<div class="pd-cover ph">${iconSvg(p.category)}</div>`) +
+    `<div class="pd-layout">` +
+    `<div class="pd-head">` +
     (cat ? `<span class="pd-cat">${esc(cat.name)}</span>` : '') +
     `<h1 class="pd-title">${esc(p.name)}</h1>` +
     (p.short_desc ? `<p class="pd-lede">${esc(p.short_desc)}</p>` : '') +
     (meta ? `<div class="pd-meta">${meta}</div>` : '') +
-    `<div class="pd-body">${body}</div>` +
-    `<div class="pd-boxes">${box('เหมาะกับใคร', p.suitable_for)}${box('รวมอยู่ในราคา', p.includes)}${box('ข้อควรทราบ', p.precautions, 'warn')}</div>` +
-    (p.related_article_slug ? `<div class="pd-related">อ่านเพิ่มเติม: <a href="${articleUrl(p.related_article_slug)}">บทความเกี่ยวกับ${esc(p.name)} →</a></div>` : '') +
-    (() => {
-      const others = all.filter((x) => x.category === p.category && x.slug !== p.slug).slice(0, 4);
-      if (!others.length) return '';
-      return `<div class="pd-box" style="margin-bottom:20px"><h2>${esc(cat ? cat.name : 'โปรแกรม')}อื่น ๆ ที่คลินิก</h2><div>` +
-        others.map((x) => `<a href="${programUrl(x.slug)}" style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line);text-decoration:none">` +
-          `<span style="color:var(--mint-700);font-weight:600;text-align:left">${esc(x.name)}</span>` +
-          `<span style="white-space:nowrap;font-weight:700;color:var(--apricot-600)">${x.price == null ? 'สอบถามราคา' : esc(baht(x.price))}</span></a>`).join('') + `</div></div>`;
-    })() +
-    `</article>` + (
+    switcher +
+    `</div>` +
     `<aside class="pd-aside" aria-label="ราคา"><span class="label">${options.length ? 'ราคาตัวเลือกที่เลือก' : 'ราคา'}</span><div>${bigPrice}</div>` +
     (p.price != null || options.length ? `<p class="pd-fee">${FEE_NOTE}</p>` : '') +
     (p.price_note ? `<p class="pg-note">${esc(p.price_note)}</p>` : '') + optsHtml +
-    `<a href="${esc(lineHref)}" target="_blank" rel="noopener" class="btn btn-line js-line-book">${LINE_ICON}จองผ่าน LINE</a>` +
-    `<a href="tel:0220004586" class="btn btn-ghost">โทร 02-000-4586</a></aside>`) +
-    `<div class="pd-book-wrap"><section class="pd-book" id="booking" aria-labelledby="bk-h"><h2 id="bk-h">จองคิวผ่าน LINE</h2>` +
-    `<ol class="pd-steps"><li><b>กดปุ่ม "จองผ่าน LINE"</b> ระบบจะเปิดแชท LINE ของคลินิก พร้อมข้อความจองที่กรอกโปรแกรมและราคาไว้ให้แล้ว</li>` +
-    `<li><b>เติมชื่อ เบอร์โทร และวันที่สะดวก</b> แล้วกดส่ง</li>` +
-    `<li><b>ทีมงานตอบกลับเพื่อยืนยันนัด</b> ในเวลาทำการ จ.–ศ. 08:00–18:00 / ส.–อา. 08:00–12:00</li></ol>` +
-    `<a href="${esc(lineHref)}" target="_blank" rel="noopener" class="btn btn-line js-line-book" style="width:100%">${LINE_ICON}จองผ่าน LINE @p49clinic</a>` +
-    `<p class="pg-note" style="text-align:center;margin-top:10px">ไม่สะดวกใช้ LINE โทร <a href="tel:0220004586" style="color:var(--mint-700);font-weight:600">02-000-4586</a> หรือ <a href="tel:0886837899" style="color:var(--mint-700);font-weight:600">088-683-7899</a></p></section>` +
+    `<a href="${esc(lineHref)}" target="_blank" rel="noopener" class="btn btn-line btn-xl js-line-book">${LINE_ICON}จองผ่าน LINE</a>` +
+    `<a href="tel:0220004586" class="btn btn-ghost btn-xl">📞 โทร 02-000-4586</a></aside>` +
+    `<article class="pd-main">` +
+    (cover ? `<img class="pd-cover" src="${esc(cover)}" alt="${esc(p.name)}">` : '') +
+    (body ? `<div class="pd-body">${body}</div>` : '') +
+    (Array.isArray(p.includes) && p.includes.length ? `<section class="pd-sec"><h2>${isPackage ? 'รวมอยู่ในแพ็กเกจ' : 'รวมอยู่ในราคา'}</h2><ul class="pd-list">${bigList(p.includes)}</ul></section>` : '') +
+    (Array.isArray(p.suitable_for) && p.suitable_for.length ? `<section class="pd-sec"><h2>เหมาะกับใคร</h2><ul class="pd-list soft">${bigList(p.suitable_for)}</ul></section>` : '') +
+    (Array.isArray(p.precautions) && p.precautions.length ? `<section class="pd-sec warn"><h2>${isPackage ? 'ก่อนมาตรวจ' : 'ข้อควรทราบ'}</h2><ul class="pd-list">${bigList(p.precautions)}</ul></section>` : '') +
+    (p.related_article_slug ? `<div class="pd-related">อ่านเพิ่มเติม: <a href="${articleUrl(p.related_article_slug)}">บทความเกี่ยวกับ${esc(p.name)} →</a></div>` : '') +
+    (others.length ? `<section class="pd-sec"><h2>${esc(cat ? cat.name : 'โปรแกรม')}อื่น ๆ ที่คลินิก</h2><div class="pd-others">` +
+      others.map((x) => `<a href="${programUrl(x.slug)}"><span>${esc(x.name)}</span><b>${x.price == null ? 'สอบถามราคา' : esc(baht(x.price))}</b></a>`).join('') + `</div></section>` : '') +
+    `</article>` +
+    `<div class="pd-book-wrap"><section class="pd-book" id="booking" aria-labelledby="bk-h"><h2 id="bk-h">จองคิวง่าย ๆ 2 วิธี</h2>` +
+    `<div class="pd-book-btns"><a href="${esc(lineHref)}" target="_blank" rel="noopener" class="btn btn-line btn-xl js-line-book">${LINE_ICON}ทัก LINE จองคิว</a>` +
+    `<a href="tel:0220004586" class="btn btn-primary btn-xl">📞 โทร 02-000-4586</a></div>` +
+    `<p class="pd-hours">เปิดทุกวัน · จันทร์–ศุกร์ 08:00–18:00 · เสาร์–อาทิตย์ 08:00–12:00<br>หรือโทร <a href="tel:0886837899">088-683-7899</a></p></section>` +
     `<p class="pg-note" style="margin-top:20px">ราคาสำหรับผู้ชำระเงินสด ยังไม่รวมค่าบริการทางการแพทย์ 30 บาท อาจเปลี่ยนแปลงได้ ความเหมาะสมขึ้นกับการประเมินของแพทย์ ผลลัพธ์ของแต่ละบุคคลอาจแตกต่างกัน</p></div>` +
     `</div>` +
     `<div class="pd-bar"><div>${firstPrice == null ? '<span class="price-ask">สอบถามราคา</span>' : `<span class="price" data-sel-price>${esc(baht(firstPrice))}</span><small class="pd-bar-fee">+ ค่าบริการ 30 บาท</small>`}</div><a href="${esc(lineHref)}" target="_blank" rel="noopener" class="btn btn-line js-line-book">${LINE_ICON}จองผ่าน LINE</a></div>` +
