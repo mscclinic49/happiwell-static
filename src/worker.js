@@ -348,6 +348,8 @@ const listCategories = () => sb('hw_program_categories?select=slug,name,descript
 const listPrograms = () => sb(`hw_programs?select=${PROGRAM_FIELDS}&is_published=eq.true&order=sort_order.asc,name.asc`);
 const getProgram = async (slug) =>
   (await sb(`hw_programs?select=*&is_published=eq.true&slug=eq.${encodeURIComponent(slug)}&limit=1`))[0] || null;
+// slug เดิมที่เปลี่ยนชื่อแล้ว → slug ใหม่ (301)
+const PROGRAM_REDIRECTS = { 'hepatitis-a-b-vaccine': 'hepatitis-b-vaccine' };
 const programUrl = (slug) => '/programs/' + encodeURIComponent(slug);
 const PROGRAM_ICON = {
   vaccine: '<path d="m18 2 4 4"/><path d="m17 7 3-3"/><path d="M19 9 8.7 19.3a2.4 2.4 0 0 1-3.4 0L4.7 18.7a2.4 2.4 0 0 1 0-3.4L15 5"/><path d="m9 11 4 4"/><path d="m5 19-3 3"/><path d="m14 4 6 6"/>',
@@ -538,6 +540,7 @@ export default {
       const pm = path.match(/^\/programs\/([^/]+)\/?$/);
       if (pm) {
         const slug = decodeURIComponent(pm[1]);
+        if (PROGRAM_REDIRECTS[slug]) return redirect(SITE + programUrl(PROGRAM_REDIRECTS[slug]));
         if (path.endsWith('/')) return redirect(SITE + programUrl(slug));
         return await programPage(request, env, slug);
       }
