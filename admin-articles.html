@@ -141,6 +141,20 @@
   .admin-tabs a{font-size:14px;font-weight:600;color:var(--ink-soft);text-decoration:none;padding:8px 14px;border-radius:999px;}
   .admin-tabs a.active{background:var(--mint-100);color:var(--mint-700);}
   header{flex-wrap:wrap;gap:10px;}
+
+  /* SEO panel */
+  .seo-box{background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:18px;margin-bottom:18px;}
+  .seo-box h2{font-size:16px;margin-bottom:12px;}
+  .counter{float:right;font-weight:600;font-size:12px;}
+  .counter.ok{color:var(--teal-700);} .counter.warn{color:#b26a00;} .counter.bad{color:#8C1D26;}
+  .g-preview{border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:6px 0 14px;background:#fff;font-family:Arial,'IBM Plex Sans Thai',sans-serif;}
+  .g-preview .g-url{font-size:12.5px;color:#202124;}
+  .g-preview .g-title{font-size:19px;color:#1a0dab;line-height:1.3;margin:4px 0;}
+  .g-preview .g-desc{font-size:13.5px;color:#4d5156;line-height:1.55;}
+  .seo-checks{list-style:none;display:flex;flex-direction:column;gap:6px;font-size:13.5px;}
+  .seo-checks li::before{content:'○';display:inline-block;width:20px;color:var(--ink-soft);}
+  .seo-checks li.pass::before{content:'✓';color:var(--teal-700);font-weight:700;}
+  .seo-checks li.fail::before{content:'!';color:#b26a00;font-weight:700;}
 </style>
 </head>
 <body>
@@ -181,7 +195,7 @@
     <div class="field">
       <label>Slug (สำหรับ URL)</label>
       <input type="text" id="f-slug" placeholder="flu-vaccine-2569">
-      <div class="hint">ภาษาอังกฤษ ไม่มีเว้นวรรค แก้เองได้</div>
+      <div class="hint">ควรเป็นภาษาอังกฤษตัวเล็ก คั่นด้วย - เช่น gout-2569 (ถ้าชื่อบทความเป็นภาษาไทย ให้พิมพ์ slug เอง)</div>
     </div>
 
     <div class="field">
@@ -225,6 +239,27 @@
       <div id="editorjs-container"></div>
     </div>
 
+
+    <div class="seo-box">
+      <h2>SEO (การแสดงผลบน Google)</h2>
+      <div class="field">
+        <label for="f-seo-title">หัวข้อบน Google <span class="counter" id="c-seo-title"></span></label>
+        <input type="text" id="f-seo-title" maxlength="90" placeholder="ถ้าเว้นว่าง จะใช้ชื่อบทความ">
+        <div class="hint">ใส่คำที่คนค้นหาไว้ต้นประโยค เช่น "โรคเกาต์ อาการ สาเหตุ..." ควรยาวไม่เกิน 60 ตัวอักษร</div>
+      </div>
+      <div class="field">
+        <label for="f-seo-desc">คำอธิบายบน Google <span class="counter" id="c-seo-desc"></span></label>
+        <textarea id="f-seo-desc" maxlength="200" placeholder="ถ้าเว้นว่าง จะใช้สรุปย่อ (excerpt)"></textarea>
+        <div class="hint">บอกว่าบทความตอบคำถามอะไร และชวนให้คลิก ควรยาว 80–155 ตัวอักษร</div>
+      </div>
+      <label style="font-size:13px;font-weight:600;color:var(--ink-soft);">ตัวอย่างบน Google</label>
+      <div class="g-preview" aria-live="polite">
+        <div class="g-url" id="g-url">happiwellclinic.com › articles › …</div>
+        <div class="g-title" id="g-title">ชื่อบทความ</div>
+        <div class="g-desc" id="g-desc">คำอธิบาย</div>
+      </div>
+      <ul class="seo-checks" id="seo-checks"></ul>
+    </div>
     <div class="field">
       <label style="display:flex;align-items:center;gap:8px;">
         <input type="checkbox" id="f-published" style="width:auto;">
@@ -352,6 +387,54 @@
     return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
   }
 
+
+  // ---- SEO panel ----
+  const SEO_SUFFIX = ' | HappiWell คลินิกเวชกรรม';
+  function seoTitleValue() {
+    const t = document.getElementById('f-seo-title').value.trim();
+    return t || (document.getElementById('f-title').value.trim() + SEO_SUFFIX);
+  }
+  function seoDescValue() {
+    return document.getElementById('f-seo-desc').value.trim() || document.getElementById('f-excerpt').value.trim();
+  }
+  function setCounter(id, len, okMin, okMax) {
+    const el = document.getElementById(id);
+    el.textContent = len + ' ตัวอักษร';
+    el.className = 'counter ' + (len === 0 ? '' : (len >= okMin && len <= okMax ? 'ok' : (len > okMax + 15 ? 'bad' : 'warn')));
+  }
+  function cut(s, n) { return s.length > n ? s.slice(0, n - 1) + '…' : s; }
+  async function updateSeo() {
+    const title = seoTitleValue();
+    const desc = seoDescValue();
+    const slug = document.getElementById('f-slug').value.trim();
+    setCounter('c-seo-title', title.length, 20, 60);
+    setCounter('c-seo-desc', desc.length, 80, 155);
+    document.getElementById('g-url').textContent = 'happiwellclinic.com › articles › ' + (slug || '…');
+    document.getElementById('g-title').textContent = cut(title || 'ชื่อบทความ', 65);
+    document.getElementById('g-desc').textContent = cut(desc || 'ยังไม่มีคำอธิบาย Google จะดึงข้อความจากบทความมาแสดงเอง', 160);
+
+    let headers = 0, words = 0;
+    try {
+      if (editorjs && editorjs.saver) {
+        const data = await editorjs.save();
+        headers = data.blocks.filter(b => b.type === 'header').length;
+        words = data.blocks.map(b => (b.data.text || (b.data.items || []).map(i => typeof i === 'string' ? i : (i.content || '')).join(' ') || '')).join(' ').replace(/<[^>]+>/g, '').length;
+      }
+    } catch (e) {}
+    const checks = [
+      [title.length >= 20 && title.length <= 65, 'หัวข้อบน Google ยาวพอดี (20–60 ตัวอักษร)'],
+      [desc.length >= 80 && desc.length <= 160, 'มีคำอธิบายบน Google ยาวพอดี (80–155 ตัวอักษร)'],
+      [/^[a-z0-9-]{3,}$/.test(slug), 'Slug เป็นภาษาอังกฤษตัวเล็ก ไม่มีเว้นวรรค (ลิงก์อ่านง่าย แชร์แล้วไม่เพี้ยน)'],
+      [!!coverImageUrl, 'มีรูปหน้าปก (ใช้เป็นภาพตอนแชร์ลง Facebook / LINE)'],
+      [headers >= 2, 'มีหัวข้อย่อยอย่างน้อย 2 หัวข้อ (ช่วยให้ Google เข้าใจโครงสร้าง)'],
+      [words >= 1500, 'เนื้อหายาวพอ (อย่างน้อยประมาณ 1,500 ตัวอักษร)'],
+      [currentTags.length > 0, 'มีแท็กอย่างน้อย 1 แท็ก'],
+    ];
+    document.getElementById('seo-checks').innerHTML = checks.map(([ok, label]) => `<li class="${ok ? 'pass' : 'fail'}">${label}</li>`).join('');
+  }
+  ['f-seo-title', 'f-seo-desc', 'f-title', 'f-excerpt', 'f-slug'].forEach(id => document.getElementById(id).addEventListener('input', updateSeo));
+  setInterval(() => { if (document.getElementById('editor-view').style.display === 'block') updateSeo(); }, 4000);
+
   async function deleteArticle(id, title) {
     if (!confirm(`ลบบทความ "${title}" ใช่ไหม? ไม่สามารถกู้คืนได้`)) return;
     const { error } = await sb.from('hw_articles').delete().eq('id', id);
@@ -384,6 +467,8 @@
     document.getElementById('f-title').value = '';
     document.getElementById('f-slug').value = '';
     document.getElementById('f-excerpt').value = '';
+    document.getElementById('f-seo-title').value = '';
+    document.getElementById('f-seo-desc').value = '';
     document.getElementById('f-category').value = 'news';
     document.getElementById('f-published-at').value = new Date().toISOString().slice(0, 10);
     document.getElementById('f-published').checked = false;
@@ -400,6 +485,8 @@
       document.getElementById('f-title').value = data.title || '';
       document.getElementById('f-slug').value = data.slug || '';
       document.getElementById('f-excerpt').value = data.excerpt || '';
+      document.getElementById('f-seo-title').value = data.seo_title || '';
+      document.getElementById('f-seo-desc').value = data.seo_description || '';
       document.getElementById('f-category').value = data.category || 'news';
       document.getElementById('f-published-at').value = data.published_at ? data.published_at.slice(0, 10) : '';
       document.getElementById('f-published').checked = !!data.is_published;
@@ -414,6 +501,7 @@
       }
     }
 
+    setTimeout(updateSeo, 800);
     if (editorjs) { await editorjs.isReady; editorjs.destroy(); editorjs = null; }
     editorjs = new EditorJS({
       holder: 'editorjs-container',
@@ -480,6 +568,8 @@
       title,
       slug,
       excerpt: document.getElementById('f-excerpt').value.trim(),
+      seo_title: document.getElementById('f-seo-title').value.trim() || null,
+      seo_description: document.getElementById('f-seo-desc').value.trim() || null,
       category: document.getElementById('f-category').value,
       tags: currentTags,
       published_at: document.getElementById('f-published-at').value || null,

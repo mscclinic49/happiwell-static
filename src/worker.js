@@ -270,7 +270,8 @@ async function articlePage(request, env, slug) {
 
   const canonical = SITE + articleUrl(a.slug);
   const cover = safeUrl(a.cover_image);
-  const description = a.excerpt || a.title;
+  const description = a.seo_description || a.excerpt || a.title;
+  const pageTitle = a.seo_title || `${a.title} | HappiWell คลินิกเวชกรรม`;
   const tags = Array.isArray(a.tags) ? a.tags : [];
   const category = CATEGORY_LABELS[a.category] || a.category;
 
@@ -309,7 +310,7 @@ async function articlePage(request, env, slug) {
   };
 
   const rw = new HTMLRewriter()
-    .on('title', new SetText(`${a.title} | HappiWell คลินิกเวชกรรม`))
+    .on('title', new SetText(pageTitle))
     // ลบ meta เดิมที่ client เคยเติมเอง แล้วใส่ชุดใหม่ที่มีค่าจริง
     .on('meta#meta-description', new SetAttr('content', description))
     .on('meta#og-title, meta#og-description, meta#og-image', new Remove())
