@@ -137,6 +137,10 @@
   }
   .toast.show{display:block;}
   .toast.error{background:var(--apricot-600);}
+  .admin-tabs{display:flex;gap:4px;flex-wrap:wrap;}
+  .admin-tabs a{font-size:14px;font-weight:600;color:var(--ink-soft);text-decoration:none;padding:8px 14px;border-radius:999px;}
+  .admin-tabs a.active{background:var(--mint-100);color:var(--mint-700);}
+  header{flex-wrap:wrap;gap:10px;}
 </style>
 </head>
 <body>
@@ -146,6 +150,11 @@
     <div class="mark"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-9.5-8.5C.5 8.5 3 5 6.5 5c2 0 3.5 1.2 5.5 3 2-1.8 3.5-3 5.5-3 3.5 0 6 3.5 4 7.5C19 16.65 12 21 12 21z"/></svg></div>
     <span>HappiWell Admin</span>
   </div>
+  <nav class="admin-tabs" aria-label="เมนูแอดมิน">
+    <a href="admin-articles.html" class="active">บทความ</a>
+    <a href="admin-programs.html#programs">โปรแกรมและราคา</a>
+    <a href="admin-programs.html#bookings">คำขอจองคิว</a>
+  </nav>
   <button id="logout-btn">ออกจากระบบ</button>
 </header>
 

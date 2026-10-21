@@ -10,3 +10,5 @@ README.md
 sitemap.xml
 .gitignore
 .wrangler/
+supabase/
+.dev.vars

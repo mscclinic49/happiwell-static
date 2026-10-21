@@ -18,7 +18,12 @@
       "/article.html",
       "/privacy.html",
       "/cookies.html",
-      "/sitemap.xml"
+      "/sitemap.xml",
+      "/programs",
+      "/programs/*",
+      "/programs.html",
+      "/program",
+      "/program.html"
     ]
   },
   "observability": { "enabled": true }
