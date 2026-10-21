@@ -349,7 +349,8 @@ const listPrograms = () => sb(`hw_programs?select=${PROGRAM_FIELDS}&is_published
 const getProgram = async (slug) =>
   (await sb(`hw_programs?select=*&is_published=eq.true&slug=eq.${encodeURIComponent(slug)}&limit=1`))[0] || null;
 // slug เดิมที่เปลี่ยนชื่อแล้ว → slug ใหม่ (301)
-const PROGRAM_REDIRECTS = { 'hepatitis-a-b-vaccine': 'hepatitis-b-vaccine' };
+const PROGRAM_REDIRECTS = { 'hepatitis-a-b-vaccine': 'hepatitis-b-vaccine', 'annual-health-checkup': 'health-checkup-basic' };
+const FEE_NOTE = 'ราคายังไม่รวมค่าบริการทางการแพทย์ 30 บาท';
 const programUrl = (slug) => '/programs/' + encodeURIComponent(slug);
 const PROGRAM_ICON = {
   vaccine: '<path d="m18 2 4 4"/><path d="m17 7 3-3"/><path d="M19 9 8.7 19.3a2.4 2.4 0 0 1-3.4 0L4.7 18.7a2.4 2.4 0 0 1 0-3.4L15 5"/><path d="m9 11 4 4"/><path d="m5 19-3 3"/><path d="m14 4 6 6"/>',
@@ -463,6 +464,7 @@ async function programPage(request, env, slug) {
     (p.related_article_slug ? `<div class="pd-related">อ่านเพิ่มเติม: <a href="${articleUrl(p.related_article_slug)}">บทความเกี่ยวกับ${esc(p.name)} →</a></div>` : '') +
     `</article>` + (
     `<aside class="pd-aside" aria-label="ราคา"><span class="label">${options.length ? 'ราคาตัวเลือกที่เลือก' : 'ราคา'}</span><div>${bigPrice}</div>` +
+    (p.price != null || options.length ? `<p class="pd-fee">${FEE_NOTE}</p>` : '') +
     (p.price_note ? `<p class="pg-note">${esc(p.price_note)}</p>` : '') + optsHtml +
     `<a href="#booking" class="btn btn-primary">จองคิวโปรแกรมนี้</a>` +
     `<a href="https://line.me/R/ti/p/@p49clinic" target="_blank" rel="noopener" class="btn btn-line">สอบถามทาง LINE</a></aside>`) +
@@ -477,9 +479,9 @@ async function programPage(request, env, slug) {
     `</div><label class="consent"><input type="checkbox" name="pdpa"><span>ข้าพเจ้ายินยอมให้คลินิกเก็บและใช้ข้อมูลนี้เพื่อติดต่อนัดหมาย ตาม<a href="/privacy" target="_blank">นโยบายความเป็นส่วนตัว</a></span></label>` +
     `<button type="submit" class="btn btn-primary" style="width:100%;border:0;font-size:16px">ส่งคำขอจองคิว</button>` +
     `<p class="pg-note" style="text-align:center;margin-top:10px">นี่เป็นคำขอนัดหมาย ทีมงานจะติดต่อกลับเพื่อยืนยันวันเวลา</p><div class="form-msg" id="bk-msg" role="status"></div></form></div></section>` +
-    `<p class="pg-note" style="margin-top:20px">ราคาสำหรับผู้ชำระเงินสด อาจเปลี่ยนแปลงได้ ความเหมาะสมขึ้นกับการประเมินของแพทย์ ผลลัพธ์ของแต่ละบุคคลอาจแตกต่างกัน</p></div>` +
+    `<p class="pg-note" style="margin-top:20px">ราคาสำหรับผู้ชำระเงินสด ยังไม่รวมค่าบริการทางการแพทย์ 30 บาท อาจเปลี่ยนแปลงได้ ความเหมาะสมขึ้นกับการประเมินของแพทย์ ผลลัพธ์ของแต่ละบุคคลอาจแตกต่างกัน</p></div>` +
     `</div>` +
-    `<div class="pd-bar"><div>${firstPrice == null ? '<span class="price-ask">สอบถามราคา</span>' : `<span class="price" data-sel-price>${esc(baht(firstPrice))}</span>`}</div><a href="#booking" class="btn btn-primary">จองคิว</a></div>` +
+    `<div class="pd-bar"><div>${firstPrice == null ? '<span class="price-ask">สอบถามราคา</span>' : `<span class="price" data-sel-price>${esc(baht(firstPrice))}</span><small class="pd-bar-fee">+ ค่าบริการ 30 บาท</small>`}</div><a href="#booking" class="btn btn-primary">จองคิว</a></div>` +
     `<script type="application/json" id="program-data">${jsonLd({ id: p.id, name: p.name, price: p.price, price_unit: p.price_unit, options })}</script>`;
 
   const canonical = SITE + programUrl(p.slug);
