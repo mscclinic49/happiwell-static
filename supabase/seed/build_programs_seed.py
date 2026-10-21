@@ -216,7 +216,7 @@ add(slug='medical-certificate', category='certificate', name='ใบรับร
     tags=['ใบรับรองแพทย์'])
 
 # ---------------- สุขภาพทางเพศ ----------------
-add(slug='pep-prep', category='sexual-health', name='PEP / PrEP ยาป้องกันเอชไอวี',
+add(slug='pep-prep', is_published=False, category='sexual-health', name='PEP / PrEP ยาป้องกันเอชไอวี',
     short_desc='ให้คำปรึกษาเป็นความลับ ต้องนัดหมายทาง LINE ก่อนเข้ารับบริการ',
     price=None, price_note='สอบถามค่ายาทาง LINE @p49clinic', related_article_slug='pep-prep-2569',
     description=blocks('บริการ PEP (ยาต้านไวรัสหลังสัมผัสเชื้อ) และ PrEP (ยาป้องกันก่อนสัมผัสเชื้อ) พร้อมคำปรึกษาเป็นความลับ กรุณาทัก LINE เพื่อนัดหมายก่อนเข้ารับบริการทุกครั้ง'),
@@ -248,7 +248,8 @@ add(slug='std-screening', category='sexual-health', name='ตรวจคัด�
     precautions=['บางการตรวจต้องเว้นระยะหลังความเสี่ยงก่อนจึงจะตรวจพบ แพทย์จะแนะนำช่วงเวลาที่เหมาะสม'],
     tags=['สุขภาพทางเพศ'])
 
-add(slug='ncd-care', category='chronic-care', name='ดูแลโรคเรื้อรัง ความดัน เบาหวาน ไขมัน',
+# ยกเลิก 21 ต.ค. 2569: คลินิกยังไม่มีบริการนี้
+add(slug='ncd-care', is_published=False, category='chronic-care', name='ดูแลโรคเรื้อรัง ความดัน เบาหวาน ไขมัน',
     short_desc='ตรวจติดตาม ปรับยา และให้คำแนะนำต่อเนื่องโดยแพทย์ ใกล้บ้าน ไม่ต้องไปโรงพยาบาลใหญ่',
     price=None, price_note='ผู้มีสิทธิบัตรทองใช้สิทธิได้ตามเงื่อนไขของสิทธิ ผู้ชำระเงินสดสอบถามค่าตรวจและค่ายาได้ทาง LINE', sort_order=21,
     related_article_slug='diabetes-hypertension-2569',
@@ -260,7 +261,7 @@ add(slug='ncd-care', category='chronic-care', name='ดูแลโรคเร�
     precautions=['นำยาที่ใช้อยู่และผลตรวจเดิมมาด้วยในครั้งแรก', 'บางการตรวจเลือดต้องงดน้ำและอาหารก่อนตรวจ'],
     tags=['โรคเรื้อรัง', 'ความดัน', 'เบาหวาน'])
 
-add(slug='home-visit-elderly', category='chronic-care', name='ดูแลผู้สูงอายุที่บ้าน (เยี่ยมบ้าน)',
+add(slug='home-visit-elderly', is_published=False, category='chronic-care', name='ดูแลผู้สูงอายุที่บ้าน (เยี่ยมบ้าน)',
     short_desc='ทีมงานคลินิกไปดูแลผู้สูงอายุถึงบ้าน สอบถามพื้นที่ให้บริการและราคาทาง LINE',
     price=None, price_note='สอบถามพื้นที่ให้บริการและค่าบริการได้ทาง LINE @p49clinic', sort_order=22,
     description=blocks(
@@ -270,7 +271,7 @@ add(slug='home-visit-elderly', category='chronic-care', name='ดูแลผู
     precautions=['กรณีฉุกเฉิน โทร 1669'],
     tags=['ผู้สูงอายุ', 'เยี่ยมบ้าน'])
 
-add(slug='prp-knee', category='chronic-care', name='PRP ข้อเข่า (นัดปรึกษาแพทย์)',
+add(slug='prp-knee', is_published=False, category='chronic-care', name='PRP ข้อเข่า (นัดปรึกษาแพทย์)',
     short_desc='ทางเลือกการดูแลข้อเข่าเสื่อม ต้องนัดปรึกษาและประเมินโดยแพทย์ก่อน',
     price=None, price_note='ยังไม่มีราคาตายตัว นัดปรึกษาแพทย์เพื่อประเมินก่อน', sort_order=23,
     related_article_slug='prp-knee-2569',
