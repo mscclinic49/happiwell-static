@@ -23,7 +23,7 @@
       "/programs/*",
       "/programs.html",
       "/program",
-      "/program.html", "/en", "/en/*"
+      "/program.html", "/en", "/en/*", "/my", "/my/*"
     ]
   },
   "observability": { "enabled": true }

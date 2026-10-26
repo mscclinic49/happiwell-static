@@ -18,6 +18,7 @@ const PAGE_CACHE = 'public, max-age=0, s-maxage=300';
 const CATEGORY_LABELS = {
   th: { news: 'ข่าวประชาสัมพันธ์', promotion: 'โปรโมชั่น', article: 'บทความสุขภาพ' },
   en: { news: 'News', promotion: 'Promotions', article: 'Health articles' },
+  my: { news: 'သတင်း', promotion: 'ပရိုမိုးရှင်း', article: 'ကျန်းမာရေးဆောင်းပါး' },
 };
 const CATEGORY_ORDER = ['news', 'promotion', 'article'];
 const CATEGORY_META = {
@@ -90,17 +91,48 @@ const L = {
     barFee: '+ 30 baht service fee', programTitle: (n, pr) => `${n}${pr ? ' – ' + pr : ''} | HappiWell Medical Clinic, Bangkok`,
     lineHello: 'Hello, I would like to book an appointment', lineProgram: 'Service: ', linePrice: 'Price: ', lineName: 'Full name: ', linePhone: 'Phone: ', lineDate: 'Preferred date: ',
   },
+  my: {
+    siteName: 'HappiWell ဆေးခန်း', brandSuffix: 'HappiWell ဆေးခန်း', locale: 'my_MM', dateLocale: 'my-MM',
+    home: 'ပင်မ', articles: 'သတင်းနှင့် ဆောင်းပါး', programs: 'ဈေးနှုန်းနှင့် ဝန်ဆောင်မှု',
+    homeTitle: 'HappiWell ဆေးခန်း | ဘန်ကောက် Thung Khru ဆေးခန်း — ဆေးလက်မှတ်၊ ကျန်းမာရေးစစ်ဆေးမှု',
+    homeOgTitle: 'HappiWell ဆေးခန်း | ဘန်ကောက် Thung Khru',
+    homeDesc: 'ဘန်ကောက် Thung Khru၊ Soi Pracha Uthit 49 ရှိ ဆေးခန်း။ ယေဘုယျရောဂါကုသမှု၊ ကာကွယ်ဆေး၊ ကျန်းမာရေးစစ်ဆေးမှု၊ အလုပ်လုပ်ခွင့်အတွက် ကျန်းမာရေးစစ်ဆေးမှုနှင့် ဆေးလက်မှတ်။ ဈေးနှုန်းရှင်းလင်း၊ နေ့တိုင်းဖွင့်သည်။',
+    pricesEyebrow: 'ဈေးနှုန်းရှင်းလင်း', pricesH: 'လူကြိုက်များသော ဝန်ဆောင်မှုများ', pricesP: 'ဈေးနှုန်းတွင် ဆေးဝန်ဆောင်ခ မပါဝင်သေးပါ။ LINE ဖြင့် ချက်ချင်းဘိုကင်လုပ်နိုင်သည်။',
+    details: 'အသေးစိတ် →', allPrices: 'ဈေးနှုန်းအားလုံး →', from: 'စတင်ဈေး', readMore: 'ဆက်ဖတ်ရန် →', ask: 'ဈေးနှုန်းမေးရန်', askShort: 'မေးရန်',
+    nArticles: (n) => `ဆောင်းပါး ${n} ခု`, allArticles: '← ဆောင်းပါးအားလုံး', noTag: (t) => `"${t}" tag ဖြင့် ဆောင်းပါးမရှိသေးပါ`,
+    listTitle: 'ကျန်းမာရေးဆောင်းပါးနှင့် သတင်း | HappiWell ဆေးခန်း ဘန်ကောက်', tagTitle: (t) => `Tag: ${t} | HappiWell ဆေးခန်း`,
+    listDesc: 'HappiWell ဆေးခန်း (Thung Khru၊ ဘန်ကောက်) ၏ ကျန်းမာရေးဆောင်းပါး၊ သတင်းနှင့် ပရိုမိုးရှင်းများ။', tagDesc: (t) => `"${t}" tag ပါသော ကျန်းမာရေးဆောင်းပါးများ — HappiWell ဆေးခန်း`,
+    articleNotFound: 'ဆောင်းပါး ရှာမတွေ့ပါ | HappiWell ဆေးခန်း', articleNotFoundBody: 'ဤဆောင်းပါး ရှာမတွေ့ပါ (သို့) ဖယ်ရှားပြီးဖြစ်သည်။', backToList: 'သတင်းအားလုံးသို့',
+    published: 'ထုတ်ဝေသည့်ရက်', relatedH: 'HappiWell ဆေးခန်းရှိ ဤဝန်ဆောင်မှု', relatedNote: 'ဈေးနှုန်းတွင် ဆေးဝန်ဆောင်ခ မပါဝင်သေးပါ · ဈေးနှုန်းစာမျက်နှာမှ LINE ဖြင့် ဘိုကင်လုပ်နိုင်သည်',
+    ctaH: 'မေးစရာ ရှိပါသလား?', ctaP: 'ဆေးခန်း၏ LINE Official Account တွင် မေးမြန်းခြင်း (သို့) ဘိုကင်လုပ်နိုင်ပါသည်', ctaBtn: 'LINE ဖြင့် ချက်လုပ်ရန်',
+    thaiOnly: 'ဤစာမျက်နှာကို မြန်မာဘာသာဖြင့် မရရှိနိုင်သေးပါ။ မေးစရာရှိပါက LINE ဖြင့် ဆက်သွယ်ပါ။',
+    all: 'အားလုံး', recommended: 'အကြံပြု', noPrograms: 'ယခု ဝန်ဆောင်မှုမရှိသေးပါ။ LINE @p49clinic တွင် မေးပါ',
+    programsTitle: 'ကျန်းမာရေးစစ်ဆေးမှုနှင့် ဆေးလက်မှတ် ဈေးနှုန်း ဘန်ကောက် | HappiWell ဆေးခန်း',
+    programsDesc: 'HappiWell ဆေးခန်း (Thung Khru၊ ဘန်ကောက်) ရှိ အလုပ်လုပ်ခွင့်ကျန်းမာရေးစစ်ဆေးမှု၊ ဆေးလက်မှတ်၊ ကျန်းမာရေးစစ်ဆေးမှုပက်ကေ့ချ်နှင့် ကာကွယ်ဆေး ဈေးနှုန်းများ။ LINE ဖြင့် ဘိုကင်လုပ်ပါ။',
+    loadFail: 'စာမျက်နှာ ဖွင့်မရပါ။ ထပ်ကြိုးစားပါ (သို့) LINE @p49clinic တွင် မေးပါ', programNotFound: 'ဝန်ဆောင်မှု ရှာမတွေ့ပါ | HappiWell ဆေးခန်း',
+    programNotFoundBody: 'ဤဝန်ဆောင်မှု ရှာမတွေ့ပါ (သို့) မပေးတော့ပါ။', seeAllPrograms: 'ဝန်ဆောင်မှုအားလုံး',
+    duration: 'ကြာချိန်: ', product: 'ထုတ်ကုန်: ', fda: 'ထိုင်း FDA မှတ်ပုံတင်အမှတ် ', chooseOpt: 'ရွေးချယ်ရန်', choosePkg: 'ပက်ကေ့ချ် ရွေးရန်',
+    items: 'ခု', priceLabel: 'ဈေးနှုန်း', priceSel: 'ရွေးထားသည့်ဈေးနှုန်း', fee: 'ဈေးနှုန်းတွင် ဆေးဝန်ဆောင်ခ မပါဝင်သေးပါ',
+    bookLine: 'LINE ဖြင့် ဘိုကင်', call: '📞 ဖုန်း 02-000-4586', inclPkg: 'ပက်ကေ့ချ်တွင် ပါဝင်သည်', incl: 'ဈေးနှုန်းတွင် ပါဝင်သည်', suitable: 'မည်သူများအတွက်',
+    beforePkg: 'မစစ်ဆေးမီ', notes: 'သိထားရန်', readMoreAbout: (n) => `${n} အကြောင်း →`, readMoreLbl: 'ဆက်ဖတ်ရန်: ',
+    others: (c) => `ဆေးခန်းရှိ အခြား ${c}`, othersFallback: 'ဝန်ဆောင်မှုများ', bookH: 'ဘိုကင်လုပ်နည်း ၂ မျိုး', bookLine2: 'LINE ဖြင့် ဘိုကင်',
+    hours: 'နေ့တိုင်းဖွင့်သည် · တနင်္လာ–သောကြာ 08:00–18:00 · စနေ–တနင်္ဂနွေ 08:00–12:00<br>(သို့) ဖုန်း <a href="tel:0886837899">088-683-7899</a>',
+    disclaimer: 'ဤဈေးနှုန်းများသည် ငွေသားပေးချေသူများအတွက်ဖြစ်ပြီး ဆေးဝန်ဆောင်ခ မပါဝင်သေးပါ။ ဈေးနှုန်း ပြောင်းလဲနိုင်သည်။ ဝန်ဆောင်မှု သင့်/မသင့်ကို ဆရာဝန်က ဆုံးဖြတ်ပါမည်။',
+    barFee: '+ ဆေးဝန်ဆောင်ခ', programTitle: (n, pr) => `${n}${pr ? ' — ' + pr : ''} | HappiWell ဆေးခန်း ဘန်ကောက်`,
+    // ข้อความ LINE: ไทย + พม่า ให้เจ้าหน้าที่อ่านเข้าใจ
+    lineHello: 'สวัสดีค่ะ ต้องการจองคิว (ลูกค้าพม่า) / ဘိုကင်လုပ်ချင်ပါတယ်', lineProgram: 'โปรแกรม / ဝန်ဆောင်မှု: ', linePrice: 'ราคา / ဈေးနှုန်း: ', lineName: 'ชื่อ / အမည်: ', linePhone: 'เบอร์โทร / ဖုန်း: ', lineDate: 'วันที่สะดวก / လာမည့်ရက်: ',
+  },
 };
 
 function clinicJsonLd(lang) {
-  const en = lang === 'en';
+  const en = lang !== 'th';
   return {
     '@context': 'https://schema.org',
     '@type': 'MedicalClinic',
     '@id': SITE + '/#clinic',
     name: en ? SITE_NAME_EN : SITE_NAME,
     alternateName: en ? SITE_NAME : SITE_NAME_EN,
-    url: SITE + (en ? '/en/' : '/'),
+    url: SITE + lp('/', lang),
     telephone: ['+66-2-000-4586', '+66-88-683-7899'],
     address: en
       ? { '@type': 'PostalAddress', streetAddress: '195 Soi Pracha Uthit 49', addressLocality: 'Bang Mot, Thung Khru', addressRegion: 'Bangkok', postalCode: '10140', addressCountry: 'TH' }
@@ -115,7 +147,7 @@ function clinicJsonLd(lang) {
     image: [SITE + '/og-default.png'],
     priceRange: '฿50 – ฿7,200',
     currenciesAccepted: 'THB',
-    availableLanguage: ['th', 'en'],
+    availableLanguage: ['th', 'en', 'my'],
     hasMap: 'https://www.google.com/maps?q=13.648962,100.4964886',
     areaServed: (en ? ['Thung Khru', 'Bang Mot', 'Pracha Uthit', 'Rat Burana', 'Chom Thong', 'Bang Khun Thian', 'Phra Pradaeng']
       : ['ทุ่งครุ', 'บางมด', 'ประชาอุทิศ', 'ราษฎร์บูรณะ', 'จอมทอง', 'บางขุนเทียน', 'พระประแดง']).map((n) => ({ '@type': 'Place', name: n })),
@@ -145,21 +177,34 @@ function fmtDate(d, lang = 'th', month = 'long') {
   return new Date(d).toLocaleDateString(L[lang].dateLocale, { year: 'numeric', month, day: 'numeric', timeZone: 'Asia/Bangkok' });
 }
 // ลิงก์ภายในตามภาษา: lp('/programs','en') → '/en/programs', lp('/','en') → '/en/'
-const lp = (path, lang) => (lang === 'en' ? (path === '/' ? '/en/' : '/en' + path) : path);
+const LANGS = ['th', 'en', 'my'];
+const FALLBACK = { th: [], en: [], my: ['en'] }; // ภาษาสำรองก่อนกลับไปใช้ภาษาไทย
+const lp = (path, lang) => (lang && lang !== 'th' ? (path === '/' ? `/${lang}/` : `/${lang}` + path) : path);
 const articleUrl = (slug, lang = 'th') => lp('/articles/' + encodeURIComponent(slug), lang);
 const programUrl = (slug, lang = 'th') => lp('/programs/' + encodeURIComponent(slug), lang);
 // ค่าภาษาอังกฤษจากคอลัมน์ en ถ้ามี ไม่งั้นใช้ภาษาไทย
-const enOf = (row) => (row && row.en && typeof row.en === 'object' ? row.en : {});
+// ค่าภาษาอื่นจากคอลัมน์ en / my ถ้ามี ไม่งั้นใช้ภาษาสำรอง แล้วค่อยภาษาไทย
+const langOf = (row, lang) => (row && row[lang] && typeof row[lang] === 'object' ? row[lang] : {});
 const has = (v) => v != null && !(typeof v === 'string' && !v.trim()) && !(Array.isArray(v) && !v.length);
+function pickIn(row, field, lang) {
+  const e = langOf(row, lang);
+  if (has(e[field])) return e[field];
+  if (has(row[field + '_' + lang])) return row[field + '_' + lang]; // จาก select แบบ alias (en->>field)
+  return undefined;
+}
 function pick(row, field, lang) {
-  if (lang === 'en') {
-    const e = enOf(row);
-    if (has(e[field])) return e[field];
-    if (has(row[field + '_en'])) return row[field + '_en']; // จาก select แบบ alias (en->>field)
+  if (lang && lang !== 'th') {
+    for (const l of [lang, ...FALLBACK[lang]]) { const v = pickIn(row, field, l); if (v !== undefined) return v; }
   }
   return row[field];
 }
-const isTranslated = (row, key) => has(enOf(row)[key]) || has(row[key + '_en']);
+const isTranslated = (row, key, lang = 'en') => pickIn(row, key, lang) !== undefined;
+// ภาษาที่ใช้แสดงเนื้อหาจริงของแถวนี้ (ภาษาที่ขอ → ภาษาสำรอง → ไทย)
+function contentLang(row, lang, keys = ['title']) {
+  if (lang === 'th') return 'th';
+  for (const l of [lang, ...FALLBACK[lang]]) if (keys.every((k) => isTranslated(row, k, l))) return l;
+  return 'th';
+}
 
 let SB_URL = SUPABASE_URL; // ทดสอบในเครื่องตั้ง env.SUPABASE_URL ได้
 async function sb(path) {
@@ -170,7 +215,7 @@ async function sb(path) {
   if (!res.ok) throw new Error(`supabase ${res.status}`);
   return res.json();
 }
-const LIST_FIELDS = 'slug,title,excerpt,cover_image,category,tags,published_at,updated_at,title_en:en->>title,excerpt_en:en->>excerpt';
+const LIST_FIELDS = 'slug,title,excerpt,cover_image,category,tags,published_at,updated_at,title_en:en->>title,excerpt_en:en->>excerpt,title_my:my->>title,excerpt_my:my->>excerpt';
 const listArticles = () => sb(`hw_articles?select=${LIST_FIELDS}&is_published=eq.true&order=published_at.desc`);
 const getArticle = async (slug) =>
   (await sb(`hw_articles?select=*&is_published=eq.true&slug=eq.${encodeURIComponent(slug)}&limit=1`))[0] || null;
@@ -203,8 +248,8 @@ function renderBlocks(blocks, lang = 'th') {
   }).join('')
     // ลิงก์แบบเก่า article.html?slug=x (ลิงก์ relative จะพังเมื่ออยู่ใต้ /articles/) → /articles/x
     .replace(/href="(?:https:\/\/happiwellclinic\.com)?\/?article(?:\.html)?\?slug=([^"&#]+)"/g, 'href="/articles/$1"');
-  if (lang !== 'en') return html;
-  return html.replace(/href="(?:https:\/\/happiwellclinic\.com)?\/(programs|articles)(?=[/"?#])/g, 'href="/en/$1');
+  if (lang === 'th') return html;
+  return html.replace(/href="(?:https:\/\/happiwellclinic\.com)?\/(programs|articles)(?=[/"?#])/g, `href="/${lang}/$1`);
 }
 function renderContent(json, lang) {
   if (!json) return '';
@@ -241,8 +286,7 @@ function headTags({ canonical, title, description, image, type = 'website', robo
   const tags = [
     canonical && `<link rel="canonical" href="${esc(canonical)}">`,
     ...(alternates ? [
-      alternates.th && `<link rel="alternate" hreflang="th" href="${esc(alternates.th)}">`,
-      alternates.en && `<link rel="alternate" hreflang="en" href="${esc(alternates.en)}">`,
+      ...LANGS.filter((l) => alternates[l]).map((l) => `<link rel="alternate" hreflang="${l}" href="${esc(alternates[l])}">`),
       alternates.th && `<link rel="alternate" hreflang="x-default" href="${esc(alternates.th)}">`,
     ] : []),
     robots && `<meta name="robots" content="${esc(robots)}">`,
@@ -259,7 +303,12 @@ function headTags({ canonical, title, description, image, type = 'website', robo
   return '\n' + tags.filter(Boolean).join('\n') + '\n';
 }
 // ปุ่มเปลี่ยนภาษาในเมนู ให้ชี้ไปหน้าเดียวกันอีกภาษา
-const langSwitch = (href) => ({ element(el) { el.setAttribute('href', href); } });
+// เมนูภาษา: ตั้งลิงก์ a.lang-th / a.lang-en / a.lang-my ให้ชี้หน้าเดียวกัน (thPath = path ภาษาไทย)
+function withLang(rw, thPath) {
+  for (const l of LANGS) rw = rw.on('a.lang-' + l, { element(el) { el.setAttribute('href', lp(thPath, l)); } });
+  return rw;
+}
+const allAlt = (thPath, langs = LANGS) => Object.fromEntries(langs.map((l) => [l, SITE + lp(thPath, l)]));
 
 function htmlResponse(res, status = 200) {
   const h = new Headers(res.headers);
@@ -278,7 +327,7 @@ function asset(env, request, path) {
   // ไม่ส่ง header ของ browser ต่อ (เช่น If-None-Match) เพื่อให้ได้ template เต็มเสมอ ไม่ใช่ 304
   return env.ASSETS.fetch(new Request(u.toString()));
 }
-const tplPath = (path, lang) => (lang === 'en' ? (path === '/' ? '/en/' : '/en' + path) : path);
+const tplPath = lp;
 
 // ---------- pages ----------
 async function homePage(request, env, lang = 'th') {
@@ -322,17 +371,16 @@ async function homePage(request, env, lang = 'th') {
       `</div><div style="margin-top:22px"><a href="${lp('/programs', lang)}" class="btn btn-primary">${t.allPrices}</a></div></div></section>`
     : '';
 
-  let rw = new HTMLRewriter()
+  let rw = withLang(new HTMLRewriter(), '/')
     .on('title', new SetText(t.homeTitle))
     .on('meta[name="description"]', new SetAttr('content', t.homeDesc))
-    .on('a.lang-sw', langSwitch(lang === 'en' ? '/' : '/en/'))
     .on('head', new AppendHead(headTags({
       canonical: SITE + lp('/', lang),
       title: t.homeOgTitle,
       description: t.homeDesc,
       jsonld: [clinicJsonLd(lang)],
       lang,
-      alternates: { th: SITE + '/', en: SITE + '/en/' },
+      alternates: allAlt('/'),
     })));
   if (cards) rw = rw.on('#news-grid', new SetHtml(cards));
   if (featuredHtml) rw = rw.on('section#coverage', { element(el) { el.before(featuredHtml, { html: true }); } });
@@ -364,7 +412,7 @@ async function listPage(request, env, lang = 'th') {
     for (const cat of CATEGORY_ORDER) {
       // ภาษาอังกฤษ: แสดงบทความที่แปลแล้วก่อน
       const items = all.filter((a) => a.category === cat)
-        .sort((a, b) => (lang === 'en' ? isTranslated(b, 'title') - isTranslated(a, 'title') : 0));
+        .sort((a, b) => (lang !== 'th' ? (contentLang(b, lang) === lang) - (contentLang(a, lang) === lang) : 0));
       if (!items.length) continue;
       html += `<div class="category-block"><h2>${esc(CATEGORY_LABELS[lang][cat])}</h2><div class="count">${t.nArticles(items.length)}</div><div class="article-list-grid">${items.map(card).join('')}</div></div>`;
     }
@@ -374,16 +422,15 @@ async function listPage(request, env, lang = 'th') {
   const description = tag ? t.tagDesc(tag) : t.listDesc;
   const q = tag ? `?tag=${encodeURIComponent(tag)}` : '';
 
-  const rw = new HTMLRewriter()
+  const rw = withLang(new HTMLRewriter(), '/articles' + q)
     .on('title', new SetText(title))
     .on('meta[name="description"]', new Remove())
-    .on('a.lang-sw', langSwitch((lang === 'en' ? '/articles' : '/en/articles') + q))
     .on('head', new AppendHead(`<meta name="description" content="${esc(description)}">` + headTags({
       canonical: SITE + listHref + q,
       title, description,
       robots: tag ? 'noindex, follow' : undefined,
       lang,
-      alternates: tag ? undefined : { th: SITE + '/articles', en: SITE + '/en/articles' },
+      alternates: tag ? undefined : allAlt('/articles'),
     })))
     .on('#content', new SetHtml(html));
   return htmlResponse(rw.transform(tpl));
@@ -396,46 +443,44 @@ async function articlePage(request, env, slug, lang = 'th') {
   try {
     [a, related] = await Promise.all([
       getArticle(slug),
-      sb(`hw_programs?select=slug,name,price,price_unit,name_en:en->>name&is_published=eq.true&related_article_slug=eq.${encodeURIComponent(slug)}&order=sort_order.asc`).catch(() => []),
+      sb(`hw_programs?select=slug,name,price,price_unit,name_en:en->>name,name_my:my->>name&is_published=eq.true&related_article_slug=eq.${encodeURIComponent(slug)}&order=sort_order.asc`).catch(() => []),
     ]);
   } catch (_) {
     return htmlResponse(tpl); // Supabase ล่ม: ปล่อยให้ client JS ลองโหลดเอง
   }
-  const switchHref = lang === 'en' ? articleUrl(slug, 'th') : articleUrl(slug, 'en');
   if (!a) {
-    const notFound = new HTMLRewriter()
+    const notFound = withLang(new HTMLRewriter(), '/articles')
       .on('title', new SetText(t.articleNotFound))
       .on('head', new AppendHead('<meta name="robots" content="noindex">'))
-      .on('a.lang-sw', langSwitch(lang === 'en' ? '/articles' : '/en/articles'))
       .on('#content', new SetHtml(`<div class="article-error">${t.articleNotFoundBody} <a href="${lp('/articles', lang)}">${t.backToList}</a></div>`, { 'data-ssr': '1' }));
     return htmlResponse(notFound.transform(tpl), 404);
   }
 
   // ภาษาอังกฤษ: ถ้ายังไม่ได้แปล แสดงภาษาไทย + แจ้งเตือน และ noindex (canonical ชี้หน้าไทย)
-  const translated = isTranslated(a, 'title') && isTranslated(a, 'content');
-  const useEn = lang === 'en' && translated;
-  const L2 = useEn ? 'en' : 'th';
+  // ภาษาที่มีเนื้อหาจริง: ภาษาที่ขอ → อังกฤษ (สำหรับพม่า) → ไทย
+  const L2 = contentLang(a, lang, ['title', 'content']);
+  const translated = L2 === lang;
+  const avail = LANGS.filter((l) => l === 'th' || contentLang(a, l, ['title', 'content']) === l);
   const title = pick(a, 'title', L2);
   const body = renderContent(pick(a, 'content', L2), lang);
 
   const thUrl = SITE + articleUrl(a.slug, 'th');
-  const enUrl = SITE + articleUrl(a.slug, 'en');
-  const canonical = lang === 'en' && translated ? enUrl : thUrl;
+  const canonical = translated ? SITE + articleUrl(a.slug, lang) : thUrl;
   const cover = safeUrl(a.cover_image);
   const description = pick(a, 'seo_description', L2) || pick(a, 'excerpt', L2) || title;
   const pageTitle = pick(a, 'seo_title', L2) || `${title} | ${t.brandSuffix}`;
   const tags = Array.isArray(a.tags) ? a.tags : [];
   const category = CATEGORY_LABELS[lang][a.category] || a.category;
-  const relName = (r) => (lang === 'en' && has(r.name_en) ? r.name_en : r.name);
+  const relName = (r) => pick(r, 'name', lang);
 
   const content =
     `<span class="article-category">${esc(category)}</span>` +
     (tags.length && lang === 'th' ? `<div class="article-tags">${tags.map((x) => `<a class="article-tag" href="/articles?tag=${encodeURIComponent(x)}">#${esc(x)}</a>`).join('')}</div>` : '') +
-    `<h1 class="article-title"${lang === 'en' && !useEn ? ' lang="th"' : ''}>${esc(title)}</h1>` +
+    `<h1 class="article-title"${L2 !== lang ? ` lang="${L2}"` : ''}>${esc(title)}</h1>` +
     `<div class="article-meta">${t.published} <time datetime="${esc(a.published_at)}">${esc(fmtDate(a.published_at, lang))}</time></div>` +
-    (lang === 'en' && !useEn ? `<p style="padding:12px 16px;border-radius:12px;background:var(--apricot-50);border:1px solid var(--apricot-100);font-size:14.5px">${t.thaiOnly}</p>` : '') +
+    (L2 !== lang ? `<p style="padding:12px 16px;border-radius:12px;background:var(--apricot-50);border:1px solid var(--apricot-100);font-size:14.5px">${t.thaiOnly}</p>` : '') +
     (cover ? `<img class="article-cover" src="${esc(cover)}" alt="${esc(title)}">` : '') +
-    `<div class="article-body"${lang === 'en' && !useEn ? ' lang="th"' : ''}>${body}</div>` +
+    `<div class="article-body"${L2 !== lang ? ` lang="${L2}"` : ''}>${body}</div>` +
     (related.length ? `<div style="margin-top:36px;padding:22px 24px;border-radius:16px;background:var(--surface);border:1.5px solid var(--mint-200)">` +
       `<div style="font-family:Anuphan,sans-serif;font-weight:700;font-size:18px;color:var(--mint-900);margin-bottom:12px">${t.relatedH}</div>` +
       related.map((r) => `<a href="${programUrl(r.slug, lang)}" style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--line);text-decoration:none;color:var(--ink)">` +
@@ -468,17 +513,16 @@ async function articlePage(request, env, slug, lang = 'th') {
     ],
   };
 
-  const rw = new HTMLRewriter()
+  const rw = withLang(new HTMLRewriter(), articleUrl(a.slug))
     .on('title', new SetText(pageTitle))
     // ลบ meta เดิมที่ client เคยเติมเอง แล้วใส่ชุดใหม่ที่มีค่าจริง
     .on('meta#meta-description', new SetAttr('content', description))
     .on('meta#og-title, meta#og-description, meta#og-image', new Remove())
     .on('script#jsonld', new Remove())
-    .on('a.lang-sw', langSwitch(switchHref))
     .on('head', new AppendHead(headTags({
       canonical, title, description, image: cover, type: 'article', jsonld: [article, crumbs], lang,
-      robots: lang === 'en' && !translated ? 'noindex, follow' : undefined,
-      alternates: translated ? { th: thUrl, en: enUrl } : undefined,
+      robots: lang !== 'th' && !translated ? 'noindex, follow' : undefined,
+      alternates: avail.length > 1 ? allAlt(articleUrl(a.slug), avail) : undefined,
     }) + `<meta property="article:published_time" content="${esc(a.published_at)}">`))
     .on('#content', new SetHtml(content, { 'data-ssr': '1' }));
   return htmlResponse(rw.transform(tpl));
@@ -493,23 +537,23 @@ async function sitemap() {
   const newestArticle = all.reduce((m, a) => maxDay(m, day(a.updated_at || a.published_at)), undefined);
   const newestProgram = progs.reduce((m, p) => maxDay(m, day(p.updated_at)), undefined);
   const LEGAL_UPDATED = '2026-08-25'; // วันที่แก้หน้า privacy / cookies ล่าสุด
-  const EN_LAUNCH = '2026-10-22';
+  const LAUNCH = { en: '2026-10-22', my: '2026-10-26' };
   const img = (u, title) => (safeUrl(u) ? [{ loc: safeUrl(u), title }] : []);
-  // แต่ละหน้า: ไทย + อังกฤษ (ถ้ามีคำแปล) พร้อมลิงก์ hreflang ถึงกัน
-  const pair = (thPath, enPath, base, hasEn) => {
-    const alt = hasEn ? [{ lang: 'th', href: SITE + thPath }, { lang: 'en', href: SITE + enPath }, { lang: 'x-default', href: SITE + thPath }] : null;
-    const out = [{ ...base, loc: SITE + thPath, alt }];
-    if (hasEn) out.push({ ...base, loc: SITE + enPath, alt, priority: (Number(base.priority) - 0.1).toFixed(1), lastmod: maxDay(base.lastmod, EN_LAUNCH) });
-    return out;
+  // แต่ละหน้า: ไทย + ภาษาที่มีคำแปล พร้อมลิงก์ hreflang ถึงกัน
+  const group = (thPath, base, langs) => {
+    const alt = langs.length > 1 ? [...langs.map((l) => ({ lang: l, href: SITE + lp(thPath, l) })), { lang: 'x-default', href: SITE + thPath }] : null;
+    return langs.map((l) => (l === 'th' ? { ...base, loc: SITE + thPath, alt }
+      : { ...base, loc: SITE + lp(thPath, l), alt, priority: (Number(base.priority) - 0.1).toFixed(1), lastmod: maxDay(base.lastmod, LAUNCH[l]) }));
   };
+  const langsOf = (row, key) => LANGS.filter((l) => l === 'th' || isTranslated(row, key, l));
   const urls = [
-    ...pair('/', '/en/', { lastmod: maxDay(newestArticle, newestProgram), priority: '1.0', images: [{ loc: DEFAULT_OG, title: SITE_NAME }] }, true),
-    ...pair('/programs', '/en/programs', { lastmod: newestProgram, priority: '0.9' }, true),
-    ...progs.flatMap((p) => pair(programUrl(p.slug), programUrl(p.slug, 'en'), { lastmod: day(p.updated_at), priority: '0.8', images: img(p.cover_image, p.name) }, isTranslated(p, 'name'))),
-    ...pair('/articles', '/en/articles', { lastmod: newestArticle, priority: '0.8' }, true),
-    ...all.flatMap((a) => pair(articleUrl(a.slug), articleUrl(a.slug, 'en'), { lastmod: day(a.updated_at || a.published_at), priority: '0.7', images: img(a.cover_image, a.title) }, isTranslated(a, 'title'))),
-    ...pair('/privacy', '/en/privacy', { lastmod: LEGAL_UPDATED, priority: '0.2' }, true),
-    ...pair('/cookies', '/en/cookies', { lastmod: LEGAL_UPDATED, priority: '0.2' }, true),
+    ...group('/', { lastmod: maxDay(newestArticle, newestProgram), priority: '1.0', images: [{ loc: DEFAULT_OG, title: SITE_NAME }] }, LANGS),
+    ...group('/programs', { lastmod: newestProgram, priority: '0.9' }, LANGS),
+    ...progs.flatMap((p) => group(programUrl(p.slug), { lastmod: day(p.updated_at), priority: '0.8', images: img(p.cover_image, p.name) }, langsOf(p, 'name'))),
+    ...group('/articles', { lastmod: newestArticle, priority: '0.8' }, LANGS),
+    ...all.flatMap((a) => group(articleUrl(a.slug), { lastmod: day(a.updated_at || a.published_at), priority: '0.7', images: img(a.cover_image, a.title) }, langsOf(a, 'title'))),
+    ...group('/privacy', { lastmod: LEGAL_UPDATED, priority: '0.2' }, LANGS),
+    ...group('/cookies', { lastmod: LEGAL_UPDATED, priority: '0.2' }, LANGS),
   ];
   const xml = '<?xml version="1.0" encoding="UTF-8"?>\n' +
     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n' +
@@ -523,8 +567,8 @@ async function sitemap() {
 
 // ---------- programs (โปรแกรมและราคา) ----------
 const PROGRAM_FIELDS = 'id,slug,category,name,short_desc,price,price_unit,price_note,options,cover_image,is_featured,sort_order,updated_at,' +
-  'name_en:en->>name,short_desc_en:en->>short_desc,price_unit_en:en->>price_unit';
-const listCategories = () => sb('hw_program_categories?select=slug,name,description,sort_order,en&is_active=eq.true&order=sort_order.asc');
+  'name_en:en->>name,short_desc_en:en->>short_desc,price_unit_en:en->>price_unit,name_my:my->>name,short_desc_my:my->>short_desc,price_unit_my:my->>price_unit';
+const listCategories = () => sb('hw_program_categories?select=slug,name,description,sort_order,en,my&is_active=eq.true&order=sort_order.asc');
 const listPrograms = () => sb(`hw_programs?select=${PROGRAM_FIELDS}&is_published=eq.true&order=sort_order.asc,name.asc`);
 const getProgram = async (slug) =>
   (await sb(`hw_programs?select=*&is_published=eq.true&slug=eq.${encodeURIComponent(slug)}&limit=1`))[0] || null;
@@ -564,8 +608,8 @@ function priceHtml(p, lang = 'th') {
   // "เริ่มต้นต่อรายการ" → เริ่มต้น ฿100 ต่อรายการ (ภาษาอังกฤษใช้ price_unit จากคอลัมน์ en)
   const u = String(p.price_unit || '');
   const from = /^เริ่มต้น/.test(u);
-  const rest = lang === 'en' ? String(pick(p, 'price_unit', 'en') || '').replace(/^from\s*/i, '').replace(/^เริ่มต้น\s*/, '') : (from ? u.replace(/^เริ่มต้น\s*/, '') : u);
-  const restSafe = lang === 'en' && /[฀-๿]/.test(rest) ? '' : rest; // ยังไม่แปล: ไม่โชว์หน่วยภาษาไทยในหน้าอังกฤษ
+  const rest = lang !== 'th' ? String(pick(p, 'price_unit', lang) || '').replace(/^from\s*/i, '').replace(/^เริ่มต้น\s*/, '') : (from ? u.replace(/^เริ่มต้น\s*/, '') : u);
+  const restSafe = lang !== 'th' && /[฀-๿]/.test(rest) ? '' : rest; // ยังไม่แปล: ไม่โชว์หน่วยภาษาไทยในหน้าอังกฤษ
   return (from ? `<span class="unit">${t.from}</span> ` : '') +
     `<span class="price">${esc(baht(p.price))}</span>` + (restSafe ? ` <span class="unit">${esc(restSafe)}</span>` : '');
 }
@@ -601,13 +645,12 @@ async function programsPage(request, env, lang = 'th') {
     '@context': 'https://schema.org', '@type': 'ItemList', name: t.programs,
     itemListElement: progs.map((p, i) => ({ '@type': 'ListItem', position: i + 1, url: SITE + programUrl(p.slug, lang), name: pick(p, 'name', lang) })),
   };
-  const rw = new HTMLRewriter()
+  const rw = withLang(new HTMLRewriter(), '/programs')
     .on('title', new SetText(t.programsTitle))
     .on('meta#meta-description', new SetAttr('content', t.programsDesc))
-    .on('a.lang-sw', langSwitch(lang === 'en' ? '/programs' : '/en/programs'))
     .on('head', new AppendHead(headTags({
       canonical: SITE + lp('/programs', lang), title: t.programsTitle, description: t.programsDesc, jsonld: [itemList], lang,
-      alternates: { th: SITE + '/programs', en: SITE + '/en/programs' },
+      alternates: allAlt('/programs'),
     })))
     .on('#cat-chips', new SetHtml(chips))
     .on('#pg-content', new SetHtml(sections));
@@ -617,22 +660,22 @@ async function programsPage(request, env, lang = 'th') {
 async function programPage(request, env, slug, lang = 'th') {
   const t = L[lang];
   const tpl = await asset(env, request, tplPath('/program', lang));
-  const switchHref = lang === 'en' ? programUrl(slug, 'th') : programUrl(slug, 'en');
   let p = null, cats = [], all = [];
   try { [p, cats, all] = await Promise.all([getProgram(slug), listCategories(), listPrograms().catch(() => [])]); } catch (_) {
     return htmlResponse(new HTMLRewriter().on('#pd-root', new SetHtml(`<div class="pg-empty">${t.loadFail}</div>`)).transform(tpl), 503);
   }
   if (!p) {
-    return htmlResponse(new HTMLRewriter()
+    return htmlResponse(withLang(new HTMLRewriter(), '/programs')
       .on('title', new SetText(t.programNotFound))
       .on('head', new AppendHead('<meta name="robots" content="noindex">'))
-      .on('a.lang-sw', langSwitch(lang === 'en' ? '/programs' : '/en/programs'))
       .on('#pd-root', new SetHtml(`<div class="pg-empty">${t.programNotFoundBody} <a href="${lp('/programs', lang)}" style="color:var(--mint-700);font-weight:700">${t.seeAllPrograms}</a></div>`))
       .transform(tpl), 404);
   }
-  const en = lang === 'en';
-  const E = enOf(p);
-  const translated = has(E.name);
+  const en = lang !== 'th';
+  const CL = contentLang(p, lang, ['name']); // ภาษาที่มีชื่อโปรแกรมจริง
+  const E = langOf(p, CL);
+  const translated = CL === lang;
+  const avail = LANGS.filter((l) => l === 'th' || isTranslated(p, 'name', l));
   const cat = cats.find((c) => c.slug === p.category);
   const cName = catName(cat, lang);
   const cover = safeUrl(p.cover_image);
@@ -640,7 +683,7 @@ async function programPage(request, env, slug, lang = 'th') {
   // ตัวเลือก: ราคามาจากภาษาไทย ชื่อ/หมายเหตุจาก en.options ตามลำดับเดียวกัน
   const optsTh = Array.isArray(p.options) ? p.options.filter((o) => o && o.label) : [];
   const optsEn = Array.isArray(E.options) ? E.options : [];
-  const options = optsTh.map((o, i) => (en && optsEn[i] && optsEn[i].label ? { ...o, label: optsEn[i].label, note: optsEn[i].note || '' } : o));
+  const options = optsTh.map((o, i) => (CL !== 'th' && optsEn[i] && optsEn[i].label ? { ...o, label: optsEn[i].label, note: optsEn[i].note || '' } : o));
   const body = renderContent(pick(p, 'description', lang), lang);
   const arr = (f) => { const v = pick(p, f, lang); return Array.isArray(v) ? v : []; };
 
@@ -663,13 +706,13 @@ async function programPage(request, env, slug, lang = 'th') {
     ? `<span class="price-ask" data-sel-price>${t.ask}</span>`
     : (options.length ? `<span class="price" data-sel-price>${esc(baht(firstPrice))}</span>` : priceHtml(p, lang).replace('<span class="price">', '<span class="price" data-sel-price>'));
   // ข้อความ LINE ภาษาอังกฤษ: ใส่ชื่อภาษาไทยในวงเล็บให้เจ้าหน้าที่อ่านง่าย
-  const lineName = en && translated ? `${name} (${p.name})` : p.name;
+  const lineName = CL !== 'th' ? `${name} (${p.name})` : p.name;
   const lineHref = lineBookUrl(lineName, p.price, options[0] || null, lang);
 
   // ตัวเลือกเทียบแพ็กเกจตรวจสุขภาพ (ชุดเล็ก / ชุดใหญ่หญิง / ชุดใหญ่ชาย)
   const siblings = /^health-checkup-/.test(p.slug) ? all.filter((x) => /^health-checkup-/.test(x.slug)) : [];
-  const shortName = (x) => (en && has(x.name_en)
-    ? x.name_en.replace(/^health check-?up package\s*/i, '')
+  const shortName = (x) => (en && pick(x, 'name', lang) !== x.name
+    ? ((pick(x, 'name', lang).match(/\(([^)]+)\)\s*$/) || [])[1] || pick(x, 'name', lang))
     : x.name.replace(/^แพ็กเกจตรวจสุขภาพ\s*/, '')).replace(/[()]/g, '').trim();
   const countOf = (txt) => ((txt || '').match(/(\d+)\s*รายการ/) || [])[1];
   const switcher = siblings.length > 1
@@ -721,14 +764,13 @@ async function programPage(request, env, slug, lang = 'th') {
     `<script type="application/json" id="program-data">${jsonLd({ name: lineName, price: p.price, price_unit: p.price_unit, options })}</script>`;
 
   const thUrl = SITE + programUrl(p.slug, 'th');
-  const enUrl = SITE + programUrl(p.slug, 'en');
-  const canonical = en && translated ? enUrl : thUrl;
+  const canonical = en && translated ? SITE + programUrl(p.slug, lang) : thUrl;
   const title = pick(p, 'seo_title', lang) || t.programTitle(name, p.price != null ? baht(p.price) : '');
   const description = pick(p, 'seo_description', lang) || shortDesc || name;
   const prices = [p.price, ...options.map((o) => o.price)].filter((x) => x != null && x !== '').map(Number);
   const service = {
     '@context': 'https://schema.org', '@type': 'MedicalProcedure', name, description,
-    url: canonical, image: cover || undefined, inLanguage: en && translated ? 'en' : 'th',
+    url: canonical, image: cover || undefined, inLanguage: CL,
     provider: { '@type': 'MedicalClinic', '@id': SITE + '/#clinic', name: t.siteName },
     offers: prices.length ? {
       '@type': prices.length > 1 ? 'AggregateOffer' : 'Offer', priceCurrency: 'THB',
@@ -744,14 +786,13 @@ async function programPage(request, env, slug, lang = 'th') {
       { '@type': 'ListItem', position: 3, name, item: canonical },
     ],
   };
-  const rw = new HTMLRewriter()
+  const rw = withLang(new HTMLRewriter(), programUrl(p.slug))
     .on('title', new SetText(title))
     .on('meta#meta-description', new SetAttr('content', description))
-    .on('a.lang-sw', langSwitch(switchHref))
     .on('head', new AppendHead(headTags({
       canonical, title: name, description, image: cover, type: 'website', jsonld: [service, crumbs], lang,
       robots: en && !translated ? 'noindex, follow' : undefined,
-      alternates: translated ? { th: thUrl, en: enUrl } : undefined,
+      alternates: avail.length > 1 ? allAlt(programUrl(p.slug), avail) : undefined,
     })))
     .on('#pd-root', new SetHtml(html));
   return htmlResponse(rw.transform(tpl));
@@ -797,19 +838,24 @@ export default {
     if (path === '/programs.html' || path === '/programs/') return redirect(SITE + '/programs' + url.search);
     if (path === '/program' || path === '/program.html') return redirect(SITE + '/programs');
     // ภาษาอังกฤษ
-    if (path === '/en') return redirect(SITE + '/en/');
-    if (path === '/en/index.html') return redirect(SITE + '/en/');
-    if (path === '/en/articles.html' || path === '/en/articles/') return redirect(SITE + '/en/articles' + url.search);
-    if (path === '/en/programs.html' || path === '/en/programs/') return redirect(SITE + '/en/programs' + url.search);
-    if (path === '/en/privacy.html') return redirect(SITE + '/en/privacy');
-    if (path === '/en/cookies.html') return redirect(SITE + '/en/cookies');
-    if (path === '/en/article' || path === '/en/article.html') return redirect(SITE + '/en/articles');
-    if (path === '/en/program' || path === '/en/program.html') return redirect(SITE + '/en/programs');
+    // ภาษาอื่น (/en, /my): URL เก่า/ไม่มี / ท้าย → URL หลัก
+    const lx = path.match(/^\/(en|my)(\/.*)?$/);
+    if (lx) {
+      const P = '/' + lx[1], rest = lx[2] || '';
+      if (rest === '') return redirect(SITE + P + '/');
+      if (rest === '/index.html') return redirect(SITE + P + '/');
+      if (rest === '/articles.html' || rest === '/articles/') return redirect(SITE + P + '/articles' + url.search);
+      if (rest === '/programs.html' || rest === '/programs/') return redirect(SITE + P + '/programs' + url.search);
+      if (rest === '/privacy.html') return redirect(SITE + P + '/privacy');
+      if (rest === '/cookies.html') return redirect(SITE + P + '/cookies');
+      if (rest === '/article' || rest === '/article.html') return redirect(SITE + P + '/articles');
+      if (rest === '/program' || rest === '/program.html') return redirect(SITE + P + '/programs');
+    }
 
     try {
       if (path === '/sitemap.xml') return await sitemap();
-      const isEn = path === '/en/' || path.startsWith('/en/');
-      const res = await route(request, env, isEn ? path.slice(3) || '/' : path, url, isEn ? 'en' : 'th');
+      const lm = path.match(/^\/(en|my)(\/.*)$/);
+      const res = await route(request, env, lm ? lm[2] : path, url, lm ? lm[1] : 'th');
       if (res) return res;
     } catch (err) {
       console.error('ssr error', path, err && err.message);
