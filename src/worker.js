@@ -823,33 +823,28 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     const path = url.pathname;
+    // www.happiwellclinic.com → happiwellclinic.com (ใช้ได้เมื่อผูกโดเมน www กับ Worker นี้แล้ว)
+    if (url.hostname.startsWith('www.')) return Response.redirect(SITE + path + url.search, 301);
     if (env && env.SUPABASE_URL) SB_URL = env.SUPABASE_URL;
     if (request.method !== 'GET' && request.method !== 'HEAD') return env.ASSETS.fetch(request);
 
-    // URL เก่า → URL ใหม่ (301 = ถาวร ให้ Google ย้ายคะแนนมา)
-    if (path === '/article' || path === '/article.html') {
-      const slug = url.searchParams.get('slug');
-      return redirect(SITE + (slug ? articleUrl(slug) : '/articles'));
-    }
-    if (path === '/index.html') return redirect(SITE + '/');
-    if (path === '/articles.html' || path === '/articles/') return redirect(SITE + '/articles' + url.search);
-    if (path === '/privacy.html') return redirect(SITE + '/privacy');
-    if (path === '/cookies.html') return redirect(SITE + '/cookies');
-    if (path === '/programs.html' || path === '/programs/') return redirect(SITE + '/programs' + url.search);
-    if (path === '/program' || path === '/program.html') return redirect(SITE + '/programs');
-    // ภาษาอังกฤษ
-    // ภาษาอื่น (/en, /my): URL เก่า/ไม่มี / ท้าย → URL หลัก
-    const lx = path.match(/^\/(en|my)(\/.*)?$/);
-    if (lx) {
-      const P = '/' + lx[1], rest = lx[2] || '';
-      if (rest === '') return redirect(SITE + P + '/');
-      if (rest === '/index.html') return redirect(SITE + P + '/');
-      if (rest === '/articles.html' || rest === '/articles/') return redirect(SITE + P + '/articles' + url.search);
-      if (rest === '/programs.html' || rest === '/programs/') return redirect(SITE + P + '/programs' + url.search);
-      if (rest === '/privacy.html') return redirect(SITE + P + '/privacy');
-      if (rest === '/cookies.html') return redirect(SITE + P + '/cookies');
-      if (rest === '/article' || rest === '/article.html') return redirect(SITE + P + '/articles');
-      if (rest === '/program' || rest === '/program.html') return redirect(SITE + P + '/programs');
+    // URL เก่า → URL ใหม่ (301 = ถาวร ให้ Google ย้ายคะแนนมา) ทุกภาษา
+    // รวม URL ที่ Google เก็บจากลิงก์ relative เก่า เช่น /articles/article.html?slug=x
+    {
+      const lx = path.match(/^\/(en|my)(\/.*)?$/);
+      const P = lx ? '/' + lx[1] : '';
+      const rest = lx ? (lx[2] || '') : path;
+      const slug = (url.searchParams.get('slug') || '').trim();
+      let to = null;
+      if (lx && rest === '') to = '/';
+      else if (rest === '/index.html') to = '/';
+      else if (/^\/(articles\/)?article(\.html)?$/.test(rest)) to = slug ? '/articles/' + encodeURIComponent(slug) : '/articles';
+      else if (/^\/(programs\/)?program(\.html)?$/.test(rest)) to = slug ? '/programs/' + encodeURIComponent(slug) : '/programs';
+      else if (rest === '/articles.html' || rest === '/articles/' || rest === '/articles/articles.html') to = '/articles' + url.search;
+      else if (rest === '/programs.html' || rest === '/programs/' || rest === '/programs/programs.html') to = '/programs' + url.search;
+      else if (rest === '/privacy.html') to = '/privacy';
+      else if (rest === '/cookies.html') to = '/cookies';
+      if (to) return redirect(SITE + (to === '/' ? (P ? P + '/' : '/') : P + to));
     }
 
     try {
