@@ -263,3 +263,7 @@ T = {
   'หากมีข้อสงสัยเกี่ยวกับนโยบายคุกกี้นี้ ติดต่อคลินิกได้ที่ 02-000-4586 หรือ LINE @p49clinic':
     'If you have questions about this cookie policy, contact the Clinic at 02-000-4586 or LINE @p49clinic.',
 }
+
+# ---------- directions (แผนที่และวิธีเดินทาง) ----------
+import pathlib as _pl, runpy as _rp
+T.update(_rp.run_path(str(_pl.Path(__file__).with_name('directions-strings.py')))['EN'])

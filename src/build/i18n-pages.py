@@ -13,10 +13,11 @@ import pathlib, re, sys, runpy
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 NAV = runpy.run_path(str(ROOT / 'src/build/langnav.py'))
-PAGES = ['index.html', 'programs.html', 'program.html', 'articles.html', 'article.html', 'privacy.html', 'cookies.html']
+PAGES = ['index.html', 'programs.html', 'program.html', 'articles.html', 'article.html', 'privacy.html', 'cookies.html', 'directions.html']
 THAI = re.compile(r'[฀-๿][^<>"`\n]{0,400}')
 TH_PATH = {'index.html': '/', 'programs.html': '/programs', 'program.html': '/programs', 'articles.html': '/articles',
-           'article.html': '/articles', 'privacy.html': '/privacy', 'cookies.html': '/cookies'}
+           'article.html': '/articles', 'privacy.html': '/privacy', 'cookies.html': '/cookies',
+           'directions.html': '/directions'}
 SITE = 'https://happiwellclinic.com'
 LOCALE = {'en': 'en-GB', 'my': 'my-MM'}
 ALL = ['th', 'en', 'my']
@@ -63,12 +64,12 @@ def build(name, lang, T):
     s = re.sub(r"(['\"`])/articles/", rf"\1{pfx}/articles/", s)
 
     # 3) ลิงก์ภายใน
-    s = re.sub(r'href="/(programs|articles|privacy|cookies)(?=[/"?#])', rf'href="{pfx}/\1', s)
+    s = re.sub(r'href="/(programs|articles|privacy|cookies|directions)(?=[/"?#])', rf'href="{pfx}/\1', s)
     s = re.sub(r'href="/(#[^"]*)?"', lambda m: f'href="{pfx}/{m.group(1) or ""}"', s)
 
     # 4) ภาษา + canonical/hreflang ของหน้าคงที่ + ฟอนต์พม่า
     s = must_replace(s, '<html lang="th"', f'<html lang="{lang}"', name)
-    if name in ('privacy.html', 'cookies.html'):
+    if name in ('privacy.html', 'cookies.html', 'directions.html'):
         own = SITE + NAV['prefixed'](TH_PATH[name], lang)
         s = re.sub(r'\n<link rel="alternate" hreflang="[^"]*" href="[^"]*">', '', s)
         s, n = re.subn(r'<link rel="canonical" href="[^"]*">', f'<link rel="canonical" href="{own}">\n' + alternates(TH_PATH[name]), s)

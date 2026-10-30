@@ -255,3 +255,6 @@ T.update({
   'หากมีข้อสงสัยเกี่ยวกับนโยบายคุกกี้นี้ ติดต่อคลินิกได้ที่ 02-000-4586 หรือ LINE @p49clinic':
     'ဤ Cookie မူဝါဒနှင့်ပတ်သက်၍ မေးစရာရှိပါက 02-000-4586 (သို့) LINE @p49clinic သို့ ဆက်သွယ်ပါ။',
 })
+
+# ---------- directions (แผนที่และวิธีเดินทาง) ----------
+T.update(runpy.run_path(str(pathlib.Path(__file__).with_name('directions-strings.py')))['MY'])

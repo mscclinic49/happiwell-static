@@ -552,6 +552,7 @@ async function sitemap() {
     ...progs.flatMap((p) => group(programUrl(p.slug), { lastmod: day(p.updated_at), priority: '0.8', images: img(p.cover_image, p.name) }, langsOf(p, 'name'))),
     ...group('/articles', { lastmod: newestArticle, priority: '0.8' }, LANGS),
     ...all.flatMap((a) => group(articleUrl(a.slug), { lastmod: day(a.updated_at || a.published_at), priority: '0.7', images: img(a.cover_image, a.title) }, langsOf(a, 'title'))),
+    ...group('/directions', { lastmod: '2026-10-30', priority: '0.7' }, LANGS),
     ...group('/privacy', { lastmod: LEGAL_UPDATED, priority: '0.2' }, LANGS),
     ...group('/cookies', { lastmod: LEGAL_UPDATED, priority: '0.2' }, LANGS),
   ];
@@ -844,6 +845,7 @@ export default {
       else if (rest === '/programs.html' || rest === '/programs/' || rest === '/programs/programs.html') to = '/programs' + url.search;
       else if (rest === '/privacy.html') to = '/privacy';
       else if (rest === '/cookies.html') to = '/cookies';
+      else if (rest === '/directions.html') to = '/directions';
       if (to) return redirect(SITE + (to === '/' ? (P ? P + '/' : '/') : P + to));
     }
 
