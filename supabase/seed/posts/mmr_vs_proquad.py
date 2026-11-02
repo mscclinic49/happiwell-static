@@ -1,0 +1,115 @@
+# -*- coding: utf-8 -*-
+"""บทความ: MMR กับ ProQuad (MMRV) ต่างกันยังไง — ไทย + อังกฤษ + SEO พร้อมลิงก์ไปหน้าราคา/จองคิว
+รัน: python3 supabase/seed/posts/mmr_vs_proquad.py → เขียน mmr_vs_proquad.json
+"""
+import json, pathlib
+
+SLUG = 'mmr-vs-proquad-mmrv-2569'
+LINE = 'https://line.me/R/ti/p/@p49clinic'
+MMR, VAR, PQ = '/programs/mmr-vaccine', '/programs/chickenpox-vaccine-varivax', '/programs/mmrv-vaccine-proquad'
+REF = [
+  '<a href="https://www.cdc.gov/mmwr/preview/mmwrhtml/rr5903a1.htm">CDC MMWR – Use of Combination Measles, Mumps, Rubella, and Varicella Vaccine (ACIP)</a>',
+  '<a href="https://www.cdc.gov/vaccines/vpd/mmr/hcp/vacopt-factsheet-hcp.html">CDC – MMR &amp; Varicella Vaccines or MMRV Vaccine: Discussing Options with Parents</a>',
+]
+
+
+def blocks(items):
+    out = []
+    for i, (kind, val) in enumerate(items):
+        bid = f'mq{i}'
+        if kind == 'p':
+            out.append({'id': bid, 'type': 'paragraph', 'data': {'text': val}})
+        elif kind in ('h2', 'h3'):
+            out.append({'id': bid, 'type': 'header', 'data': {'text': val, 'level': int(kind[1])}})
+        elif kind == 'ul':
+            out.append({'id': bid, 'type': 'list', 'data': {'style': 'unordered', 'items': val}})
+    return json.dumps({'time': 1793520000000, 'version': '2.29.1', 'blocks': out}, ensure_ascii=False)
+
+
+TH = dict(
+  title='วัคซีน MMR กับ ProQuad (MMRV) ต่างกันยังไง เลือกแบบไหนดี ราคาเท่าไหร่ (อัปเดตปี 2569)',
+  excerpt='MMR ป้องกัน 3 โรค ส่วน ProQuad ป้องกัน 4 โรครวมอีสุกอีใสในเข็มเดียว ใครฉีดแบบไหนได้ ฉีดแยกหรือฉีดรวมดีกว่า พร้อมราคาและลิงก์จองที่แฮปปี้เวลล์ คลินิก ทุ่งครุ',
+  seo_title='วัคซีน MMR กับ ProQuad (MMRV) ต่างกันยังไง เลือกแบบไหนดี ราคา 2569',
+  seo_description='MMR ป้องกันหัด คางทูม หัดเยอรมัน ส่วน ProQuad เพิ่มอีสุกอีใสในเข็มเดียว ใช้ได้กับใคร ฉีดแยกหรือรวมดีกว่า ราคาที่แฮปปี้เวลล์ คลินิกเวชกรรม ทุ่งครุ',
+  tags=['วัคซีน', 'วัคซีนเด็ก', 'เด็ก'],
+  content=blocks([
+    ('p', 'พ่อแม่หลายคนสงสัยว่าวัคซีน MMR กับ ProQuad (MMRV) ต่างกันยังไง ลูกควรฉีดแบบไหน และถ้าเป็นผู้ใหญ่ต้องฉีดตัวไหน บทความนี้สรุปความแตกต่างแบบเข้าใจง่าย พร้อมราคาและลิงก์จองคิวที่คลินิก'),
+    ('h2', 'สรุปสั้น ๆ'),
+    ('ul', ['<b>MMR</b> ป้องกัน 3 โรค: หัด คางทูม หัดเยอรมัน ใช้ได้ทั้งเด็กอายุ 1 ปีขึ้นไปและผู้ใหญ่',
+            '<b>ProQuad (MMRV)</b> ป้องกัน 4 โรค: หัด คางทูม หัดเยอรมัน <b>และอีสุกอีใส</b> ในเข็มเดียว ใช้ได้เฉพาะเด็กอายุ 1–12 ปี',
+            'ProQuad เท่ากับ MMR + วัคซีนอีสุกอีใส (Varivax) รวมกัน ช่วยลดจำนวนเข็มที่เด็กต้องโดน']),
+    ('h2', 'วัคซีน MMR คืออะไร'),
+    ('p', 'วัคซีน MMR เป็นวัคซีนรวมชนิดเชื้อเป็นอ่อนฤทธิ์ ป้องกันโรคหัด (Measles) คางทูม (Mumps) และหัดเยอรมัน (Rubella) เด็กฉีดตามตารางวัคซีน ส่วนผู้ใหญ่ที่ไม่เคยได้รับวัคซีนหรือไม่แน่ใจ เช่น ผู้หญิงที่วางแผนจะตั้งครรภ์ ก็ฉีดได้ แพทย์จะดูประวัติวัคซีนและแนะนำจำนวนเข็ม'),
+    ('h2', 'วัคซีน ProQuad (MMRV) คืออะไร'),
+    ('p', 'ProQuad คือวัคซีน MMR ที่รวมวัคซีนอีสุกอีใส (Varicella) ไว้ในเข็มเดียวกัน ป้องกันได้ 4 โรค ใช้ได้เฉพาะเด็กอายุ 1–12 ปี ผู้ใหญ่และเด็กโตกว่า 12 ปีต้องฉีด MMR และวัคซีนอีสุกอีใสแยกกัน'),
+    ('h2', 'ฉีดแยก (MMR + Varivax) หรือฉีดรวม (ProQuad) ดีกว่า'),
+    ('p', 'ทั้งสองแบบป้องกันได้ 4 โรคเหมือนกัน ต่างกันที่จำนวนเข็มและราคา'),
+    ('ul', ['<b>ฉีดแยก</b>: MMR 1 เข็ม + Varivax 1 เข็ม รวมราคาถูกกว่า แต่เด็กต้องโดนเข็ม 2 ครั้ง',
+            '<b>ฉีดรวม ProQuad</b>: โดนเข็มครั้งเดียว เด็กเจ็บน้อยกว่า แต่ราคาสูงกว่า']),
+    ('p', 'ข้อควรรู้: ในเด็กเล็กที่ฉีดเข็มแรก การฉีดแบบรวม (MMRV) มีโอกาสเกิดไข้และชักจากไข้สูงมากกว่าการฉีดแยกเล็กน้อย หลายแนวทาง รวมถึงของสหรัฐอเมริกา จึงแนะนำให้เด็กอายุต่ำกว่า 4 ปีฉีดแยกในเข็มแรก ส่วนเด็กโตหรือเข็มที่ 2 ใช้ ProQuad ได้ แพทย์จะประเมินและแนะนำแบบที่เหมาะกับเด็กแต่ละคน'),
+    ('h2', 'ใครไม่ควรฉีด หรือควรแจ้งแพทย์ก่อน'),
+    ('ul', ['ผู้ที่ตั้งครรภ์ ห้ามฉีด MMR และวัคซีนอีสุกอีใส ผู้หญิงควรหลีกเลี่ยงการตั้งครรภ์หลังฉีดตามระยะเวลาที่แพทย์แนะนำ',
+            'ผู้ที่มีภูมิคุ้มกันบกพร่อง ห้ามฉีด',
+            'เด็กที่เคยชัก หรือคนในครอบครัวเคยชัก ควรแจ้งแพทย์ก่อนฉีด ProQuad',
+            'ผู้ที่เพิ่งได้รับเลือด ผลิตภัณฑ์จากเลือด หรือวัคซีนเชื้อเป็นชนิดอื่น ควรแจ้งแพทย์']),
+    ('h2', 'ราคาที่แฮปปี้เวลล์ คลินิก'),
+    ('ul', [f'<a href="{MMR}">วัคซีน MMR (หัด คางทูม หัดเยอรมัน)</a> เข็มละ <b>690 บาท</b>',
+            f'<a href="{VAR}">วัคซีนอีสุกอีใส (Varivax)</a> เข็มละ <b>1,590 บาท</b>',
+            f'<a href="{PQ}">วัคซีน ProQuad (MMRV)</a> เข็มละ <b>2,790 บาท</b>']),
+    ('p', 'ราคายังไม่รวมค่าบริการทางการแพทย์ แพทย์ซักประวัติและประเมินก่อนฉีดทุกครั้ง'),
+    ('p', f'จองคิวฉีดวัคซีน กดที่ชื่อวัคซีนด้านบนเพื่อดูรายละเอียดและกดจองผ่าน LINE หรือ<a href="{LINE}">ทัก LINE @p49clinic</a> ได้เลย คลินิกเปิดทุกวัน จันทร์–ศุกร์ 08.00–18.00 น. เสาร์–อาทิตย์ 08.00–12.00 น.'),
+    ('h2', 'คำถามที่พบบ่อย'),
+    ('p', '<b>ผู้ใหญ่ฉีด ProQuad ได้ไหม</b><br>ไม่ได้ ProQuad ใช้ได้เฉพาะเด็กอายุ 1–12 ปี ผู้ใหญ่ที่ต้องการป้องกันทั้ง 4 โรคให้ฉีด MMR และ Varivax แยกกัน'),
+    ('p', '<b>เคยเป็นอีสุกอีใสแล้ว ต้องฉีด ProQuad ไหม</b><br>โดยทั่วไปผู้ที่เคยเป็นอีสุกอีใสแล้วมีภูมิคุ้มกันต่อโรคนี้ แพทย์อาจแนะนำให้ฉีดเฉพาะ MMR ตามประวัติวัคซีน'),
+    ('p', '<b>ลูกฉีดวัคซีนพื้นฐานตามสิทธิ์แล้ว ยังต้องฉีดเพิ่มไหม</b><br>ขึ้นกับประวัติวัคซีนของเด็ก นำสมุดวัคซีนมาให้แพทย์ดูเพื่อวางแผน ดูเพิ่มเติมได้ที่บทความ <a href="/articles/child-vaccine-schedule-2569">ตารางวัคซีนเด็ก</a>'),
+    ('h3', 'แหล่งอ้างอิง'),
+    ('ul', REF),
+    ('p', '<i>บทความนี้จัดทำเพื่อให้ข้อมูลทั่วไป ไม่ใช่คำแนะนำทางการแพทย์เฉพาะบุคคล ควรปรึกษาแพทย์ก่อนตัดสินใจฉีดวัคซีนทุกครั้ง</i>'),
+  ]))
+
+EN = dict(
+  title='MMR vs ProQuad (MMRV): What Is the Difference, Which Should You Choose and How Much? (2026 Update)',
+  excerpt='MMR protects against 3 diseases; ProQuad adds chickenpox in a single injection. Who can have which, separate or combined shots, plus prices and booking at HappiWell Clinic, Thung Khru.',
+  seo_title='MMR vs ProQuad (MMRV) Vaccine: Differences, Who Should Have Which & Price | HappiWell',
+  seo_description='MMR protects against measles, mumps and rubella; ProQuad adds chickenpox in one shot. Who can have which, separate or combined, and prices at HappiWell Medical Clinic, Thung Khru, Bangkok.',
+  tags=['Vaccines', 'Child vaccines', 'Children'],
+  content=blocks([
+    ('p', 'Many parents wonder how the MMR and ProQuad (MMRV) vaccines differ, which one their child should have, and which one adults need. This article sums up the differences simply, with prices and booking links at our clinic.'),
+    ('h2', 'In short'),
+    ('ul', ['<b>MMR</b> protects against 3 diseases: measles, mumps and rubella. It can be given to children from 1 year of age and to adults.',
+            '<b>ProQuad (MMRV)</b> protects against 4 diseases: measles, mumps, rubella <b>and chickenpox</b> in a single injection. It is for children aged 1–12 only.',
+            'ProQuad is MMR plus the chickenpox vaccine (Varivax) combined, so children need fewer injections.']),
+    ('h2', 'What is the MMR vaccine?'),
+    ('p', 'MMR is a live attenuated combined vaccine against measles, mumps and rubella. Children receive it on the vaccination schedule. Adults who have never been vaccinated or are unsure — for example women planning a pregnancy — can also have it. The doctor will review your history and advise how many doses you need.'),
+    ('h2', 'What is ProQuad (MMRV)?'),
+    ('p', 'ProQuad is the MMR vaccine combined with the chickenpox (varicella) vaccine in one injection, protecting against 4 diseases. It is only for children aged 1–12. Adults and children over 12 need MMR and the chickenpox vaccine as separate injections.'),
+    ('h2', 'Separate shots (MMR + Varivax) or combined (ProQuad)?'),
+    ('p', 'Both options protect against the same 4 diseases. The difference is the number of injections and the price.'),
+    ('ul', ['<b>Separate</b>: 1 MMR + 1 Varivax injection — cheaper overall, but 2 injections.',
+            '<b>Combined ProQuad</b>: 1 injection — less discomfort for the child, but a higher price.']),
+    ('p', 'Good to know: for the first dose in young children, the combined MMRV vaccine carries a slightly higher chance of fever and febrile seizures than separate shots. Many guidelines, including those in the United States, therefore recommend separate shots for the first dose in children under 4. ProQuad can be used for older children or the second dose. The doctor will advise the best option for your child.'),
+    ('h2', 'Who should not have it, or should tell the doctor first'),
+    ('ul', ['Pregnant women must not have MMR or the chickenpox vaccine. Women should avoid pregnancy after vaccination for the period advised by the doctor.',
+            'People with a weakened immune system must not have these vaccines.',
+            'Tell the doctor before ProQuad if your child or a family member has a history of seizures.',
+            'Tell the doctor if you have recently had blood, blood products or another live vaccine.']),
+    ('h2', 'Prices at HappiWell Clinic'),
+    ('ul', [f'<a href="{MMR}">MMR vaccine (measles, mumps, rubella)</a>: <b>690 baht</b> per dose',
+            f'<a href="{VAR}">Chickenpox vaccine (Varivax)</a>: <b>1,590 baht</b> per dose',
+            f'<a href="{PQ}">ProQuad (MMRV)</a>: <b>2,790 baht</b> per dose']),
+    ('p', 'Prices do not include the medical service fee. A doctor takes your history and assesses you before every injection.'),
+    ('p', f'To book, tap a vaccine name above for details and LINE booking, or <a href="{LINE}">message us on LINE @p49clinic</a>. We are open every day: Monday–Friday 08:00–18:00 and Saturday–Sunday 08:00–12:00.'),
+    ('h2', 'Frequently asked questions'),
+    ('p', '<b>Can adults have ProQuad?</b><br>No. ProQuad is only for children aged 1–12. Adults who want protection against all 4 diseases should have MMR and Varivax separately.'),
+    ('p', '<b>I have had chickenpox. Do I need ProQuad?</b><br>People who have had chickenpox are generally immune to it. The doctor may recommend MMR alone, depending on your vaccination history.'),
+    ('p', "<b>My child has had the basic vaccines. Do they need more?</b><br>It depends on your child's vaccination history. Bring the vaccination record for the doctor to review. See also our article on the <a href=\"/articles/child-vaccine-schedule-2569\">child vaccination schedule</a>."),
+    ('h3', 'References'),
+    ('ul', REF),
+    ('p', '<i>This article is for general information and is not personal medical advice. Always talk to a doctor before deciding on any vaccination.</i>'),
+  ]))
+
+if __name__ == '__main__':
+    out = {'slug': SLUG, 'th': TH, 'en': EN}
+    p = pathlib.Path(__file__).with_name('mmr_vs_proquad.json')
+    p.write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding='utf-8')
+    print('ok', p)
