@@ -1,0 +1,545 @@
+{
+ "programs": [
+  {
+   "name": "วัคซีนปอดอักเสบ 15 สายพันธุ์ (Vaxneuvance)",
+   "short_desc": "วัคซีนป้องกันโรคไอพีดี (ปอดอักเสบจากเชื้อนิวโมคอคคัส) ชนิดคอนจูเกต 15 สายพันธุ์ แพทย์ประเมินก่อนฉีดทุกครั้ง",
+   "description": "{\"time\": 1793500000000, \"version\": \"2.29.1\", \"blocks\": [{\"id\": \"v0\", \"type\": \"paragraph\", \"data\": {\"text\": \"วัคซีน Vaxneuvance (PCV15) เป็นวัคซีนชนิดคอนจูเกต ป้องกันการติดเชื้อนิวโมคอคคัส 15 สายพันธุ์ ซึ่งเป็นสาเหตุสำคัญของปอดอักเสบ ติดเชื้อในกระแสเลือด และเยื่อหุ้มสมองอักเสบ (โรคไอพีดี)\"}}, {\"id\": \"v1\", \"type\": \"paragraph\", \"data\": {\"text\": \"ผู้ใหญ่ที่ไม่เคยฉีดวัคซีนไอพีดีมาก่อน มักได้รับคำแนะนำให้ฉีด PCV15 แล้วตามด้วยวัคซีน Pneumovax 23 (PPSV23) อีก 1 เข็ม โดยทั่วไปห่างกันอย่างน้อย 1 ปี แพทย์จะประเมินและวางแผนการฉีดตามอายุ โรคประจำตัว และประวัติวัคซีนเดิม\"}}]}",
+   "suitable_for": [
+    "ผู้สูงอายุ 65 ปีขึ้นไป",
+    "ผู้ใหญ่ที่มีโรคเรื้อรัง เช่น เบาหวาน โรคหัวใจ โรคปอด โรคไต หรือภูมิคุ้มกันบกพร่อง",
+    "ผู้ใหญ่ทั่วไปที่ต้องการป้องกัน"
+   ],
+   "includes": [
+    "ซักประวัติและประเมินความเหมาะสมโดยแพทย์ก่อนฉีด",
+    "ค่าวัคซีนและค่าฉีด",
+    "สังเกตอาการหลังฉีดที่คลินิก"
+   ],
+   "precautions": [
+    "แจ้งแพทย์หากเคยฉีดวัคซีนไอพีดีชนิดอื่นมาก่อน เพื่อวางแผนการฉีดให้เหมาะสม",
+    "หากมีไข้หรือเจ็บป่วยเฉียบพลัน แพทย์อาจแนะนำให้เลื่อนการฉีด"
+   ],
+   "price_unit": "ต่อเข็ม",
+   "seo_title": "วัคซีนปอดอักเสบ 15 สายพันธุ์ Vaxneuvance ราคา 2,690 บาท ทุ่งครุ | HappiWell",
+   "seo_description": "วัคซีนปอดอักเสบ (ไอพีดี) Vaxneuvance PCV15 เข็มละ 2,690 บาท แพทย์ประเมินและวางแผนฉีดร่วมกับ PPSV23 ที่แฮปปี้เวลล์ คลินิกเวชกรรม ซ.ประชาอุทิศ 49 ทุ่งครุ",
+   "duration": "1 เข็ม (ผู้ใหญ่ส่วนใหญ่ฉีด PPSV23 ต่ออีก 1 เข็มตามที่แพทย์แนะนำ)",
+   "slug": "pneumococcal-vaccine-vaxneuvance",
+   "category": "vaccine",
+   "price": 2690,
+   "sort_order": 3,
+   "is_featured": false,
+   "is_published": true,
+   "brand": "Vaxneuvance (PCV15)",
+   "related_article_slug": "pneumonia-vaccine-2569",
+   "en": {
+    "name": "Pneumococcal vaccine, 15-valent (Vaxneuvance)",
+    "short_desc": "A 15-valent conjugate vaccine against invasive pneumococcal disease (IPD). A doctor assesses you before every injection.",
+    "description": "{\"time\": 1793500000000, \"version\": \"2.29.1\", \"blocks\": [{\"id\": \"v0\", \"type\": \"paragraph\", \"data\": {\"text\": \"Vaxneuvance (PCV15) is a conjugate vaccine that protects against 15 types of pneumococcus, a major cause of pneumonia, bloodstream infection and meningitis (invasive pneumococcal disease, IPD).\"}}, {\"id\": \"v1\", \"type\": \"paragraph\", \"data\": {\"text\": \"Adults who have never had a pneumococcal vaccine are usually advised to have PCV15 followed by one dose of Pneumovax 23 (PPSV23), generally at least 1 year apart. The doctor will plan your schedule based on your age, health conditions and vaccination history.\"}}]}",
+    "suitable_for": [
+     "Adults aged 65 and over",
+     "Adults with long-term conditions such as diabetes, heart, lung or kidney disease, or a weakened immune system",
+     "Any adult who wants protection"
+    ],
+    "includes": [
+     "Doctor's history check and assessment before the injection",
+     "Vaccine and injection fee",
+     "Observation at the clinic after the injection"
+    ],
+    "precautions": [
+     "Tell the doctor if you have had another pneumococcal vaccine before, so the right schedule can be planned",
+     "If you have a fever or acute illness, the doctor may advise postponing the injection"
+    ],
+    "price_unit": "per dose",
+    "seo_title": "Vaxneuvance PCV15 Pneumococcal Vaccine 2,690 THB, Bangkok | HappiWell",
+    "seo_description": "Vaxneuvance (PCV15) pneumococcal vaccine for 2,690 baht per dose, with a doctor planning your schedule with PPSV23. HappiWell Medical Clinic, Soi Pracha Uthit 49, Thung Khru, Bangkok.",
+    "duration": "1 dose (most adults then have 1 dose of PPSV23 as advised by the doctor)"
+   },
+   "my": {
+    "name": "နျူမိုကိုကပ်စ် ကာကွယ်ဆေး ၁၅ မျိုးခံ (Vaxneuvance)",
+    "short_desc": "နျူမိုကိုကပ်စ် ပိုးဝင်ခြင်း (IPD) ကို ကာကွယ်သော ၁၅ မျိုးခံ ကွန်ဂျူဂိတ် ကာကွယ်ဆေး။ ဆေးမထိုးမီ ဆရာဝန်က အကဲဖြတ်ပေးပါသည်။",
+    "description": "{\"time\": 1793500000000, \"version\": \"2.29.1\", \"blocks\": [{\"id\": \"v0\", \"type\": \"paragraph\", \"data\": {\"text\": \"Vaxneuvance (PCV15) သည် အဆုတ်ရောင်ခြင်း၊ သွေးထဲပိုးဝင်ခြင်းနှင့် ဦးနှောက်အမြှေးရောင်ခြင်း (IPD) ၏ အဓိကအကြောင်းရင်း ဖြစ်သော နျူမိုကိုကပ်စ် ၁၅ မျိုးကို ကာကွယ်ပေးသော ကွန်ဂျူဂိတ် ကာကွယ်ဆေး ဖြစ်ပါသည်။\"}}, {\"id\": \"v1\", \"type\": \"paragraph\", \"data\": {\"text\": \"နျူမိုကိုကပ်စ် ကာကွယ်ဆေး မထိုးဖူးသော အရွယ်ရောက်သူများကို PCV15 ထိုးပြီးနောက် Pneumovax 23 (PPSV23) ၁ လုံး ထပ်ထိုးရန် များသောအားဖြင့် အကြံပြုပါသည်၊ ယေဘုယျအားဖြင့် အနည်းဆုံး ၁ နှစ်ခြားပါသည်။ ဆရာဝန်က အသက်၊ ရောဂါနှင့် ယခင်ထိုးဖူးမှုအပေါ် မူတည်၍ အချိန်ဇယား စီစဉ်ပေးပါမည်။\"}}]}",
+    "suitable_for": [
+     "အသက် ၆၅ နှစ် နှင့်အထက် လူကြီးများ",
+     "ဆီးချို၊ နှလုံး၊ အဆုတ်၊ ကျောက်ကပ်ရောဂါ (သို့) ခုခံအားကျနေသော အရွယ်ရောက်သူများ",
+     "ကာကွယ်လိုသော အရွယ်ရောက်သူ မည်သူမဆို"
+    ],
+    "includes": [
+     "ကာကွယ်ဆေးမထိုးမီ ဆရာဝန်က ရောဂါရာဇဝင်မေးပြီး စစ်ဆေးအကဲဖြတ်ခြင်း",
+     "ကာကွယ်ဆေးဖိုးနှင့် ဆေးထိုးခ",
+     "ဆေးထိုးပြီးနောက် ဆေးခန်းတွင် ခဏစောင့်ကြည့်ခြင်း"
+    ],
+    "precautions": [
+     "အခြား နျူမိုကိုကပ်စ် ကာကွယ်ဆေး ထိုးဖူးပါက ဆရာဝန်ကို ပြောပြပါ",
+     "ဖျားနေခြင်း (သို့) ရုတ်တရက် နေမကောင်းဖြစ်နေပါက ဆရာဝန်က ဆေးထိုးချိန်ကို ရွှေ့ရန် အကြံပေးနိုင်ပါသည်"
+    ],
+    "price_unit": "တစ်လုံးလျှင်",
+    "seo_title": "Vaxneuvance PCV15 နျူမိုကိုကပ်စ် ကာကွယ်ဆေး 2,690 ဘတ် | HappiWell",
+    "seo_description": "Vaxneuvance (PCV15) နျူမိုကိုကပ်စ် ကာကွယ်ဆေး တစ်လုံး 2,690 ဘတ်၊ ဆရာဝန်က PPSV23 နှင့်အတူ အချိန်ဇယား စီစဉ်ပေးသည်။ HappiWell ဆေးခန်း၊ Soi Pracha Uthit 49၊ Thung Khru၊ ဘန်ကောက်။",
+    "duration": "၁ လုံး (အရွယ်ရောက်သူ အများစုသည် ဆရာဝန်အကြံပြုချက်အတိုင်း PPSV23 ၁ လုံး ထပ်ထိုးသည်)"
+   }
+  },
+  {
+   "name": "วัคซีนปอดอักเสบ 23 สายพันธุ์ (Pneumovax 23)",
+   "short_desc": "วัคซีนป้องกันโรคไอพีดี ชนิดโพลีแซคคาไรด์ 23 สายพันธุ์ มักฉีดต่อจากวัคซีน PCV15 ตามที่แพทย์แนะนำ",
+   "description": "{\"time\": 1793500000000, \"version\": \"2.29.1\", \"blocks\": [{\"id\": \"v0\", \"type\": \"paragraph\", \"data\": {\"text\": \"วัคซีน Pneumovax 23 (PPSV23) ป้องกันการติดเชื้อนิวโมคอคคัส 23 สายพันธุ์ ช่วยขยายความครอบคลุมสายพันธุ์ของการป้องกันโรคไอพีดี\"}}, {\"id\": \"v1\", \"type\": \"paragraph\", \"data\": {\"text\": \"ในผู้ใหญ่ มักฉีดต่อจากวัคซีนชนิดคอนจูเกต เช่น PCV15 (Vaxneuvance) โดยทั่วไปห่างกันอย่างน้อย 1 ปี แพทย์จะดูประวัติวัคซีนเดิมและแนะนำเวลาที่เหมาะสม\"}}]}",
+   "suitable_for": [
+    "ผู้ที่ฉีด PCV15 แล้ว และถึงกำหนดฉีดเข็มต่อไป",
+    "ผู้สูงอายุ 65 ปีขึ้นไป และผู้ที่มีโรคเรื้อรังตามที่แพทย์แนะนำ"
+   ],
+   "includes": [
+    "ซักประวัติและประเมินความเหมาะสมโดยแพทย์ก่อนฉีด",
+    "ค่าวัคซีนและค่าฉีด",
+    "สังเกตอาการหลังฉีดที่คลินิก"
+   ],
+   "precautions": [
+    "แจ้งแพทย์หากเคยฉีดวัคซีนไอพีดีชนิดใดมาก่อน และฉีดเมื่อไร",
+    "หากมีไข้หรือเจ็บป่วยเฉียบพลัน แพทย์อาจแนะนำให้เลื่อนการฉีด"
+   ],
+   "price_unit": "ต่อเข็ม",
+   "seo_title": "วัคซีนปอดอักเสบ 23 สายพันธุ์ Pneumovax 23 ราคา 1,590 บาท | HappiWell",
+   "seo_description": "วัคซีนปอดอักเสบ Pneumovax 23 (PPSV23) เข็มละ 1,590 บาท ฉีดต่อจาก PCV15 ตามที่แพทย์แนะนำ ที่แฮปปี้เวลล์ คลินิกเวชกรรม ซ.ประชาอุทิศ 49 ทุ่งครุ",
+   "duration": "1 เข็ม ตามกำหนดที่แพทย์แนะนำ",
+   "slug": "pneumococcal-vaccine-pneumovax-23",
+   "category": "vaccine",
+   "price": 1590,
+   "sort_order": 3,
+   "is_featured": false,
+   "is_published": true,
+   "brand": "Pneumovax 23 (PPSV23)",
+   "related_article_slug": "pneumonia-vaccine-2569",
+   "en": {
+    "name": "Pneumococcal vaccine, 23-valent (Pneumovax 23)",
+    "short_desc": "A 23-valent polysaccharide vaccine against invasive pneumococcal disease, usually given after PCV15 as advised by the doctor.",
+    "description": "{\"time\": 1793500000000, \"version\": \"2.29.1\", \"blocks\": [{\"id\": \"v0\", \"type\": \"paragraph\", \"data\": {\"text\": \"Pneumovax 23 (PPSV23) protects against 23 types of pneumococcus, broadening your protection against invasive pneumococcal disease.\"}}, {\"id\": \"v1\", \"type\": \"paragraph\", \"data\": {\"text\": \"In adults it is usually given after a conjugate vaccine such as PCV15 (Vaxneuvance), generally at least 1 year apart. The doctor will review your vaccination history and advise the right timing.\"}}]}",
+    "suitable_for": [
+     "People who have had PCV15 and are due for the next dose",
+     "Adults aged 65 and over, and people with long-term conditions, as advised by the doctor"
+    ],
+    "includes": [
+     "Doctor's history check and assessment before the injection",
+     "Vaccine and injection fee",
+     "Observation at the clinic after the injection"
+    ],
+    "precautions": [
+     "Tell the doctor which pneumococcal vaccines you have had before, and when",
+     "If you have a fever or acute illness, the doctor may advise postponing the injection"
+    ],
+    "price_unit": "per dose",
+    "seo_title": "Pneumovax 23 (PPSV23) Pneumococcal Vaccine 1,590 THB, Bangkok | HappiWell",
+    "seo_description": "Pneumovax 23 (PPSV23) pneumococcal vaccine for 1,590 baht per dose, usually given after PCV15 as advised by the doctor. HappiWell Medical Clinic, Soi Pracha Uthit 49, Thung Khru, Bangkok.",
+    "duration": "1 dose, timed as advised by the doctor"
+   },
+   "my": {
+    "name": "နျူမိုကိုကပ်စ် ကာကွယ်ဆေး ၂၃ မျိုးခံ (Pneumovax 23)",
+    "short_desc": "နျူမိုကိုကပ်စ် ၂၃ မျိုးကို ကာကွယ်သော ကာကွယ်ဆေး၊ ဆရာဝန်အကြံပြုချက်အတိုင်း PCV15 ပြီးမှ ထိုးလေ့ရှိသည်။",
+    "description": "{\"time\": 1793500000000, \"version\": \"2.29.1\", \"blocks\": [{\"id\": \"v0\", \"type\": \"paragraph\", \"data\": {\"text\": \"Pneumovax 23 (PPSV23) သည် နျူမိုကိုကပ်စ် ၂၃ မျိုးကို ကာကွယ်ပြီး IPD ကာကွယ်မှုကို ပိုမိုကျယ်ပြန့်စေပါသည်။\"}}, {\"id\": \"v1\", \"type\": \"paragraph\", \"data\": {\"text\": \"အရွယ်ရောက်သူများတွင် PCV15 (Vaxneuvance) ကဲ့သို့ ကွန်ဂျူဂိတ် ကာကွယ်ဆေး ပြီးမှ ယေဘုယျအားဖြင့် အနည်းဆုံး ၁ နှစ်ခြား၍ ထိုးလေ့ရှိပါသည်။ ဆရာဝန်က ယခင်ထိုးဖူးမှုကို ကြည့်ပြီး သင့်တော်သောအချိန်ကို အကြံပေးပါမည်။\"}}]}",
+    "suitable_for": [
+     "PCV15 ထိုးပြီး နောက်တစ်လုံး ထိုးရန် အချိန်ရောက်သူများ",
+     "ဆရာဝန်အကြံပြုချက်အတိုင်း အသက် ၆၅ နှစ်အထက်နှင့် နာတာရှည်ရောဂါရှိသူများ"
+    ],
+    "includes": [
+     "ကာကွယ်ဆေးမထိုးမီ ဆရာဝန်က ရောဂါရာဇဝင်မေးပြီး စစ်ဆေးအကဲဖြတ်ခြင်း",
+     "ကာကွယ်ဆေးဖိုးနှင့် ဆေးထိုးခ",
+     "ဆေးထိုးပြီးနောက် ဆေးခန်းတွင် ခဏစောင့်ကြည့်ခြင်း"
+    ],
+    "precautions": [
+     "ယခင် ထိုးဖူးသော နျူမိုကိုကပ်စ် ကာကွယ်ဆေးနှင့် ထိုးခဲ့သည့်အချိန်ကို ဆရာဝန်ကို ပြောပြပါ",
+     "ဖျားနေခြင်း (သို့) ရုတ်တရက် နေမကောင်းဖြစ်နေပါက ဆရာဝန်က ဆေးထိုးချိန်ကို ရွှေ့ရန် အကြံပေးနိုင်ပါသည်"
+    ],
+    "price_unit": "တစ်လုံးလျှင်",
+    "seo_title": "Pneumovax 23 (PPSV23) နျူမိုကိုကပ်စ် ကာကွယ်ဆေး 1,590 ဘတ် | HappiWell",
+    "seo_description": "Pneumovax 23 (PPSV23) နျူမိုကိုကပ်စ် ကာကွယ်ဆေး တစ်လုံး 1,590 ဘတ်၊ ဆရာဝန်အကြံပြုချက်အတိုင်း PCV15 ပြီးမှ ထိုးသည်။ HappiWell ဆေးခန်း၊ Soi Pracha Uthit 49၊ Thung Khru၊ ဘန်ကောက်။",
+    "duration": "ဆရာဝန် အကြံပြုသည့်အချိန်တွင် ၁ လုံး"
+   }
+  },
+  {
+   "name": "วัคซีน HPV 4 สายพันธุ์ (Gardasil)",
+   "short_desc": "วัคซีนป้องกันเชื้อไวรัส HPV 4 สายพันธุ์ (6, 11, 16, 18) จำนวนเข็มขึ้นกับอายุ แพทย์จะแนะนำตารางฉีดที่เหมาะสม",
+   "description": "{\"time\": 1793500000000, \"version\": \"2.29.1\", \"blocks\": [{\"id\": \"v0\", \"type\": \"paragraph\", \"data\": {\"text\": \"วัคซีน Gardasil 4 สายพันธุ์ ป้องกันการติดเชื้อไวรัส HPV สายพันธุ์ 16 และ 18 ซึ่งเกี่ยวข้องกับมะเร็งปากมดลูก และสายพันธุ์ 6 และ 11 ซึ่งเป็นสาเหตุของหูดหงอนไก่\"}}, {\"id\": \"v1\", \"type\": \"paragraph\", \"data\": {\"text\": \"จำนวนเข็มและระยะห่างขึ้นกับอายุที่เริ่มฉีด แพทย์จะประเมินและแนะนำตารางฉีดที่เหมาะสมกับแต่ละคน หากต้องการการป้องกันที่ครอบคลุมสายพันธุ์มากกว่า มีวัคซีน Gardasil 9 ให้เลือกด้วย\"}}]}",
+   "suitable_for": [
+    "ผู้หญิงและผู้ชายตามช่วงอายุที่แพทย์แนะนำ"
+   ],
+   "includes": [
+    "ซักประวัติและประเมินความเหมาะสมโดยแพทย์ก่อนฉีด",
+    "ค่าวัคซีนและค่าฉีด",
+    "สังเกตอาการหลังฉีดที่คลินิก"
+   ],
+   "precautions": [
+    "ผู้ที่ตั้งครรภ์ควรปรึกษาแพทย์ก่อนฉีด",
+    "วัคซีนไม่ได้ทดแทนการตรวจคัดกรองมะเร็งปากมดลูก ผู้หญิงควรตรวจคัดกรองตามกำหนดต่อไป"
+   ],
+   "price_unit": "ต่อเข็ม",
+   "seo_title": "วัคซีน HPV 4 สายพันธุ์ Gardasil ราคา 2,790 บาท ทุ่งครุ | HappiWell",
+   "seo_description": "ฉีดวัคซีน HPV 4 สายพันธุ์ (Gardasil) เข็มละ 2,790 บาท แพทย์แนะนำตารางฉีดตามอายุ ที่แฮปปี้เวลล์ คลินิกเวชกรรม ซ.ประชาอุทิศ 49 ทุ่งครุ",
+   "slug": "hpv-vaccine-gardasil-4",
+   "category": "vaccine",
+   "price": 2790,
+   "sort_order": 6,
+   "is_featured": false,
+   "is_published": true,
+   "brand": "Gardasil (4-valent)",
+   "related_article_slug": null,
+   "en": {
+    "name": "HPV vaccine, 4-valent (Gardasil)",
+    "short_desc": "Protects against 4 types of HPV (6, 11, 16, 18). The number of doses depends on your age — the doctor will advise the right schedule.",
+    "description": "{\"time\": 1793500000000, \"version\": \"2.29.1\", \"blocks\": [{\"id\": \"v0\", \"type\": \"paragraph\", \"data\": {\"text\": \"The 4-valent Gardasil vaccine protects against HPV types 16 and 18, which are linked to cervical cancer, and types 6 and 11, which cause genital warts.\"}}, {\"id\": \"v1\", \"type\": \"paragraph\", \"data\": {\"text\": \"The number of doses and the interval depend on your age when you start. The doctor will assess you and recommend the right schedule. For broader protection, Gardasil 9 is also available.\"}}]}",
+    "suitable_for": [
+     "Women and men in the age ranges recommended by the doctor"
+    ],
+    "includes": [
+     "Doctor's history check and assessment before the injection",
+     "Vaccine and injection fee",
+     "Observation at the clinic after the injection"
+    ],
+    "precautions": [
+     "If you are pregnant, talk to the doctor before the injection",
+     "The vaccine does not replace cervical screening — women should continue regular screening"
+    ],
+    "price_unit": "per dose",
+    "seo_title": "Gardasil 4-valent HPV Vaccine 2,790 THB in Bangkok | HappiWell Clinic",
+    "seo_description": "4-valent HPV vaccine (Gardasil) for 2,790 baht per dose, with a schedule advised by the doctor for your age. HappiWell Medical Clinic, Soi Pracha Uthit 49, Thung Khru, Bangkok."
+   },
+   "my": {
+    "name": "HPV ကာကွယ်ဆေး ၄ မျိုးခံ (Gardasil)",
+    "short_desc": "HPV ၄ မျိုး (6, 11, 16, 18) ကို ကာကွယ်သည်။ ထိုးရမည့်အရေအတွက်သည် အသက်ပေါ် မူတည်ပြီး ဆရာဝန်က အကြံပေးပါမည်။",
+    "description": "{\"time\": 1793500000000, \"version\": \"2.29.1\", \"blocks\": [{\"id\": \"v0\", \"type\": \"paragraph\", \"data\": {\"text\": \"Gardasil ၄ မျိုးခံ ကာကွယ်ဆေးသည် သားအိမ်ခေါင်းကင်ဆာနှင့် ဆက်စပ်သော HPV 16 နှင့် 18၊ လိင်အင်္ဂါကြွက်နို့ ဖြစ်စေသော HPV 6 နှင့် 11 ကို ကာကွယ်ပေးပါသည်။\"}}, {\"id\": \"v1\", \"type\": \"paragraph\", \"data\": {\"text\": \"ထိုးရမည့် အရေအတွက်နှင့် ကြားကာလသည် စတင်ထိုးချိန် အသက်ပေါ် မူတည်ပါသည်။ ဆရာဝန်က အကဲဖြတ်ပြီး သင့်တော်သော အချိန်ဇယားကို အကြံပေးပါမည်။ ပိုမိုကျယ်ပြန့်သော ကာကွယ်မှုအတွက် Gardasil 9 လည်း ရနိုင်ပါသည်။\"}}]}",
+    "suitable_for": [
+     "ဆရာဝန် အကြံပြုသော အသက်အရွယ်ရှိ အမျိုးသမီးနှင့် အမျိုးသားများ"
+    ],
+    "includes": [
+     "ကာကွယ်ဆေးမထိုးမီ ဆရာဝန်က ရောဂါရာဇဝင်မေးပြီး စစ်ဆေးအကဲဖြတ်ခြင်း",
+     "ကာကွယ်ဆေးဖိုးနှင့် ဆေးထိုးခ",
+     "ဆေးထိုးပြီးနောက် ဆေးခန်းတွင် ခဏစောင့်ကြည့်ခြင်း"
+    ],
+    "precautions": [
+     "ကိုယ်ဝန်ဆောင်ပါက ဆေးမထိုးမီ ဆရာဝန်နှင့် တိုင်ပင်ပါ",
+     "ကာကွယ်ဆေးသည် သားအိမ်ခေါင်းကင်ဆာ စစ်ဆေးမှုကို အစားမထိုးပါ၊ အမျိုးသမီးများ ပုံမှန်စစ်ဆေးမှုကို ဆက်လုပ်သင့်ပါသည်"
+    ],
+    "price_unit": "တစ်လုံးလျှင်",
+    "seo_title": "HPV ကာကွယ်ဆေး ၄ မျိုးခံ Gardasil 2,790 ဘတ် ဘန်ကောက် | HappiWell",
+    "seo_description": "HPV ၄ မျိုးခံ ကာကွယ်ဆေး (Gardasil) တစ်လုံး 2,790 ဘတ်၊ အသက်အလိုက် ဆရာဝန်က အချိန်ဇယား အကြံပေးသည်။ HappiWell ဆေးခန်း၊ Soi Pracha Uthit 49၊ Thung Khru၊ ဘန်ကောက်။"
+   }
+  },
+  {
+   "name": "วัคซีนอีสุกอีใส (Varivax)",
+   "short_desc": "วัคซีนป้องกันโรคอีสุกอีใส สำหรับเด็กอายุ 1 ปีขึ้นไปและผู้ใหญ่ที่ยังไม่มีภูมิคุ้มกัน ฉีด 2 เข็ม",
+   "description": "{\"time\": 1793500000000, \"version\": \"2.29.1\", \"blocks\": [{\"id\": \"v0\", \"type\": \"paragraph\", \"data\": {\"text\": \"วัคซีน Varivax ป้องกันโรคอีสุกอีใส เป็นวัคซีนชนิดเชื้อเป็นอ่อนฤทธิ์ ใช้ได้ในเด็กอายุ 1 ปีขึ้นไป วัยรุ่น และผู้ใหญ่ที่ไม่เคยเป็นอีสุกอีใสหรือไม่เคยได้รับวัคซีน\"}}, {\"id\": \"v1\", \"type\": \"paragraph\", \"data\": {\"text\": \"ฉีดทั้งหมด 2 เข็ม ระยะห่างระหว่างเข็มขึ้นกับอายุ แพทย์จะแนะนำตารางฉีดที่เหมาะสม\"}}]}",
+   "suitable_for": [
+    "เด็กอายุ 1 ปีขึ้นไป ตามตารางวัคซีน",
+    "วัยรุ่นและผู้ใหญ่ที่ไม่เคยเป็นอีสุกอีใสและไม่เคยได้รับวัคซีน"
+   ],
+   "includes": [
+    "ซักประวัติและประเมินความเหมาะสมโดยแพทย์ก่อนฉีด",
+    "ค่าวัคซีนและค่าฉีด",
+    "สังเกตอาการหลังฉีดที่คลินิก"
+   ],
+   "precautions": [
+    "ผู้ที่ตั้งครรภ์ หรือมีภูมิคุ้มกันบกพร่อง ห้ามฉีด",
+    "ผู้หญิงควรหลีกเลี่ยงการตั้งครรภ์หลังฉีดตามระยะเวลาที่แพทย์แนะนำ",
+    "แจ้งแพทย์หากเพิ่งได้รับเลือด ผลิตภัณฑ์จากเลือด หรือวัคซีนเชื้อเป็นชนิดอื่น"
+   ],
+   "price_unit": "ต่อเข็ม",
+   "seo_title": "วัคซีนอีสุกอีใส Varivax ราคา 1,490 บาท ทุ่งครุ | HappiWell",
+   "seo_description": "วัคซีนอีสุกอีใส Varivax เข็มละ 1,490 บาท สำหรับเด็กอายุ 1 ปีขึ้นไปและผู้ใหญ่ที่ยังไม่มีภูมิ แพทย์ประเมินก่อนฉีด ที่แฮปปี้เวลล์ คลินิกเวชกรรม ซ.ประชาอุทิศ 49 ทุ่งครุ",
+   "duration": "2 เข็ม",
+   "slug": "chickenpox-vaccine-varivax",
+   "category": "vaccine",
+   "price": 1490,
+   "sort_order": 10,
+   "is_featured": false,
+   "is_published": true,
+   "brand": "Varivax",
+   "related_article_slug": null,
+   "en": {
+    "name": "Chickenpox vaccine (Varivax)",
+    "short_desc": "Protects against chickenpox, for children from 1 year and adults without immunity. 2 doses.",
+    "description": "{\"time\": 1793500000000, \"version\": \"2.29.1\", \"blocks\": [{\"id\": \"v0\", \"type\": \"paragraph\", \"data\": {\"text\": \"Varivax is a live attenuated vaccine against chickenpox (varicella). It can be given to children from 1 year of age, teenagers and adults who have never had chickenpox or the vaccine.\"}}, {\"id\": \"v1\", \"type\": \"paragraph\", \"data\": {\"text\": \"The course is 2 doses. The interval depends on your age — the doctor will advise the right schedule.\"}}]}",
+    "suitable_for": [
+     "Children aged 1 year and over, following the vaccination schedule",
+     "Teenagers and adults who have never had chickenpox or the vaccine"
+    ],
+    "includes": [
+     "Doctor's history check and assessment before the injection",
+     "Vaccine and injection fee",
+     "Observation at the clinic after the injection"
+    ],
+    "precautions": [
+     "Not for pregnant women or people with a weakened immune system",
+     "Women should avoid pregnancy after vaccination for the period advised by the doctor",
+     "Tell the doctor if you have recently had blood, blood products or another live vaccine"
+    ],
+    "price_unit": "per dose",
+    "seo_title": "Varivax Chickenpox Vaccine 1,490 THB in Bangkok | HappiWell Clinic",
+    "seo_description": "Varivax chickenpox vaccine for 1,490 baht per dose, for children from 1 year and adults without immunity. Doctor assessment before every shot. HappiWell Medical Clinic, Soi Pracha Uthit 49, Thung Khru, Bangkok.",
+    "duration": "2 doses"
+   },
+   "my": {
+    "name": "ရေကျောက် ကာကွယ်ဆေး (Varivax)",
+    "short_desc": "ရေကျောက်ရောဂါကို ကာကွယ်သည်၊ အသက် ၁ နှစ်အထက် ကလေးများနှင့် ခုခံအားမရှိသေးသော အရွယ်ရောက်သူများအတွက် ၂ လုံး။",
+    "description": "{\"time\": 1793500000000, \"version\": \"2.29.1\", \"blocks\": [{\"id\": \"v0\", \"type\": \"paragraph\", \"data\": {\"text\": \"Varivax သည် ရေကျောက်ကို ကာကွယ်သော အားလျော့ထားသည့် ပိုးရှင် ကာကွယ်ဆေး ဖြစ်ပြီး အသက် ၁ နှစ်အထက် ကလေးများ၊ ဆယ်ကျော်သက်များနှင့် ရေကျောက် မဖြစ်ဖူး/ကာကွယ်ဆေး မထိုးဖူးသော အရွယ်ရောက်သူများ ထိုးနိုင်ပါသည်။\"}}, {\"id\": \"v1\", \"type\": \"paragraph\", \"data\": {\"text\": \"စုစုပေါင်း ၂ လုံး ထိုးရပါမည်။ ကြားကာလသည် အသက်ပေါ် မူတည်ပြီး ဆရာဝန်က အချိန်ဇယား အကြံပေးပါမည်။\"}}]}",
+    "suitable_for": [
+     "ကာကွယ်ဆေးအချိန်ဇယားအတိုင်း အသက် ၁ နှစ်အထက် ကလေးများ",
+     "ရေကျောက် မဖြစ်ဖူးပြီး ကာကွယ်ဆေး မထိုးဖူးသော ဆယ်ကျော်သက်နှင့် အရွယ်ရောက်သူများ"
+    ],
+    "includes": [
+     "ကာကွယ်ဆေးမထိုးမီ ဆရာဝန်က ရောဂါရာဇဝင်မေးပြီး စစ်ဆေးအကဲဖြတ်ခြင်း",
+     "ကာကွယ်ဆေးဖိုးနှင့် ဆေးထိုးခ",
+     "ဆေးထိုးပြီးနောက် ဆေးခန်းတွင် ခဏစောင့်ကြည့်ခြင်း"
+    ],
+    "precautions": [
+     "ကိုယ်ဝန်ဆောင်များနှင့် ခုခံအားကျနေသူများ မထိုးရပါ",
+     "ဆေးထိုးပြီးနောက် ဆရာဝန်အကြံပြုသည့် ကာလအတွင်း ကိုယ်ဝန်ရှောင်ပါ",
+     "မကြာမီက သွေး၊ သွေးထုတ်ကုန် (သို့) အခြား ပိုးရှင်ကာကွယ်ဆေး ရရှိခဲ့ပါက ဆရာဝန်ကို ပြောပြပါ"
+    ],
+    "price_unit": "တစ်လုံးလျှင်",
+    "seo_title": "ရေကျောက် ကာကွယ်ဆေး Varivax 1,490 ဘတ် ဘန်ကောက် | HappiWell",
+    "seo_description": "Varivax ရေကျောက် ကာကွယ်ဆေး တစ်လုံး 1,490 ဘတ်၊ အသက် ၁ နှစ်အထက် ကလေးများနှင့် အရွယ်ရောက်သူများအတွက်။ HappiWell ဆေးခန်း၊ Soi Pracha Uthit 49၊ Thung Khru၊ ဘန်ကောက်။",
+    "duration": "၂ လုံး"
+   }
+  },
+  {
+   "name": "วัคซีนไวรัสตับอักเสบเอ (VAQTA)",
+   "short_desc": "วัคซีนป้องกันไวรัสตับอักเสบเอ ฉีด 2 เข็ม ห่างกัน 6–18 เดือน สำหรับเด็กอายุ 1 ปีขึ้นไปและผู้ใหญ่",
+   "description": "{\"time\": 1793500000000, \"version\": \"2.29.1\", \"blocks\": [{\"id\": \"v0\", \"type\": \"paragraph\", \"data\": {\"text\": \"วัคซีน VAQTA เป็นวัคซีนชนิดเชื้อตาย ป้องกันโรคไวรัสตับอักเสบเอ ซึ่งติดต่อทางอาหารและน้ำดื่มที่ปนเปื้อน\"}}, {\"id\": \"v1\", \"type\": \"paragraph\", \"data\": {\"text\": \"ฉีด 2 เข็ม ห่างกัน 6–18 เดือน ใช้ได้ในเด็กอายุ 1 ปีขึ้นไปและผู้ใหญ่ แพทย์จะประเมินว่าควรตรวจภูมิคุ้มกันก่อนฉีดหรือไม่\"}}]}",
+   "suitable_for": [
+    "เด็กอายุ 1 ปีขึ้นไป",
+    "ผู้ใหญ่ที่ยังไม่มีภูมิคุ้มกันต่อไวรัสตับอักเสบเอ",
+    "ผู้ที่ทำงานเกี่ยวกับอาหาร หรือจะเดินทางไปพื้นที่ที่มีโรคชุกชุม",
+    "ผู้ที่มีโรคตับเรื้อรัง ตามที่แพทย์แนะนำ"
+   ],
+   "includes": [
+    "ซักประวัติและประเมินความเหมาะสมโดยแพทย์ก่อนฉีด",
+    "ค่าวัคซีนและค่าฉีด",
+    "สังเกตอาการหลังฉีดที่คลินิก"
+   ],
+   "precautions": [
+    "ผู้ที่ตั้งครรภ์ควรปรึกษาแพทย์ก่อนฉีด",
+    "หากมีไข้หรือเจ็บป่วยเฉียบพลัน แพทย์อาจแนะนำให้เลื่อนการฉีด"
+   ],
+   "price_unit": "ต่อเข็ม",
+   "seo_title": "วัคซีนไวรัสตับอักเสบเอ VAQTA ราคา 1,190 บาท ทุ่งครุ | HappiWell",
+   "seo_description": "วัคซีนไวรัสตับอักเสบเอ (VAQTA) เข็มละ 1,190 บาท ฉีด 2 เข็ม สำหรับเด็กอายุ 1 ปีขึ้นไปและผู้ใหญ่ ที่แฮปปี้เวลล์ คลินิกเวชกรรม ซ.ประชาอุทิศ 49 ทุ่งครุ",
+   "duration": "2 เข็ม ห่างกัน 6–18 เดือน",
+   "slug": "hepatitis-a-vaccine-vaqta",
+   "category": "vaccine",
+   "price": 1190,
+   "sort_order": 11,
+   "is_featured": false,
+   "is_published": true,
+   "brand": "VAQTA",
+   "related_article_slug": null,
+   "en": {
+    "name": "Hepatitis A vaccine (VAQTA)",
+    "short_desc": "Protects against hepatitis A. 2 doses, 6–18 months apart, for children from 1 year and adults.",
+    "description": "{\"time\": 1793500000000, \"version\": \"2.29.1\", \"blocks\": [{\"id\": \"v0\", \"type\": \"paragraph\", \"data\": {\"text\": \"VAQTA is an inactivated vaccine against hepatitis A, a liver infection spread through contaminated food and water.\"}}, {\"id\": \"v1\", \"type\": \"paragraph\", \"data\": {\"text\": \"The course is 2 doses given 6–18 months apart, for children from 1 year of age and adults. The doctor will advise whether an immunity test is worthwhile before vaccination.\"}}]}",
+    "suitable_for": [
+     "Children aged 1 year and over",
+     "Adults who are not yet immune to hepatitis A",
+     "Food handlers and travellers to areas where hepatitis A is common",
+     "People with long-term liver disease, as advised by the doctor"
+    ],
+    "includes": [
+     "Doctor's history check and assessment before the injection",
+     "Vaccine and injection fee",
+     "Observation at the clinic after the injection"
+    ],
+    "precautions": [
+     "If you are pregnant, talk to the doctor before the injection",
+     "If you have a fever or acute illness, the doctor may advise postponing the injection"
+    ],
+    "price_unit": "per dose",
+    "seo_title": "VAQTA Hepatitis A Vaccine 1,190 THB in Bangkok | HappiWell Clinic",
+    "seo_description": "Hepatitis A vaccine (VAQTA) for 1,190 baht per dose, 2-dose course for children from 1 year and adults. HappiWell Medical Clinic, Soi Pracha Uthit 49, Thung Khru, Bangkok.",
+    "duration": "2 doses, 6–18 months apart"
+   },
+   "my": {
+    "name": "အသည်းရောင် အေ ကာကွယ်ဆေး (VAQTA)",
+    "short_desc": "အသည်းရောင် အေ ကို ကာကွယ်သည်။ ၆–၁၈ လခြား၍ ၂ လုံး၊ အသက် ၁ နှစ်အထက် ကလေးများနှင့် အရွယ်ရောက်သူများအတွက်။",
+    "description": "{\"time\": 1793500000000, \"version\": \"2.29.1\", \"blocks\": [{\"id\": \"v0\", \"type\": \"paragraph\", \"data\": {\"text\": \"VAQTA သည် ညစ်ညမ်းသော အစားအစာနှင့် သောက်ရေမှတစ်ဆင့် ကူးစက်သော အသည်းရောင် အေ ကို ကာကွယ်သည့် ပိုးသေ ကာကွယ်ဆေး ဖြစ်ပါသည်။\"}}, {\"id\": \"v1\", \"type\": \"paragraph\", \"data\": {\"text\": \"၆–၁၈ လခြား၍ ၂ လုံး ထိုးရပြီး အသက် ၁ နှစ်အထက် ကလေးများနှင့် အရွယ်ရောက်သူများ ထိုးနိုင်ပါသည်။ ဆေးမထိုးမီ ခုခံအား စစ်ဆေးသင့်မသင့်ကို ဆရာဝန်က အကြံပေးပါမည်။\"}}]}",
+    "suitable_for": [
+     "အသက် ၁ နှစ်အထက် ကလေးများ",
+     "အသည်းရောင် အေ ခုခံအား မရှိသေးသော အရွယ်ရောက်သူများ",
+     "အစားအစာနှင့်ပတ်သက်သော အလုပ်လုပ်သူများနှင့် ရောဂါများသော ဒေသသို့ ခရီးသွားမည့်သူများ",
+     "ဆရာဝန်အကြံပြုချက်အတိုင်း နာတာရှည် အသည်းရောဂါရှိသူများ"
+    ],
+    "includes": [
+     "ကာကွယ်ဆေးမထိုးမီ ဆရာဝန်က ရောဂါရာဇဝင်မေးပြီး စစ်ဆေးအကဲဖြတ်ခြင်း",
+     "ကာကွယ်ဆေးဖိုးနှင့် ဆေးထိုးခ",
+     "ဆေးထိုးပြီးနောက် ဆေးခန်းတွင် ခဏစောင့်ကြည့်ခြင်း"
+    ],
+    "precautions": [
+     "ကိုယ်ဝန်ဆောင်ပါက ဆေးမထိုးမီ ဆရာဝန်နှင့် တိုင်ပင်ပါ",
+     "ဖျားနေခြင်း (သို့) ရုတ်တရက် နေမကောင်းဖြစ်နေပါက ဆရာဝန်က ဆေးထိုးချိန်ကို ရွှေ့ရန် အကြံပေးနိုင်ပါသည်"
+    ],
+    "price_unit": "တစ်လုံးလျှင်",
+    "seo_title": "အသည်းရောင် အေ ကာကွယ်ဆေး VAQTA 1,190 ဘတ် ဘန်ကောက် | HappiWell",
+    "seo_description": "အသည်းရောင် အေ ကာကွယ်ဆေး (VAQTA) တစ်လုံး 1,190 ဘတ်၊ ကလေးနှင့် အရွယ်ရောက်သူများအတွက် ၂ လုံး။ HappiWell ဆေးခန်း၊ Soi Pracha Uthit 49၊ Thung Khru၊ ဘန်ကောက်။",
+    "duration": "၆–၁၈ လခြား၍ ၂ လုံး"
+   }
+  },
+  {
+   "name": "วัคซีนหัด คางทูม หัดเยอรมัน (MMR)",
+   "short_desc": "วัคซีนรวมป้องกันโรคหัด คางทูม และหัดเยอรมัน สำหรับเด็กตามตารางวัคซีน และผู้ใหญ่ที่ยังไม่มีภูมิคุ้มกัน",
+   "description": "{\"time\": 1793500000000, \"version\": \"2.29.1\", \"blocks\": [{\"id\": \"v0\", \"type\": \"paragraph\", \"data\": {\"text\": \"วัคซีน M-M-R II เป็นวัคซีนรวมชนิดเชื้อเป็นอ่อนฤทธิ์ ป้องกันโรคหัด คางทูม และหัดเยอรมันในเข็มเดียว\"}}, {\"id\": \"v1\", \"type\": \"paragraph\", \"data\": {\"text\": \"เด็กฉีดตามตารางวัคซีน ส่วนผู้ใหญ่ที่ไม่เคยได้รับวัคซีนหรือไม่แน่ใจ เช่น ผู้หญิงที่วางแผนจะตั้งครรภ์ แพทย์จะประเมินประวัติวัคซีนและแนะนำจำนวนเข็มที่ต้องฉีด\"}}]}",
+   "suitable_for": [
+    "เด็กตามตารางวัคซีน",
+    "ผู้ใหญ่ที่ไม่เคยได้รับวัคซีนหรือไม่แน่ใจประวัติวัคซีน",
+    "ผู้หญิงที่วางแผนจะตั้งครรภ์ (ฉีดก่อนตั้งครรภ์)"
+   ],
+   "includes": [
+    "ซักประวัติและประเมินความเหมาะสมโดยแพทย์ก่อนฉีด",
+    "ค่าวัคซีนและค่าฉีด",
+    "สังเกตอาการหลังฉีดที่คลินิก"
+   ],
+   "precautions": [
+    "ผู้ที่ตั้งครรภ์ หรือมีภูมิคุ้มกันบกพร่อง ห้ามฉีด",
+    "ผู้หญิงควรหลีกเลี่ยงการตั้งครรภ์หลังฉีดตามระยะเวลาที่แพทย์แนะนำ",
+    "แจ้งแพทย์หากเพิ่งได้รับเลือด ผลิตภัณฑ์จากเลือด หรือวัคซีนเชื้อเป็นชนิดอื่น"
+   ],
+   "price_unit": "ต่อเข็ม",
+   "seo_title": "วัคซีน MMR หัด คางทูม หัดเยอรมัน ราคา 650 บาท ทุ่งครุ | HappiWell",
+   "seo_description": "วัคซีนหัด คางทูม หัดเยอรมัน (MMR) เข็มละ 650 บาท สำหรับเด็กและผู้ใหญ่ที่ยังไม่มีภูมิ แพทย์ประเมินก่อนฉีด ที่แฮปปี้เวลล์ คลินิกเวชกรรม ซ.ประชาอุทิศ 49 ทุ่งครุ",
+   "slug": "mmr-vaccine",
+   "category": "vaccine",
+   "price": 650,
+   "sort_order": 12,
+   "is_featured": false,
+   "is_published": true,
+   "brand": "M-M-R II",
+   "related_article_slug": null,
+   "en": {
+    "name": "Measles, mumps and rubella vaccine (MMR)",
+    "short_desc": "A combined vaccine against measles, mumps and rubella, for children on the vaccination schedule and adults without immunity.",
+    "description": "{\"time\": 1793500000000, \"version\": \"2.29.1\", \"blocks\": [{\"id\": \"v0\", \"type\": \"paragraph\", \"data\": {\"text\": \"M-M-R II is a live attenuated combined vaccine that protects against measles, mumps and rubella in a single injection.\"}}, {\"id\": \"v1\", \"type\": \"paragraph\", \"data\": {\"text\": \"Children receive it on the vaccination schedule. For adults who have never been vaccinated or are unsure — for example women planning a pregnancy — the doctor will review your history and advise how many doses you need.\"}}]}",
+    "suitable_for": [
+     "Children, following the vaccination schedule",
+     "Adults who have never been vaccinated or are unsure of their vaccination history",
+     "Women planning a pregnancy (vaccinate before pregnancy)"
+    ],
+    "includes": [
+     "Doctor's history check and assessment before the injection",
+     "Vaccine and injection fee",
+     "Observation at the clinic after the injection"
+    ],
+    "precautions": [
+     "Not for pregnant women or people with a weakened immune system",
+     "Women should avoid pregnancy after vaccination for the period advised by the doctor",
+     "Tell the doctor if you have recently had blood, blood products or another live vaccine"
+    ],
+    "price_unit": "per dose",
+    "seo_title": "MMR Vaccine (Measles, Mumps, Rubella) 650 THB, Bangkok | HappiWell",
+    "seo_description": "MMR vaccine against measles, mumps and rubella for 650 baht per dose, for children and adults without immunity. HappiWell Medical Clinic, Soi Pracha Uthit 49, Thung Khru, Bangkok."
+   },
+   "my": {
+    "name": "ဝက်သက်၊ ပါးချိတ်ရောင်၊ ဂျိုက်သိုး ကာကွယ်ဆေး (MMR)",
+    "short_desc": "ဝက်သက်၊ ပါးချိတ်ရောင်နှင့် ဂျိုက်သိုး (Rubella) ကို ကာကွယ်သော ပေါင်းစပ်ကာကွယ်ဆေး၊ ကလေးများနှင့် ခုခံအားမရှိသေးသော အရွယ်ရောက်သူများအတွက်။",
+    "description": "{\"time\": 1793500000000, \"version\": \"2.29.1\", \"blocks\": [{\"id\": \"v0\", \"type\": \"paragraph\", \"data\": {\"text\": \"M-M-R II သည် ဝက်သက်၊ ပါးချိတ်ရောင်နှင့် ဂျိုက်သိုးကို တစ်လုံးတည်းဖြင့် ကာကွယ်ပေးသော အားလျော့ထားသည့် ပိုးရှင် ပေါင်းစပ်ကာကွယ်ဆေး ဖြစ်ပါသည်။\"}}, {\"id\": \"v1\", \"type\": \"paragraph\", \"data\": {\"text\": \"ကလေးများသည် ကာကွယ်ဆေးအချိန်ဇယားအတိုင်း ထိုးရပါမည်။ မထိုးဖူးသော (သို့) မသေချာသော အရွယ်ရောက်သူများ — ဥပမာ ကိုယ်ဝန်ယူရန် စီစဉ်နေသော အမျိုးသမီးများ — အတွက် ဆရာဝန်က ရာဇဝင်ကို ကြည့်ပြီး ထိုးရမည့်အရေအတွက်ကို အကြံပေးပါမည်။\"}}]}",
+    "suitable_for": [
+     "ကာကွယ်ဆေးအချိန်ဇယားအတိုင်း ကလေးများ",
+     "မထိုးဖူးသော (သို့) ထိုးဖူးမှု မသေချာသော အရွယ်ရောက်သူများ",
+     "ကိုယ်ဝန်ယူရန် စီစဉ်နေသော အမျိုးသမီးများ (ကိုယ်ဝန်မရှိမီ ထိုးရန်)"
+    ],
+    "includes": [
+     "ကာကွယ်ဆေးမထိုးမီ ဆရာဝန်က ရောဂါရာဇဝင်မေးပြီး စစ်ဆေးအကဲဖြတ်ခြင်း",
+     "ကာကွယ်ဆေးဖိုးနှင့် ဆေးထိုးခ",
+     "ဆေးထိုးပြီးနောက် ဆေးခန်းတွင် ခဏစောင့်ကြည့်ခြင်း"
+    ],
+    "precautions": [
+     "ကိုယ်ဝန်ဆောင်များနှင့် ခုခံအားကျနေသူများ မထိုးရပါ",
+     "ဆေးထိုးပြီးနောက် ဆရာဝန်အကြံပြုသည့် ကာလအတွင်း ကိုယ်ဝန်ရှောင်ပါ",
+     "မကြာမီက သွေး၊ သွေးထုတ်ကုန် (သို့) အခြား ပိုးရှင်ကာကွယ်ဆေး ရရှိခဲ့ပါက ဆရာဝန်ကို ပြောပြပါ"
+    ],
+    "price_unit": "တစ်လုံးလျှင်",
+    "seo_title": "MMR ကာကွယ်ဆေး (ဝက်သက်၊ ပါးချိတ်ရောင်၊ ဂျိုက်သိုး) 650 ဘတ် | HappiWell",
+    "seo_description": "MMR ကာကွယ်ဆေး တစ်လုံး 650 ဘတ်၊ ကလေးများနှင့် ခုခံအားမရှိသေးသော အရွယ်ရောက်သူများအတွက်။ HappiWell ဆေးခန်း၊ Soi Pracha Uthit 49၊ Thung Khru၊ ဘန်ကောက်။"
+   }
+  },
+  {
+   "name": "วัคซีนหัด คางทูม หัดเยอรมัน อีสุกอีใส (ProQuad)",
+   "short_desc": "วัคซีนรวม 4 โรค (MMR + อีสุกอีใส) ในเข็มเดียว สำหรับเด็กอายุ 1–12 ปี ช่วยลดจำนวนครั้งที่ต้องฉีด",
+   "description": "{\"time\": 1793500000000, \"version\": \"2.29.1\", \"blocks\": [{\"id\": \"v0\", \"type\": \"paragraph\", \"data\": {\"text\": \"วัคซีน ProQuad (MMRV) รวมการป้องกันโรคหัด คางทูม หัดเยอรมัน และอีสุกอีใสไว้ในเข็มเดียว ใช้ในเด็กอายุ 1–12 ปี\"}}, {\"id\": \"v1\", \"type\": \"paragraph\", \"data\": {\"text\": \"แพทย์จะดูประวัติวัคซีนของเด็กและแนะนำว่าควรใช้ ProQuad หรือฉีด MMR กับวัคซีนอีสุกอีใสแยกกัน ให้เหมาะกับเด็กแต่ละคน\"}}]}",
+   "suitable_for": [
+    "เด็กอายุ 1–12 ปี ตามตารางวัคซีน"
+   ],
+   "includes": [
+    "ซักประวัติและประเมินความเหมาะสมโดยแพทย์ก่อนฉีด",
+    "ค่าวัคซีนและค่าฉีด",
+    "สังเกตอาการหลังฉีดที่คลินิก"
+   ],
+   "precautions": [
+    "แจ้งแพทย์หากเด็กหรือคนในครอบครัวมีประวัติชัก",
+    "เด็กที่มีภูมิคุ้มกันบกพร่อง ห้ามฉีด",
+    "แจ้งแพทย์หากเด็กเพิ่งได้รับเลือด ผลิตภัณฑ์จากเลือด หรือวัคซีนเชื้อเป็นชนิดอื่น"
+   ],
+   "price_unit": "ต่อเข็ม",
+   "seo_title": "วัคซีน MMRV ProQuad หัด คางทูม หัดเยอรมัน อีสุกอีใส 2,590 บาท | HappiWell",
+   "seo_description": "วัคซีนรวม 4 โรค ProQuad (MMRV) เข็มละ 2,590 บาท สำหรับเด็กอายุ 1–12 ปี แพทย์ประเมินก่อนฉีด ที่แฮปปี้เวลล์ คลินิกเวชกรรม ซ.ประชาอุทิศ 49 ทุ่งครุ",
+   "slug": "mmrv-vaccine-proquad",
+   "category": "vaccine",
+   "price": 2590,
+   "sort_order": 13,
+   "is_featured": false,
+   "is_published": true,
+   "brand": "ProQuad (MMRV)",
+   "related_article_slug": null,
+   "en": {
+    "name": "Measles, mumps, rubella and chickenpox vaccine (ProQuad)",
+    "short_desc": "A 4-in-1 vaccine (MMR + chickenpox) in a single injection for children aged 1–12, meaning fewer injections.",
+    "description": "{\"time\": 1793500000000, \"version\": \"2.29.1\", \"blocks\": [{\"id\": \"v0\", \"type\": \"paragraph\", \"data\": {\"text\": \"ProQuad (MMRV) combines protection against measles, mumps, rubella and chickenpox in one injection, for children aged 1–12 years.\"}}, {\"id\": \"v1\", \"type\": \"paragraph\", \"data\": {\"text\": \"The doctor will review your child's vaccination history and advise whether ProQuad or separate MMR and chickenpox vaccines suit your child best.\"}}]}",
+    "suitable_for": [
+     "Children aged 1–12, following the vaccination schedule"
+    ],
+    "includes": [
+     "Doctor's history check and assessment before the injection",
+     "Vaccine and injection fee",
+     "Observation at the clinic after the injection"
+    ],
+    "precautions": [
+     "Tell the doctor if your child or a family member has a history of seizures",
+     "Not for children with a weakened immune system",
+     "Tell the doctor if your child has recently had blood, blood products or another live vaccine"
+    ],
+    "price_unit": "per dose",
+    "seo_title": "ProQuad MMRV Vaccine 2,590 THB for Children, Bangkok | HappiWell",
+    "seo_description": "ProQuad (MMRV) 4-in-1 vaccine against measles, mumps, rubella and chickenpox for 2,590 baht per dose, for children aged 1–12. HappiWell Medical Clinic, Soi Pracha Uthit 49, Thung Khru, Bangkok."
+   },
+   "my": {
+    "name": "ဝက်သက်၊ ပါးချိတ်ရောင်၊ ဂျိုက်သိုး၊ ရေကျောက် ကာကွယ်ဆေး (ProQuad)",
+    "short_desc": "ရောဂါ ၄ မျိုး (MMR + ရေကျောက်) ကို တစ်လုံးတည်းဖြင့် ကာကွယ်သည်၊ အသက် ၁–၁၂ နှစ် ကလေးများအတွက်။",
+    "description": "{\"time\": 1793500000000, \"version\": \"2.29.1\", \"blocks\": [{\"id\": \"v0\", \"type\": \"paragraph\", \"data\": {\"text\": \"ProQuad (MMRV) သည် ဝက်သက်၊ ပါးချိတ်ရောင်၊ ဂျိုက်သိုးနှင့် ရေကျောက်ကို တစ်လုံးတည်းဖြင့် ကာကွယ်ပေးပြီး အသက် ၁–၁၂ နှစ် ကလေးများ ထိုးနိုင်ပါသည်။\"}}, {\"id\": \"v1\", \"type\": \"paragraph\", \"data\": {\"text\": \"ဆရာဝန်က ကလေး၏ ကာကွယ်ဆေးရာဇဝင်ကို ကြည့်ပြီး ProQuad (သို့) MMR နှင့် ရေကျောက်ကာကွယ်ဆေးကို သီးခြားထိုးခြင်း မည်သည်က ပိုသင့်တော်ကြောင်း အကြံပေးပါမည်။\"}}]}",
+    "suitable_for": [
+     "ကာကွယ်ဆေးအချိန်ဇယားအတိုင်း အသက် ၁–၁၂ နှစ် ကလေးများ"
+    ],
+    "includes": [
+     "ကာကွယ်ဆေးမထိုးမီ ဆရာဝန်က ရောဂါရာဇဝင်မေးပြီး စစ်ဆေးအကဲဖြတ်ခြင်း",
+     "ကာကွယ်ဆေးဖိုးနှင့် ဆေးထိုးခ",
+     "ဆေးထိုးပြီးနောက် ဆေးခန်းတွင် ခဏစောင့်ကြည့်ခြင်း"
+    ],
+    "precautions": [
+     "ကလေး (သို့) မိသားစုဝင်တွင် တက်ခြင်းရာဇဝင် ရှိပါက ဆရာဝန်ကို ပြောပြပါ",
+     "ခုခံအားကျနေသော ကလေးများ မထိုးရပါ",
+     "ကလေးသည် မကြာမီက သွေး၊ သွေးထုတ်ကုန် (သို့) အခြား ပိုးရှင်ကာကွယ်ဆေး ရရှိခဲ့ပါက ဆရာဝန်ကို ပြောပြပါ"
+    ],
+    "price_unit": "တစ်လုံးလျှင်",
+    "seo_title": "ProQuad MMRV ကာကွယ်ဆေး ကလေးများအတွက် 2,590 ဘတ် | HappiWell",
+    "seo_description": "ProQuad (MMRV) ရောဂါ ၄ မျိုး ကာကွယ်ဆေး တစ်လုံး 2,590 ဘတ်၊ အသက် ၁–၁၂ နှစ် ကလေးများအတွက်။ HappiWell ဆေးခန်း၊ Soi Pracha Uthit 49၊ Thung Khru၊ ဘန်ကောက်။"
+   }
+  }
+ ],
+ "article": {
+  "slug": "pneumonia-vaccine-2569",
+  "th": {
+   "title": "วัคซีนปอดอักเสบ (ไอพีดี) PCV15 และ PPSV23 จำเป็นแค่ไหน ฉีดกี่เข็ม ราคาเท่าไหร่ (อัปเดตปี 2569)",
+   "excerpt": "วัคซีนปอดอักเสบ (ไอพีดี) Vaxneuvance PCV15 และ Pneumovax 23 ป้องกันอะไร ใครควรฉีด ฉีดกี่เข็ม พร้อมราคาที่แฮปปี้เวลล์ คลินิก ทุ่งครุ",
+   "seo_title": "วัคซีนปอดอักเสบ PCV15 + PPSV23 จำเป็นไหม ฉีดกี่เข็ม ราคาเท่าไหร่ (2569)",
+   "seo_description": "วัคซีนปอดอักเสบ (ไอพีดี) Vaxneuvance PCV15 และ Pneumovax 23 ป้องกันอะไร ใครควรฉีด ฉีดกี่เข็ม พร้อมราคาที่แฮปปี้เวลล์ คลินิกเวชกรรม ทุ่งครุ",
+   "content": "{\"time\": 1793500000000, \"version\": \"2.29.1\", \"blocks\": [{\"id\": \"pv0\", \"type\": \"paragraph\", \"data\": {\"text\": \"ปอดอักเสบเป็นโรคที่หลายคนคิดว่าเป็นแค่ภาวะแทรกซ้อนของไข้หวัด แต่เชื้อแบคทีเรียนิวโมคอคคัสที่เป็นสาเหตุหลักสามารถก่อโรครุนแรงได้หลายแบบ ตั้งแต่หูชั้นกลางอักเสบไปจนถึงเยื่อหุ้มสมองอักเสบและติดเชื้อในกระแสเลือด บทความนี้จะพาไปดูว่าวัคซีนปอดอักเสบช่วยป้องกันได้อย่างไร และใครควรฉีดเป็นพิเศษ\"}}, {\"id\": \"pv1\", \"type\": \"header\", \"data\": {\"text\": \"เชื้อนิวโมคอคคัสอันตรายแค่ไหน\", \"level\": 2}}, {\"id\": \"pv2\", \"type\": \"paragraph\", \"data\": {\"text\": \"เชื้อแบคทีเรียนิวโมคอคคัส (Pneumococcus) เป็นสาเหตุของกลุ่มโรคที่เรียกว่าไอพีดี (IPD - Invasive Pneumococcal Disease) ซึ่งครอบคลุมตั้งแต่ปอดอักเสบ เยื่อหุ้มสมองอักเสบ ติดเชื้อในกระแสเลือด ไปจนถึงหูชั้นกลางอักเสบและไซนัสอักเสบ เชื้อตัวนี้ยังชอบแทรกซ้อนร่วมกับการติดเชื้อไวรัสอย่างไข้หวัดใหญ่หรือโควิด-19 ทำให้อาการรุนแรงขึ้น\"}}, {\"id\": \"pv3\", \"type\": \"header\", \"data\": {\"text\": \"ใครเสี่ยงอาการรุนแรงเป็นพิเศษ\", \"level\": 2}}, {\"id\": \"pv4\", \"type\": \"list\", \"data\": {\"style\": \"unordered\", \"items\": [\"เด็กอายุต่ำกว่า 2 ปี\", \"ผู้สูงอายุ 65 ปีขึ้นไป\", \"ผู้ที่ได้รับยาหรือการรักษาที่กระทบภูมิคุ้มกัน เช่น เคมีบำบัด หรือใช้สเตียรอยด์ระยะยาว\", \"ผู้มีโรคประจำตัวเรื้อรัง เช่น โรคไต โรคปอด โรคหัวใจ เบาหวาน มะเร็งเม็ดเลือด และผู้ติดเชื้อ HIV\"]}}, {\"id\": \"pv5\", \"type\": \"header\", \"data\": {\"text\": \"วัคซีนปอดอักเสบมีกี่ชนิด\", \"level\": 2}}, {\"id\": \"pv6\", \"type\": \"paragraph\", \"data\": {\"text\": \"<b>PCV15 (Vaxneuvance)</b> เป็นวัคซีนชนิดคอนจูเกต ป้องกันเชื้อนิวโมคอคคัส 15 สายพันธุ์ กระตุ้นภูมิคุ้มกันได้ดีและเป็นเข็มแรกของการฉีดในผู้ใหญ่\"}}, {\"id\": \"pv7\", \"type\": \"paragraph\", \"data\": {\"text\": \"<b>PPSV23 (Pneumovax 23)</b> เป็นวัคซีนชนิดโพลีแซคคาไรด์ ป้องกัน 23 สายพันธุ์ ใช้ฉีดต่อจาก PCV15 เพื่อขยายความครอบคลุมสายพันธุ์ให้กว้างขึ้น\"}}, {\"id\": \"pv8\", \"type\": \"header\", \"data\": {\"text\": \"ใครควรฉีด ฉีดกี่เข็ม\", \"level\": 2}}, {\"id\": \"pv9\", \"type\": \"paragraph\", \"data\": {\"text\": \"สำหรับผู้ใหญ่ที่ไม่เคยฉีดวัคซีนไอพีดีมาก่อน คำแนะนำทั่วไปคือฉีด <b>PCV15 1 เข็ม แล้วตามด้วย PPSV23 อีก 1 เข็ม</b> โดยทั่วไปห่างกันอย่างน้อย 1 ปี ในบางกลุ่ม เช่น ผู้มีภูมิคุ้มกันบกพร่อง แพทย์อาจพิจารณาให้ห่างกันน้อยกว่านั้น กลุ่มที่แนะนำให้ฉีดเป็นพิเศษคือ\"}}, {\"id\": \"pv10\", \"type\": \"list\", \"data\": {\"style\": \"unordered\", \"items\": [\"ผู้สูงอายุ 65 ปีขึ้นไปทุกคน\", \"ผู้มีโรคเรื้อรังหรือภูมิคุ้มกันบกพร่องตามที่กล่าวมาข้างต้น ไม่ว่าอายุเท่าไหร่\"]}}, {\"id\": \"pv11\", \"type\": \"paragraph\", \"data\": {\"text\": \"ผู้ที่เคยฉีดวัคซีนไอพีดีมาแล้ว ควรนำประวัติวัคซีนมาให้แพทย์ดู เพื่อวางแผนว่าต้องฉีดเข็มไหนต่อและเมื่อไร\"}}, {\"id\": \"pv12\", \"type\": \"header\", \"data\": {\"text\": \"ราคาที่แฮปปี้เวลล์ คลินิก\", \"level\": 2}}, {\"id\": \"pv13\", \"type\": \"paragraph\", \"data\": {\"text\": \"ที่ <b>แฮปปี้เวลล์ คลินิกเวชกรรม</b> ย่านทุ่งครุ วัคซีน <b>Vaxneuvance (PCV15) ราคา 2,690 บาทต่อเข็ม</b> และ <b>Pneumovax 23 (PPSV23) ราคา 1,590 บาทต่อเข็ม</b> แพทย์ให้คำปรึกษาก่อนฉีดทุกครั้งว่าเหมาะกับสุขภาพและประวัติการฉีดวัคซีนเดิมหรือไม่\"}}, {\"id\": \"pv14\", \"type\": \"paragraph\", \"data\": {\"text\": \"สนใจนัดฉีดวัคซีนปอดอักเสบ ทักแชทหรือโทรสอบถามคิวได้ที่คลินิกแฮปปี้เวลล์ เปิดบริการทุกวัน จันทร์–ศุกร์ 08.00–18.00 น. เสาร์–อาทิตย์ 08.00–12.00 น.\"}}, {\"id\": \"pv15\", \"type\": \"header\", \"data\": {\"text\": \"คำถามที่พบบ่อย\", \"level\": 2}}, {\"id\": \"pv16\", \"type\": \"paragraph\", \"data\": {\"text\": \"<b>ฉีดวัคซีนไข้หวัดใหญ่กับวัคซีนปอดอักเสบพร้อมกันได้ไหม</b><br>โดยทั่วไปฉีดพร้อมกันได้ในคนละตำแหน่งแขน และยังช่วยลดความเสี่ยงภาวะแทรกซ้อนที่เชื้อนิวโมคอคคัสมักมาซ้ำเติมตอนเป็นไข้หวัดใหญ่ ควรให้แพทย์ประเมินก่อนเสมอ\"}}, {\"id\": \"pv17\", \"type\": \"paragraph\", \"data\": {\"text\": \"<b>ต้องฉีดทั้ง PCV15 และ PPSV23 ไหม</b><br>ผู้ใหญ่ส่วนใหญ่ที่เริ่มด้วย PCV15 จะได้รับคำแนะนำให้ฉีด PPSV23 ต่ออีก 1 เข็ม เพื่อให้ครอบคลุมสายพันธุ์มากขึ้น แพทย์จะแนะนำตามอายุและโรคประจำตัว\"}}, {\"id\": \"pv18\", \"type\": \"paragraph\", \"data\": {\"text\": \"<b>เคยฉีด PCV13 มาแล้ว ต้องทำอย่างไรต่อ</b><br>ขึ้นอยู่กับว่าเคยฉีด PPSV23 แล้วหรือยัง และฉีดเมื่อไร ควรนำประวัติวัคซีนมาให้แพทย์ประเมิน\"}}, {\"id\": \"pv19\", \"type\": \"paragraph\", \"data\": {\"text\": \"<b>อายุยังไม่ถึง 65 ปี และไม่มีโรคประจำตัว ยังฉีดได้ไหม</b><br>ฉีดได้ หากต้องการป้องกันไว้ก่อนสามารถปรึกษาแพทย์ได้\"}}, {\"id\": \"pv20\", \"type\": \"header\", \"data\": {\"text\": \"สรุป\", \"level\": 2}}, {\"id\": \"pv21\", \"type\": \"paragraph\", \"data\": {\"text\": \"เชื้อนิวโมคอคคัสก่อโรคได้ตั้งแต่ไม่รุนแรงไปจนถึงอันตรายถึงชีวิต โดยเฉพาะในผู้สูงอายุและผู้มีโรคเรื้อรัง การฉีด PCV15 ตามด้วย PPSV23 ช่วยให้ป้องกันได้ครอบคลุม หากอายุ 65 ปีขึ้นไปหรือมีโรคประจำตัวที่เพิ่มความเสี่ยง แนะนำให้ปรึกษาแพทย์เพื่อวางแผนการฉีด\"}}, {\"id\": \"pv22\", \"type\": \"header\", \"data\": {\"text\": \"แหล่งอ้างอิง\", \"level\": 3}}, {\"id\": \"pv23\", \"type\": \"list\", \"data\": {\"style\": \"unordered\", \"items\": [\"<a href=\\\"https://www.cdc.gov/mmwr/volumes/71/wr/mm7104a1.htm\\\">CDC MMWR – Use of PCV15 and PCV20 among U.S. adults (ACIP)</a>\", \"<a href=\\\"https://ddc.moph.go.th/\\\">กรมควบคุมโรค กระทรวงสาธารณสุข</a>\"]}}, {\"id\": \"pv24\", \"type\": \"paragraph\", \"data\": {\"text\": \"<i>บทความนี้จัดทำเพื่อให้ข้อมูลทั่วไป ไม่ใช่คำแนะนำทางการแพทย์เฉพาะบุคคล ควรปรึกษาแพทย์ก่อนตัดสินใจฉีดวัคซีนทุกครั้ง</i>\"}}]}"
+  },
+  "en": {
+   "title": "Pneumococcal Vaccines (PCV15 and PPSV23): Do You Need Them, How Many Doses and How Much? (2026 Update)",
+   "excerpt": "What the Vaxneuvance (PCV15) and Pneumovax 23 pneumococcal vaccines protect against, who should get them, how many doses, and the price at HappiWell Clinic, Thung Khru.",
+   "seo_title": "PCV15 + PPSV23 Pneumococcal Vaccines: Who Needs Them & Price (2026) | HappiWell",
+   "seo_description": "What Vaxneuvance (PCV15) and Pneumovax 23 protect against, who should get them, how many doses, and the price at HappiWell Medical Clinic, Thung Khru, Bangkok.",
+   "content": "{\"time\": 1793500000000, \"version\": \"2.29.1\", \"blocks\": [{\"id\": \"pv0\", \"type\": \"paragraph\", \"data\": {\"text\": \"Many people think pneumonia is just a complication of a cold, but pneumococcus — the main bacterial cause — can cause many serious illnesses, from middle ear infections to meningitis and bloodstream infection. This article explains how pneumococcal vaccines protect you and who should especially get them.\"}}, {\"id\": \"pv1\", \"type\": \"header\", \"data\": {\"text\": \"How dangerous is pneumococcus?\", \"level\": 2}}, {\"id\": \"pv2\", \"type\": \"paragraph\", \"data\": {\"text\": \"Pneumococcus bacteria cause a group of illnesses called invasive pneumococcal disease (IPD), which includes pneumonia, meningitis and bloodstream infection, as well as middle ear infections and sinusitis. It often strikes on top of viral infections such as flu or COVID-19, making them more severe.\"}}, {\"id\": \"pv3\", \"type\": \"header\", \"data\": {\"text\": \"Who is at higher risk of severe illness?\", \"level\": 2}}, {\"id\": \"pv4\", \"type\": \"list\", \"data\": {\"style\": \"unordered\", \"items\": [\"Children under 2\", \"Adults aged 65 and over\", \"People receiving medicines or treatments that weaken immunity, such as chemotherapy or long-term steroids\", \"People with long-term conditions such as kidney disease, lung disease, heart disease, diabetes, blood cancers, or HIV\"]}}, {\"id\": \"pv5\", \"type\": \"header\", \"data\": {\"text\": \"What types of pneumococcal vaccine are there?\", \"level\": 2}}, {\"id\": \"pv6\", \"type\": \"paragraph\", \"data\": {\"text\": \"<b>PCV15 (Vaxneuvance)</b> is a conjugate vaccine covering 15 pneumococcal types. It produces a strong immune response and is the first dose of the adult schedule.\"}}, {\"id\": \"pv7\", \"type\": \"paragraph\", \"data\": {\"text\": \"<b>PPSV23 (Pneumovax 23)</b> is a polysaccharide vaccine covering 23 types. It is given after PCV15 to broaden the range of types covered.\"}}, {\"id\": \"pv8\", \"type\": \"header\", \"data\": {\"text\": \"Who should get it, and how many doses?\", \"level\": 2}}, {\"id\": \"pv9\", \"type\": \"paragraph\", \"data\": {\"text\": \"For adults who have never had a pneumococcal vaccine, the usual recommendation is <b>1 dose of PCV15 followed by 1 dose of PPSV23</b>, generally at least 1 year apart. For some groups, such as people with weakened immunity, the doctor may use a shorter interval. It is especially recommended for:\"}}, {\"id\": \"pv10\", \"type\": \"list\", \"data\": {\"style\": \"unordered\", \"items\": [\"All adults aged 65 and over\", \"People of any age with the long-term conditions or weakened immunity listed above\"]}}, {\"id\": \"pv11\", \"type\": \"paragraph\", \"data\": {\"text\": \"If you have had a pneumococcal vaccine before, bring your vaccination record so the doctor can plan which dose you need next, and when.\"}}, {\"id\": \"pv12\", \"type\": \"header\", \"data\": {\"text\": \"Price at HappiWell Clinic\", \"level\": 2}}, {\"id\": \"pv13\", \"type\": \"paragraph\", \"data\": {\"text\": \"At <b>HappiWell Medical Clinic</b> in Thung Khru, <b>Vaxneuvance (PCV15) costs 2,690 baht per dose</b> and <b>Pneumovax 23 (PPSV23) costs 1,590 baht per dose</b>, with a doctor’s consultation before every injection to check it suits your health and vaccination history.\"}}, {\"id\": \"pv14\", \"type\": \"paragraph\", \"data\": {\"text\": \"To book your pneumococcal vaccine, message us on LINE or call HappiWell Clinic. We are open every day: Monday–Friday 08:00–18:00 and Saturday–Sunday 08:00–12:00.\"}}, {\"id\": \"pv15\", \"type\": \"header\", \"data\": {\"text\": \"Frequently asked questions\", \"level\": 2}}, {\"id\": \"pv16\", \"type\": \"paragraph\", \"data\": {\"text\": \"<b>Can I have the flu vaccine and the pneumococcal vaccine at the same time?</b><br>Usually yes, in different arms. It also helps reduce the risk of pneumococcal complications that often follow flu. Always let a doctor assess you first.\"}}, {\"id\": \"pv17\", \"type\": \"paragraph\", \"data\": {\"text\": \"<b>Do I need both PCV15 and PPSV23?</b><br>Most adults who start with PCV15 are advised to have one dose of PPSV23 afterwards for broader coverage. The doctor will advise based on your age and health conditions.\"}}, {\"id\": \"pv18\", \"type\": \"paragraph\", \"data\": {\"text\": \"<b>I have already had PCV13. What should I do next?</b><br>It depends on whether — and when — you have had PPSV23. Bring your vaccination record for the doctor to review.\"}}, {\"id\": \"pv19\", \"type\": \"paragraph\", \"data\": {\"text\": \"<b>I am under 65 with no long-term conditions. Can I still have it?</b><br>Yes. If you want to be protected, talk to a doctor.\"}}, {\"id\": \"pv20\", \"type\": \"header\", \"data\": {\"text\": \"Summary\", \"level\": 2}}, {\"id\": \"pv21\", \"type\": \"paragraph\", \"data\": {\"text\": \"Pneumococcus causes illnesses ranging from mild to life-threatening, especially in older adults and people with long-term conditions. PCV15 followed by PPSV23 gives broad protection. If you are 65 or over, or have a condition that raises your risk, talk to a doctor about planning your vaccination.\"}}, {\"id\": \"pv22\", \"type\": \"header\", \"data\": {\"text\": \"References\", \"level\": 3}}, {\"id\": \"pv23\", \"type\": \"list\", \"data\": {\"style\": \"unordered\", \"items\": [\"<a href=\\\"https://www.cdc.gov/mmwr/volumes/71/wr/mm7104a1.htm\\\">CDC MMWR – Use of PCV15 and PCV20 among U.S. adults (ACIP)</a>\", \"<a href=\\\"https://ddc.moph.go.th/\\\">Department of Disease Control, Ministry of Public Health (Thai)</a>\"]}}, {\"id\": \"pv24\", \"type\": \"paragraph\", \"data\": {\"text\": \"<i>This article is for general information and is not personal medical advice. Always talk to a doctor before deciding on any vaccination.</i>\"}}]}"
+  }
+ }
+}
