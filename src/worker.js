@@ -588,7 +588,8 @@ function lineBookUrl(name, price, opt, lang) {
   return 'https://line.me/R/oaMessage/' + encodeURIComponent(LINE_OA) + '/?' + encodeURIComponent(lineBookText(name, price, opt, lang));
 }
 // slug เดิมที่เปลี่ยนชื่อแล้ว → slug ใหม่ (301)
-const PROGRAM_REDIRECTS = { 'hepatitis-a-b-vaccine': 'hepatitis-b-vaccine', 'annual-health-checkup': 'health-checkup-basic' };
+const PROGRAM_REDIRECTS = { 'hepatitis-a-b-vaccine': 'hepatitis-b-vaccine', 'annual-health-checkup': 'health-checkup-basic',
+  'pneumococcal-vaccine-prevnar-20': 'pneumococcal-vaccine-vaxneuvance' };
 const PROGRAM_ICON = {
   vaccine: '<path d="m18 2 4 4"/><path d="m17 7 3-3"/><path d="M19 9 8.7 19.3a2.4 2.4 0 0 1-3.4 0L4.7 18.7a2.4 2.4 0 0 1 0-3.4L15 5"/><path d="m9 11 4 4"/><path d="m5 19-3 3"/><path d="m14 4 6 6"/>',
   checkup: '<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/>',
