@@ -104,7 +104,7 @@ T = {
   'เลือกใช้สิทธิที่คุณมีได้ทันที': 'Use the coverage you already have',
   'แจ้งเจ้าหน้าที่หน้าเคาน์เตอร์พร้อมบัตรประชาชนหรือบัตรแสดงสิทธิของคุณ': 'Show your ID card, passport or coverage card at the front desk',
   'ยอดนิยม': 'Popular',
-  'รักษาฟรีตามสิทธิหลักประกันสุขภาพแห่งชาติ สำหรับผู้มีสิทธิในพื้นที่และปริมณฑล': 'Free treatment under Thailand’s Universal Coverage Scheme for eligible residents of the area',
+  'รักษาฟรีตามสิทธิหลักประกันสุขภาพแห่งชาติ ผู้มีสิทธิจากทุกพื้นที่ทั่วประเทศใช้สิทธิที่คลินิกได้ ไม่ต้องย้ายสิทธิ': 'Free treatment under Thailand’s Universal Coverage Scheme (gold card). Cardholders registered anywhere in Thailand can use it here — no need to transfer your registration',
   'ผู้ประกันตนที่ใช้สิทธิ': 'Insured persons registered with',
   'โรงพยาบาลราษฎร์บูรณะ': 'Rajburana Hospital',
   'และ': 'and',
