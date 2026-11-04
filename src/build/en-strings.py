@@ -271,3 +271,10 @@ T.update(_rp.run_path(str(_pl.Path(__file__).with_name('directions-strings.py'))
 T.update({'รับสิทธิการรักษา':'Accepted coverage','สำนักงานหลักประกันสุขภาพแห่งชาติ (สปสช.)':'National Health Security Office (NHSO)','สำนักงานประกันสังคม':'Social Security Office','โรงพยาบาลราษฎร์บูรณะ':'Rajburana Hospital','โรงพยาบาลสุขสวัสดิ์อินเตอร์':'Suksawat Inter Hospital'})
 T.update({'30 บาทรักษาทุกที่':'30 Baht Treatment Anywhere'})
 T.update({'บาทรักษาทุกที่':'Baht Treatment Anywhere'})
+T.update({
+ 'รักษาฟรีตามสิทธิหลักประกันสุขภาพแห่งชาติ ผู้มีสิทธิจากทุกพื้นที่ทั่วประเทศใช้สิทธิที่คลินิกได้ ไม่ต้องย้ายสิทธิ มีค่ายาส่วนเกินเหมาจ่าย 30 บาท':
+  'Free treatment under the National Health Security scheme. Members registered anywhere in Thailand can use their rights at the clinic with no need to transfer. A flat 30 baht applies for any excess medication cost.',
+ 'สำหรับผู้ไม่มีสิทธิของรัฐ สิทธิเบิกจ่ายตรงกรมบัญชีกลาง และสิทธิประกันสังคมโรงพยาบาลอื่น เหมาจ่ายครั้งละ 360 บาท ได้รับ':
+  'For people with no public coverage, Comptroller General\'s Department direct-billing rights, or social security rights at another hospital. A flat 360 baht per visit includes',
+ 'การตรวจรักษา ยา และใบรับรองแพทย์': 'examination and treatment, medication and a medical certificate',
+})
