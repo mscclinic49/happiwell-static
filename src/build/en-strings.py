@@ -267,3 +267,7 @@ T = {
 # ---------- directions (แผนที่และวิธีเดินทาง) ----------
 import pathlib as _pl, runpy as _rp
 T.update(_rp.run_path(str(_pl.Path(__file__).with_name('directions-strings.py')))['EN'])
+
+T.update({'รับสิทธิการรักษา':'Accepted coverage','สำนักงานหลักประกันสุขภาพแห่งชาติ (สปสช.)':'National Health Security Office (NHSO)','สำนักงานประกันสังคม':'Social Security Office','โรงพยาบาลราษฎร์บูรณะ':'Rajburana Hospital','โรงพยาบาลสุขสวัสดิ์อินเตอร์':'Suksawat Inter Hospital'})
+T.update({'30 บาทรักษาทุกที่':'30 Baht Treatment Anywhere'})
+T.update({'บาทรักษาทุกที่':'Baht Treatment Anywhere'})
