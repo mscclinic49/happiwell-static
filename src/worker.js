@@ -850,6 +850,9 @@ export default {
       if (to) return redirect(SITE + (to === '/' ? (P ? P + '/' : '/') : P + to));
     }
 
+    // ไฟล์ของเว็บ Next.js เดิม ไม่มีแล้วถาวร → 410 ให้ Google เลิกเก็บเร็วขึ้น
+    if (path.startsWith('/_next/')) return new Response('Gone', { status: 410, headers: { 'cache-control': 'public, max-age=86400' } });
+
     try {
       if (path === '/sitemap.xml') return await sitemap();
       const lm = path.match(/^\/(en|my)(\/.*)$/);
