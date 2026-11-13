@@ -648,7 +648,7 @@
       return ['สวัสดีค่ะ ต้องการจองคิว',
         'โปรแกรม: ' + P.name + (opt && opt.label ? ' (' + opt.label + ')' : ''),
         'ราคา: ' + fmt(price),
-        'ชื่อ-นามสกุล: ', 'เบอร์โทร: ', 'วันที่สะดวก: '].join('\n');
+        'ชื่อ-นามสกุล: ', 'เบอร์โทร: ', 'วันที่สะดวก: ', 'เวลาที่สะดวก: '].join('\n');
     }
     function sync(){
       var r = document.querySelector('input[name="pd-opt"]:checked');

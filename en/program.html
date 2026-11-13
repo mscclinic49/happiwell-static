@@ -648,7 +648,7 @@
       return ['Hello, I would like to book an appointment',
         'Service: ' + P.name + (opt && opt.label ? ' (' + opt.label + ')' : ''),
         'Price: ' + fmt(price),
-        'Full name: ', 'Phone: ', 'Preferred date: '].join('\n');
+        'Full name: ', 'Phone: ', 'Preferred date: ', 'Preferred time: '].join('\n');
     }
     function sync(){
       var r = document.querySelector('input[name="pd-opt"]:checked');

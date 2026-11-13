@@ -59,7 +59,7 @@ const L = {
     hours: 'เปิดทุกวัน · จันทร์–ศุกร์ 08:00–18:00 · เสาร์–อาทิตย์ 08:00–12:00<br>หรือโทร <a href="tel:0886837899">088-683-7899</a>',
     disclaimer: 'ราคาสำหรับผู้ชำระเงินสด ยังไม่รวมค่าบริการทางการแพทย์ 30 บาท อาจเปลี่ยนแปลงได้ ความเหมาะสมขึ้นกับการประเมินของแพทย์ ผลลัพธ์ของแต่ละบุคคลอาจแตกต่างกัน',
     barFee: '+ ค่าบริการ 30 บาท', programTitle: (n, pr) => `${n} ราคา${pr ? ' ' + pr : ''} | HappiWell คลินิกเวชกรรม ทุ่งครุ`,
-    lineHello: 'สวัสดีค่ะ ต้องการจองคิว', lineProgram: 'โปรแกรม: ', linePrice: 'ราคา: ', lineName: 'ชื่อ-นามสกุล: ', linePhone: 'เบอร์โทร: ', lineDate: 'วันที่สะดวก: ',
+    lineHello: 'สวัสดีค่ะ ต้องการจองคิว', lineProgram: 'โปรแกรม: ', linePrice: 'ราคา: ', lineName: 'ชื่อ-นามสกุล: ', linePhone: 'เบอร์โทร: ', lineDate: 'วันที่สะดวก: ', lineTime: 'เวลาที่สะดวก: ',
   },
   en: {
     siteName: SITE_NAME_EN, brandSuffix: 'HappiWell Medical Clinic', locale: 'en_US', dateLocale: 'en-GB',
@@ -89,7 +89,7 @@ const L = {
     hours: 'Open every day · Mon–Fri 08:00–18:00 · Sat–Sun 08:00–12:00<br>or call <a href="tel:0886837899">088-683-7899</a>',
     disclaimer: 'Prices are for self-paying patients and exclude the 30 baht medical service fee. Prices may change. Suitability depends on the doctor’s assessment, and individual results may vary.',
     barFee: '+ 30 baht service fee', programTitle: (n, pr) => `${n}${pr ? ' – ' + pr : ''} | HappiWell Medical Clinic, Bangkok`,
-    lineHello: 'Hello, I would like to book an appointment', lineProgram: 'Service: ', linePrice: 'Price: ', lineName: 'Full name: ', linePhone: 'Phone: ', lineDate: 'Preferred date: ',
+    lineHello: 'Hello, I would like to book an appointment', lineProgram: 'Service: ', linePrice: 'Price: ', lineName: 'Full name: ', linePhone: 'Phone: ', lineDate: 'Preferred date: ', lineTime: 'Preferred time: ',
   },
   my: {
     siteName: 'HappiWell ဆေးခန်း', brandSuffix: 'HappiWell ဆေးခန်း', locale: 'my_MM', dateLocale: 'my-MM',
@@ -120,7 +120,7 @@ const L = {
     disclaimer: 'ဤဈေးနှုန်းများသည် ငွေသားပေးချေသူများအတွက်ဖြစ်ပြီး ဆေးဝန်ဆောင်ခ မပါဝင်သေးပါ။ ဈေးနှုန်း ပြောင်းလဲနိုင်သည်။ ဝန်ဆောင်မှု သင့်/မသင့်ကို ဆရာဝန်က ဆုံးဖြတ်ပါမည်။',
     barFee: '+ ဆေးဝန်ဆောင်ခ', programTitle: (n, pr) => `${n}${pr ? ' — ' + pr : ''} | HappiWell ဆေးခန်း ဘန်ကောက်`,
     // ข้อความ LINE: ไทย + พม่า ให้เจ้าหน้าที่อ่านเข้าใจ
-    lineHello: 'สวัสดีค่ะ ต้องการจองคิว (ลูกค้าพม่า) / ဘိုကင်လုပ်ချင်ပါတယ်', lineProgram: 'โปรแกรม / ဝန်ဆောင်မှု: ', linePrice: 'ราคา / ဈေးနှုန်း: ', lineName: 'ชื่อ / အမည်: ', linePhone: 'เบอร์โทร / ဖုန်း: ', lineDate: 'วันที่สะดวก / လာမည့်ရက်: ',
+    lineHello: 'สวัสดีค่ะ ต้องการจองคิว (ลูกค้าพม่า) / ဘိုကင်လုပ်ချင်ပါတယ်', lineProgram: 'โปรแกรม / ဝန်ဆောင်မှု: ', linePrice: 'ราคา / ဈေးနှုန်း: ', lineName: 'ชื่อ / အမည်: ', linePhone: 'เบอร์โทร / ဖုန်း: ', lineDate: 'วันที่สะดวก / လာမည့်ရက်: ', lineTime: 'เวลาที่สะดวก / လာမည့်အချိန်: ',
   },
 };
 
@@ -582,7 +582,7 @@ function lineBookText(name, price, opt, lang = 'th') {
   return [t.lineHello,
     t.lineProgram + name + (opt && opt.label ? ' (' + opt.label + ')' : ''),
     t.linePrice + (pr == null ? t.ask : baht(pr)),
-    t.lineName, t.linePhone, t.lineDate].join('\n');
+    t.lineName, t.linePhone, t.lineDate, t.lineTime].join('\n');
 }
 function lineBookUrl(name, price, opt, lang) {
   return 'https://line.me/R/oaMessage/' + encodeURIComponent(LINE_OA) + '/?' + encodeURIComponent(lineBookText(name, price, opt, lang));
