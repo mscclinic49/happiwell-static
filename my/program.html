@@ -647,7 +647,7 @@
     function fmt(n){ return n == null || n === '' ? 'ဈေးနှုန်းမေးရန်' : '฿' + Number(n).toLocaleString('en-US', {maximumFractionDigits: 2}); }
     function lineText(opt){
       var price = opt && opt.price != null && opt.price !== '' ? opt.price : P.price;
-      return ['สวัสดีค่ะ ต้องการจองคิว (ลูกค้าพม่า) / ဘိုကင်လုပ်ချင်ပါတယ်',
+      return ['ขอจองคิว (ลูกค้าพม่า) / ဘိုကင်လုပ်ချင်ပါတယ်',
         'โปรแกรม / ဝန်ဆောင်မှု: ' + P.name + (opt && opt.label ? ' (' + opt.label + ')' : ''),
         'ราคา / ဈေးနှုန်း: ' + fmt(price),
         'ชื่อ / အမည်: ', 'เบอร์โทร / ဖုန်း: ', 'วันที่สะดวก / လာမည့်ရက်: ', 'เวลาที่สะดวก / လာမည့်အချိန်: '].join('\n');

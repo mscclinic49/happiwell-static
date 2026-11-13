@@ -645,7 +645,7 @@
     function fmt(n){ return n == null || n === '' ? 'Ask for price' : '฿' + Number(n).toLocaleString('en-US', {maximumFractionDigits: 2}); }
     function lineText(opt){
       var price = opt && opt.price != null && opt.price !== '' ? opt.price : P.price;
-      return ['Hello, I would like to book an appointment',
+      return ['I would like to book an appointment',
         'Service: ' + P.name + (opt && opt.label ? ' (' + opt.label + ')' : ''),
         'Price: ' + fmt(price),
         'Full name: ', 'Phone: ', 'Preferred date: ', 'Preferred time: '].join('\n');

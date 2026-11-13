@@ -645,7 +645,7 @@
     function fmt(n){ return n == null || n === '' ? 'สอบถามราคา' : '฿' + Number(n).toLocaleString('en-US', {maximumFractionDigits: 2}); }
     function lineText(opt){
       var price = opt && opt.price != null && opt.price !== '' ? opt.price : P.price;
-      return ['สวัสดีค่ะ ต้องการจองคิว',
+      return ['ขอจองคิว',
         'โปรแกรม: ' + P.name + (opt && opt.label ? ' (' + opt.label + ')' : ''),
         'ราคา: ' + fmt(price),
         'ชื่อ-นามสกุล: ', 'เบอร์โทร: ', 'วันที่สะดวก: ', 'เวลาที่สะดวก: '].join('\n');
