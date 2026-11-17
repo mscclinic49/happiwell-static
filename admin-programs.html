@@ -293,6 +293,11 @@
       <label for="f-precautions">ข้อควรทราบ</label>
       <textarea id="f-precautions" rows="3" placeholder="1 บรรทัด = 1 ข้อ"></textarea>
     </div>
+    <div class="field">
+      <label for="f-faq">คำถามที่พบบ่อย (FAQ)</label>
+      <textarea id="f-faq" rows="5" placeholder="1 บรรทัด = 1 ข้อ เขียนแบบ  คำถาม | คำตอบ&#10;เช่น ต้องจองก่อนไหม | จองผ่าน LINE @p49clinic หรือเดินเข้ามาที่คลินิกได้เลย"></textarea>
+      <div class="hint">แสดงท้ายหน้าโปรแกรม และช่วยให้ Google เข้าใจหน้านี้ดีขึ้น</div>
+    </div>
     <div class="three-col">
       <div class="field">
         <label for="f-duration">ระยะเวลา / จำนวนเข็ม</label>
@@ -341,6 +346,7 @@
           <div class="field"><label for="f-en-includes">Included</label><textarea id="f-en-includes" rows="4" placeholder="1 บรรทัด = 1 ข้อ (ใช้ ' — ' คั่นรายละเอียดได้)"></textarea></div>
         </div>
         <div class="field"><label for="f-en-precautions">Good to know</label><textarea id="f-en-precautions" rows="3" placeholder="1 บรรทัด = 1 ข้อ"></textarea></div>
+        <div class="field"><label for="f-en-faq">FAQ</label><textarea id="f-en-faq" rows="4" placeholder="Question | Answer (1 บรรทัด = 1 ข้อ)"></textarea></div>
         <div class="two-col">
           <div class="field"><label for="f-en-seo-title">Google title (SEO)</label><input type="text" id="f-en-seo-title" maxlength="90"></div>
           <div class="field"><label for="f-en-seo-desc">Google description (SEO)</label><textarea id="f-en-seo-desc" maxlength="200"></textarea></div>
@@ -507,6 +513,9 @@
     row.querySelector('button').onclick = () => row.remove();
     document.getElementById('opt-list').appendChild(row);
   }
+  // FAQ: 1 บรรทัด = 'คำถาม | คำตอบ'
+  function faqToText(list) { return (Array.isArray(list) ? list : []).filter(f => f && f.q).map(f => f.q + ' | ' + (f.a || '')).join('\n'); }
+  function textToFaq(text) { return String(text || '').split('\n').map(l => { const [q, ...a] = l.split('|'); return { q: (q || '').trim(), a: a.join('|').trim() }; }).filter(f => f.q && f.a); }
   function readOptions() {
     return [...document.querySelectorAll('#opt-list .opt-row')].map(r => ({
       label: r.querySelector('.opt-label').value.trim(),
@@ -559,6 +568,7 @@
     setLines('f-suitable', p && p.suitable_for);
     setLines('f-includes', p && p.includes);
     setLines('f-precautions', p && p.precautions);
+    document.getElementById('f-faq').value = faqToText(p && p.faq);
     document.getElementById('f-duration').value = v('duration');
     document.getElementById('f-brand').value = v('brand');
     document.getElementById('f-fda').value = v('fda_reg_no');
@@ -605,6 +615,7 @@
     document.getElementById('f-en-price-note').value = e.price_note || '';
     document.getElementById('f-en-options').value = (Array.isArray(e.options) ? e.options : []).map(o => (o.label || '') + (o.note ? ' | ' + o.note : '')).join('\n');
     setLines('f-en-suitable', e.suitable_for); setLines('f-en-includes', e.includes); setLines('f-en-precautions', e.precautions);
+    document.getElementById('f-en-faq').value = faqToText(e.faq);
     document.getElementById('f-en-seo-title').value = e.seo_title || '';
     document.getElementById('f-en-seo-desc').value = e.seo_description || '';
     document.getElementById('en-state').textContent = e.name ? 'มีแล้ว ✓' : 'ยังไม่มี';
@@ -625,6 +636,7 @@
     set('duration', val('f-en-duration')); set('price_note', val('f-en-price-note'));
     set('options', lines('f-en-options').map(l => { const [label, ...note] = l.split('|'); return { label: label.trim(), note: note.join('|').trim() }; }));
     set('suitable_for', lines('f-en-suitable')); set('includes', lines('f-en-includes')); set('precautions', lines('f-en-precautions'));
+    set('faq', textToFaq(document.getElementById('f-en-faq').value));
     set('seo_title', val('f-en-seo-title')); set('seo_description', val('f-en-seo-desc'));
     let blocks = [];
     if (editorjsEn) { try { blocks = (await editorjsEn.save()).blocks || []; } catch (e) {} }
@@ -660,6 +672,7 @@
       suitable_for: lines('f-suitable'),
       includes: lines('f-includes'),
       precautions: lines('f-precautions'),
+      faq: textToFaq(document.getElementById('f-faq').value),
       duration: document.getElementById('f-duration').value.trim() || null,
       brand: document.getElementById('f-brand').value.trim() || null,
       fda_reg_no: document.getElementById('f-fda').value.trim() || null,

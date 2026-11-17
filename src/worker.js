@@ -54,7 +54,7 @@ const L = {
     duration: 'ระยะเวลา: ', product: 'ผลิตภัณฑ์: ', fda: 'เลขทะเบียน อย. ', chooseOpt: 'เลือกตัวเลือก', choosePkg: 'เลือกชุดตรวจ',
     items: 'รายการ', priceLabel: 'ราคา', priceSel: 'ราคาตัวเลือกที่เลือก', fee: 'ราคายังไม่รวมค่าบริการทางการแพทย์ 30 บาท',
     bookLine: 'จองผ่าน LINE', call: '📞 โทร 02-000-4586', inclPkg: 'รวมอยู่ในแพ็กเกจ', incl: 'รวมอยู่ในราคา', suitable: 'เหมาะกับใคร',
-    beforePkg: 'ก่อนมาตรวจ', notes: 'ข้อควรทราบ', readMoreAbout: (n) => `บทความเกี่ยวกับ${n} →`, readMoreLbl: 'อ่านเพิ่มเติม: ',
+    beforePkg: 'ก่อนมาตรวจ', notes: 'ข้อควรทราบ', faqH: 'คำถามที่พบบ่อย', readMoreAbout: (n) => `บทความเกี่ยวกับ${n} →`, readMoreLbl: 'อ่านเพิ่มเติม: ',
     others: (c) => `${c}อื่น ๆ ที่คลินิก`, othersFallback: 'โปรแกรม', bookH: 'จองคิวง่าย ๆ 2 วิธี', bookLine2: 'ทัก LINE จองคิว',
     hours: 'เปิดทุกวัน · จันทร์–ศุกร์ 08:00–18:00 · เสาร์–อาทิตย์ 08:00–12:00<br>หรือโทร <a href="tel:0886837899">088-683-7899</a>',
     disclaimer: 'ราคาสำหรับผู้ชำระเงินสด ยังไม่รวมค่าบริการทางการแพทย์ 30 บาท อาจเปลี่ยนแปลงได้ ความเหมาะสมขึ้นกับการประเมินของแพทย์ ผลลัพธ์ของแต่ละบุคคลอาจแตกต่างกัน',
@@ -84,7 +84,7 @@ const L = {
     duration: 'Duration: ', product: 'Product: ', fda: 'Thai FDA reg. no. ', chooseOpt: 'Choose an option', choosePkg: 'Choose a package',
     items: 'items', priceLabel: 'Price', priceSel: 'Price for selected option', fee: 'Price excludes the 30 baht medical service fee',
     bookLine: 'Book via LINE', call: '📞 Call 02-000-4586', inclPkg: 'Included in the package', incl: 'Included in the price', suitable: 'Who is it for?',
-    beforePkg: 'Before your check-up', notes: 'Good to know', readMoreAbout: (n) => `About ${n} →`, readMoreLbl: 'Read more: ',
+    beforePkg: 'Before your check-up', notes: 'Good to know', faqH: 'Frequently asked questions', readMoreAbout: (n) => `About ${n} →`, readMoreLbl: 'Read more: ',
     others: (c) => `Other ${c.toLowerCase()} at the clinic`, othersFallback: 'services', bookH: 'Two easy ways to book', bookLine2: 'Book on LINE',
     hours: 'Open every day · Mon–Fri 08:00–18:00 · Sat–Sun 08:00–12:00<br>or call <a href="tel:0886837899">088-683-7899</a>',
     disclaimer: 'Prices are for self-paying patients and exclude the 30 baht medical service fee. Prices may change. Suitability depends on the doctor’s assessment, and individual results may vary.',
@@ -114,7 +114,7 @@ const L = {
     duration: 'ကြာချိန်: ', product: 'ထုတ်ကုန်: ', fda: 'ထိုင်း FDA မှတ်ပုံတင်အမှတ် ', chooseOpt: 'ရွေးချယ်ရန်', choosePkg: 'ပက်ကေ့ချ် ရွေးရန်',
     items: 'ခု', priceLabel: 'ဈေးနှုန်း', priceSel: 'ရွေးထားသည့်ဈေးနှုန်း', fee: 'ဈေးနှုန်းတွင် ဆေးဝန်ဆောင်ခ မပါဝင်သေးပါ',
     bookLine: 'LINE ဖြင့် ဘိုကင်', call: '📞 ဖုန်း 02-000-4586', inclPkg: 'ပက်ကေ့ချ်တွင် ပါဝင်သည်', incl: 'ဈေးနှုန်းတွင် ပါဝင်သည်', suitable: 'မည်သူများအတွက်',
-    beforePkg: 'မစစ်ဆေးမီ', notes: 'သိထားရန်', readMoreAbout: (n) => `${n} အကြောင်း →`, readMoreLbl: 'ဆက်ဖတ်ရန်: ',
+    beforePkg: 'မစစ်ဆေးမီ', notes: 'သိထားရန်', faqH: 'မေးလေ့ရှိသော မေးခွန်းများ', readMoreAbout: (n) => `${n} အကြောင်း →`, readMoreLbl: 'ဆက်ဖတ်ရန်: ',
     others: (c) => `ဆေးခန်းရှိ အခြား ${c}`, othersFallback: 'ဝန်ဆောင်မှုများ', bookH: 'ဘိုကင်လုပ်နည်း ၂ မျိုး', bookLine2: 'LINE ဖြင့် ဘိုကင်',
     hours: 'နေ့တိုင်းဖွင့်သည် · တနင်္လာ–သောကြာ 08:00–18:00 · စနေ–တနင်္ဂနွေ 08:00–12:00<br>(သို့) ဖုန်း <a href="tel:0886837899">088-683-7899</a>',
     disclaimer: 'ဤဈေးနှုန်းများသည် ငွေသားပေးချေသူများအတွက်ဖြစ်ပြီး ဆေးဝန်ဆောင်ခ မပါဝင်သေးပါ။ ဈေးနှုန်း ပြောင်းလဲနိုင်သည်။ ဝန်ဆောင်မှု သင့်/မသင့်ကို ဆရာဝန်က ဆုံးဖြတ်ပါမည်။',
@@ -729,6 +729,8 @@ async function programPage(request, env, slug, lang = 'th') {
   const shortDesc = pick(p, 'short_desc', lang);
   const priceNote = pick(p, 'price_note', lang);
   const includes = arr('includes'), suitable = arr('suitable_for'), precautions = arr('precautions');
+  // คำถามที่พบบ่อย: แสดงเปิดไว้ทั้งหมด (ผู้สูงอายุอ่านง่าย ไม่ต้องกดขยาย) + FAQPage schema
+  const faq = arr('faq').filter((f) => f && f.q && f.a);
   const thaiNotice = en && !translated ? `<p style="padding:12px 16px;border-radius:12px;background:var(--apricot-50);border:1px solid var(--apricot-100);font-size:14.5px">${t.thaiOnly}</p>` : '';
 
   const html =
@@ -752,6 +754,8 @@ async function programPage(request, env, slug, lang = 'th') {
     (includes.length ? `<section class="pd-sec"><h2>${isPackage ? t.inclPkg : t.incl}</h2><ul class="pd-list">${bigList(includes)}</ul></section>` : '') +
     (suitable.length ? `<section class="pd-sec"><h2>${t.suitable}</h2><ul class="pd-list soft">${bigList(suitable)}</ul></section>` : '') +
     (precautions.length ? `<section class="pd-sec warn"><h2>${isPackage ? t.beforePkg : t.notes}</h2><ul class="pd-list">${bigList(precautions)}</ul></section>` : '') +
+    (faq.length ? `<section class="pd-sec pd-faq" id="faq"><h2>${t.faqH}</h2>` +
+      faq.map((f) => `<div class="pd-qa"><h3>${esc(f.q)}</h3><p>${esc(f.a)}</p></div>`).join('') + `</section>` : '') +
     (p.related_article_slug ? `<div class="pd-related">${t.readMoreLbl}<a href="${articleUrl(p.related_article_slug, lang)}">${esc(t.readMoreAbout(name))}</a></div>` : '') +
     (others.length ? `<section class="pd-sec"><h2>${esc(t.others(cName || t.othersFallback))}</h2><div class="pd-others">` +
       others.map((x) => `<a href="${programUrl(x.slug, lang)}"><span>${esc(pick(x, 'name', lang))}</span><b>${x.price == null ? t.ask : esc(baht(x.price))}</b></a>`).join('') + `</div></section>` : '') +
@@ -792,7 +796,11 @@ async function programPage(request, env, slug, lang = 'th') {
     .on('title', new SetText(title))
     .on('meta#meta-description', new SetAttr('content', description))
     .on('head', new AppendHead(headTags({
-      canonical, title: name, description, image: cover, type: 'website', jsonld: [service, crumbs], lang,
+      canonical, title: name, description, image: cover, type: 'website', lang,
+      jsonld: faq.length ? [service, crumbs, {
+        '@context': 'https://schema.org', '@type': 'FAQPage', inLanguage: CL,
+        mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+      }] : [service, crumbs],
       robots: en && !translated ? 'noindex, follow' : undefined,
       alternates: avail.length > 1 ? allAlt(programUrl(p.slug), avail) : undefined,
     })))
