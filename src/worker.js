@@ -44,7 +44,7 @@ const L = {
     listTitle: 'บทความสุขภาพ ข่าวสาร และโปรโมชั่น | แฮปปี้เวลล์ คลินิก ทุ่งครุ', tagTitle: (t) => `แท็ก: ${t} | HappiWell คลินิกเวชกรรม`,
     listDesc: `บทความสุขภาพ ข่าวประชาสัมพันธ์ และโปรโมชั่นจาก ${SITE_NAME} เขตทุ่งครุ กรุงเทพฯ`, tagDesc: (t) => `รวมบทความสุขภาพที่แท็ก "${t}" จาก ${SITE_NAME} เขตทุ่งครุ`,
     articleNotFound: 'ไม่พบบทความ | HappiWell คลินิกเวชกรรม', articleNotFoundBody: 'ไม่พบบทความนี้ หรือบทความอาจถูกถอดออกแล้ว', backToList: 'กลับไปหน้ารายการข่าวสาร',
-    published: 'เผยแพร่เมื่อ', relatedH: 'บริการนี้ที่แฮปปี้เวลล์ คลินิก ทุ่งครุ', relatedNote: 'ราคายังไม่รวมค่าบริการทางการแพทย์ 30 บาท · จองผ่าน LINE ได้จากหน้าราคา',
+    published: 'เผยแพร่เมื่อ', tldrH: 'สรุปสั้นๆ', relatedH: 'บริการนี้ที่แฮปปี้เวลล์ คลินิก ทุ่งครุ', relatedNote: 'ราคายังไม่รวมค่าบริการทางการแพทย์ 30 บาท · จองผ่าน LINE ได้จากหน้าราคา',
     ctaH: 'มีคำถามเพิ่มเติมไหม?', ctaP: 'ทักแชทสอบถามหรือนัดหมายได้ที่ LINE Official Account ของคลินิก', ctaBtn: 'แชทผ่าน LINE',
     thaiOnly: '', all: 'ทั้งหมด', recommended: 'แนะนำ', noPrograms: 'ยังไม่มีโปรแกรมในขณะนี้ สอบถามได้ทาง LINE @p49clinic',
     programsTitle: 'ราคาวัคซีน ตรวจสุขภาพ และโปรแกรมต่าง ๆ | HappiWell คลินิกเวชกรรม ทุ่งครุ',
@@ -73,7 +73,7 @@ const L = {
     listTitle: 'Health Articles, News & Promotions | HappiWell Medical Clinic, Bangkok', tagTitle: (t) => `Tag: ${t} | HappiWell Medical Clinic`,
     listDesc: 'Health articles, clinic news and promotions from HappiWell Medical Clinic in Thung Khru, Bangkok.', tagDesc: (t) => `Health articles tagged "${t}" from HappiWell Medical Clinic, Bangkok.`,
     articleNotFound: 'Article not found | HappiWell Medical Clinic', articleNotFoundBody: 'This article was not found or has been removed.', backToList: 'Back to all news',
-    published: 'Published', relatedH: 'This service at HappiWell Medical Clinic', relatedNote: 'Prices exclude the 30 baht medical service fee · Book via LINE from the price page',
+    published: 'Published', tldrH: 'Quick answer', relatedH: 'This service at HappiWell Medical Clinic', relatedNote: 'Prices exclude the 30 baht medical service fee · Book via LINE from the price page',
     ctaH: 'Have a question?', ctaP: 'Chat with us or book an appointment on the clinic’s LINE Official Account', ctaBtn: 'Chat on LINE',
     thaiOnly: 'This page is currently available in Thai only. Please chat with us on LINE if you have any questions.',
     all: 'All', recommended: 'Recommended', noPrograms: 'No services listed right now. Ask us on LINE @p49clinic',
@@ -103,7 +103,7 @@ const L = {
     listTitle: 'ကျန်းမာရေးဆောင်းပါးနှင့် သတင်း | HappiWell ဆေးခန်း ဘန်ကောက်', tagTitle: (t) => `Tag: ${t} | HappiWell ဆေးခန်း`,
     listDesc: 'HappiWell ဆေးခန်း (Thung Khru၊ ဘန်ကောက်) ၏ ကျန်းမာရေးဆောင်းပါး၊ သတင်းနှင့် ပရိုမိုးရှင်းများ။', tagDesc: (t) => `"${t}" tag ပါသော ကျန်းမာရေးဆောင်းပါးများ — HappiWell ဆေးခန်း`,
     articleNotFound: 'ဆောင်းပါး ရှာမတွေ့ပါ | HappiWell ဆေးခန်း', articleNotFoundBody: 'ဤဆောင်းပါး ရှာမတွေ့ပါ (သို့) ဖယ်ရှားပြီးဖြစ်သည်။', backToList: 'သတင်းအားလုံးသို့',
-    published: 'ထုတ်ဝေသည့်ရက်', relatedH: 'HappiWell ဆေးခန်းရှိ ဤဝန်ဆောင်မှု', relatedNote: 'ဈေးနှုန်းတွင် ဆေးဝန်ဆောင်ခ မပါဝင်သေးပါ · ဈေးနှုန်းစာမျက်နှာမှ LINE ဖြင့် ဘိုကင်လုပ်နိုင်သည်',
+    published: 'ထုတ်ဝေသည့်ရက်', tldrH: 'အတိုချုပ်', relatedH: 'HappiWell ဆေးခန်းရှိ ဤဝန်ဆောင်မှု', relatedNote: 'ဈေးနှုန်းတွင် ဆေးဝန်ဆောင်ခ မပါဝင်သေးပါ · ဈေးနှုန်းစာမျက်နှာမှ LINE ဖြင့် ဘိုကင်လုပ်နိုင်သည်',
     ctaH: 'မေးစရာ ရှိပါသလား?', ctaP: 'ဆေးခန်း၏ LINE Official Account တွင် မေးမြန်းခြင်း (သို့) ဘိုကင်လုပ်နိုင်ပါသည်', ctaBtn: 'LINE ဖြင့် ချက်လုပ်ရန်',
     thaiOnly: 'ဤစာမျက်နှာကို မြန်မာဘာသာဖြင့် မရရှိနိုင်သေးပါ။ မေးစရာရှိပါက LINE ဖြင့် ဆက်သွယ်ပါ။',
     all: 'အားလုံး', recommended: 'အကြံပြု', noPrograms: 'ယခု ဝန်ဆောင်မှုမရှိသေးပါ။ LINE @p49clinic တွင် မေးပါ',
@@ -472,6 +472,9 @@ async function articlePage(request, env, slug, lang = 'th') {
   const tags = Array.isArray(a.tags) ? a.tags : [];
   const category = CATEGORY_LABELS[lang][a.category] || a.category;
   const relName = (r) => pick(r, 'name', lang);
+  // สรุปคำตอบบนสุด (AEO/GEO): ภาษาที่ขอ → ภาษาเดียวกับเนื้อหา; ภาษาพม่ามีสรุปของตัวเองแม้เนื้อหายังไม่ได้แปล
+  const sumLang = pickIn(a, 'summary', lang) !== undefined ? lang : L2;
+  const summary = String(pick(a, 'summary', sumLang) || '').trim();
 
   const content =
     `<span class="article-category">${esc(category)}</span>` +
@@ -479,6 +482,7 @@ async function articlePage(request, env, slug, lang = 'th') {
     `<h1 class="article-title"${L2 !== lang ? ` lang="${L2}"` : ''}>${esc(title)}</h1>` +
     `<div class="article-meta">${t.published} <time datetime="${esc(a.published_at)}">${esc(fmtDate(a.published_at, lang))}</time></div>` +
     (L2 !== lang ? `<p style="padding:12px 16px;border-radius:12px;background:var(--apricot-50);border:1px solid var(--apricot-100);font-size:14.5px">${t.thaiOnly}</p>` : '') +
+    (summary ? `<div class="article-tldr"${sumLang !== lang ? ` lang="${sumLang}"` : ''}><div class="tl">${t.tldrH}</div><p>${esc(summary)}</p></div>` : '') +
     (cover ? `<img class="article-cover" src="${esc(cover)}" alt="${esc(title)}">` : '') +
     `<div class="article-body"${L2 !== lang ? ` lang="${L2}"` : ''}>${body}</div>` +
     (related.length ? `<div style="margin-top:36px;padding:22px 24px;border-radius:16px;background:var(--surface);border:1.5px solid var(--mint-200)">` +
@@ -494,6 +498,7 @@ async function articlePage(request, env, slug, lang = 'th') {
     '@type': a.category === 'article' ? 'MedicalWebPage' : 'NewsArticle',
     headline: title,
     description,
+    abstract: summary || undefined,
     datePublished: a.published_at,
     dateModified: a.updated_at || a.published_at,
     image: cover || undefined,

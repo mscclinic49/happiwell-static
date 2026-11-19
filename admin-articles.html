@@ -217,6 +217,16 @@
       <textarea id="f-excerpt" placeholder="สรุปสั้นๆ แสดงในการ์ดหน้าแรก"></textarea>
     </div>
 
+    <div class="field">
+      <label for="f-summary">สรุปคำตอบ (กล่องบนสุดของบทความ)</label>
+      <textarea id="f-summary" rows="3" placeholder="ตอบคำถามหลักของบทความใน 1–3 ประโยค ใส่ตัวเลข/ราคาให้ชัด เช่น ใบรับรองแพทย์ใบขับขี่ราคา 200 บาท ต้องออกไม่เกิน 1 เดือนก่อนยื่นขนส่ง"></textarea>
+      <div class="hint">Google และ AI (ChatGPT, Gemini) มักหยิบย่อหน้านี้ไปตอบ เขียนให้อ่านจบในตัว</div>
+    </div>
+    <div class="field">
+      <label for="f-my-summary">สรุปคำตอบ ภาษาพม่า (မြန်မာ)</label>
+      <textarea id="f-my-summary" rows="3" placeholder="แสดงที่หน้า /my/articles/… (ถ้าเว้นว่างจะใช้ภาษาอังกฤษ)"></textarea>
+    </div>
+
     <div class="two-col">
       <div class="field">
         <label>หมวดหมู่</label>
@@ -280,6 +290,7 @@
         <div class="hint" style="margin-bottom:14px">แสดงที่ happiwellclinic.com/en/articles/… ถ้าเว้นว่าง หน้าอังกฤษจะแสดงภาษาไทยแทน (และไม่ขึ้น Google ภาษาอังกฤษ)</div>
         <div class="field"><label for="f-en-title">Title</label><input type="text" id="f-en-title" placeholder="English title"></div>
         <div class="field"><label for="f-en-excerpt">Excerpt</label><textarea id="f-en-excerpt" placeholder="Short summary"></textarea></div>
+        <div class="field"><label for="f-en-summary">Quick answer (box at the top)</label><textarea id="f-en-summary" rows="3" placeholder="1–3 sentences answering the article's main question"></textarea></div>
         <div class="field"><label>Content</label><div id="editorjs-en-container"></div></div>
         <div class="two-col">
           <div class="field"><label for="f-en-seo-title">Google title (SEO)</label><input type="text" id="f-en-seo-title" maxlength="90" placeholder="ถ้าเว้นว่าง จะใช้ Title"></div>
@@ -313,6 +324,7 @@
   let editorjs = null;
   let editorjsEn = null;
   let currentEn = {};
+  let currentMy = {};
   let editingId = null;
   let coverImageUrl = null;
   let currentTags = [];
@@ -503,6 +515,8 @@
     document.getElementById('f-seo-desc').value = '';
     ['f-en-title','f-en-excerpt','f-en-seo-title','f-en-seo-desc'].forEach(k => document.getElementById(k).value = '');
     currentEn = {};
+    currentMy = {};
+    ['f-summary','f-my-summary','f-en-summary'].forEach(k => document.getElementById(k).value = '');
     document.getElementById('f-category').value = 'news';
     document.getElementById('f-published-at').value = new Date().toISOString().slice(0, 10);
     document.getElementById('f-published').checked = false;
@@ -519,11 +533,15 @@
       document.getElementById('f-title').value = data.title || '';
       document.getElementById('f-slug').value = data.slug || '';
       document.getElementById('f-excerpt').value = data.excerpt || '';
+      document.getElementById('f-summary').value = data.summary || '';
+      currentMy = (data.my && typeof data.my === 'object') ? data.my : {};
+      document.getElementById('f-my-summary').value = currentMy.summary || '';
       document.getElementById('f-seo-title').value = data.seo_title || '';
       document.getElementById('f-seo-desc').value = data.seo_description || '';
       currentEn = (data.en && typeof data.en === 'object') ? data.en : {};
       document.getElementById('f-en-title').value = currentEn.title || '';
       document.getElementById('f-en-excerpt').value = currentEn.excerpt || '';
+      document.getElementById('f-en-summary').value = currentEn.summary || '';
       document.getElementById('f-en-seo-title').value = currentEn.seo_title || '';
       document.getElementById('f-en-seo-desc').value = currentEn.seo_description || '';
       document.getElementById('f-category').value = data.category || 'news';
@@ -597,6 +615,7 @@
     const set = (k, v) => { if (v) en[k] = v; else delete en[k]; };
     set('title', document.getElementById('f-en-title').value.trim());
     set('excerpt', document.getElementById('f-en-excerpt').value.trim());
+    set('summary', document.getElementById('f-en-summary').value.trim());
     set('seo_title', document.getElementById('f-en-seo-title').value.trim());
     set('seo_description', document.getElementById('f-en-seo-desc').value.trim());
     let blocks = [];
@@ -682,6 +701,7 @@
       title,
       slug,
       excerpt: document.getElementById('f-excerpt').value.trim(),
+      summary: document.getElementById('f-summary').value.trim() || null,
       seo_title: document.getElementById('f-seo-title').value.trim() || null,
       seo_description: document.getElementById('f-seo-desc').value.trim() || null,
       category: document.getElementById('f-category').value,
@@ -691,6 +711,7 @@
       cover_image: coverImageUrl,
       content: JSON.stringify(content),
       en: await readEn(),
+      my: (() => { const m = { ...currentMy }; const v = document.getElementById('f-my-summary').value.trim(); if (v) m.summary = v; else delete m.summary; return m; })(),
     };
 
     let result;
